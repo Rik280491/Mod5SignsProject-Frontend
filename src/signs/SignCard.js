@@ -1,13 +1,16 @@
-// functional component 
+// import Video.js later after func reached
+import React from "react";
+import VideoPlayer from "../video/Video";
 
-import React from 'react'
+export default function SignCard({ name, videoURL }) {
+	console.log(name);
 
-
-export default function SignCard({}){
-   
-   
-    return(
-        
-        <div>Hello</div>
-    )
+	return (
+		<div>
+			<video width="300" height="240" controls>
+				<source src={videoURL} type="video/mp4" />
+			</video>
+			<h5>{name}</h5>
+		</div>
+	);
 }
