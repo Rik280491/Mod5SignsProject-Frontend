@@ -1,6 +1,5 @@
-// import Video.js later after func reached
+//implement video.js after func reached
 import React from "react";
-import VideoPlayer from "../video/Video";
 
 export default function SignCard({ name, videoURL }) {
 	console.log(name);
