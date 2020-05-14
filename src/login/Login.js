@@ -26,7 +26,9 @@ class Login extends React.Component {
 	};
 
 	render() {
+		console.log(this.props)
 		return (
+			
 			<div>
 				<LoginForm
 					handleChange={this.handleChange}
@@ -37,5 +39,4 @@ class Login extends React.Component {
 	}
 }
 
-// export default withRouter(Login);
-export default Login
+export default withRouter(Login);

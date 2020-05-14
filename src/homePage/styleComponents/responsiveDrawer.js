@@ -16,6 +16,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -57,7 +58,7 @@ function ResponsiveDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
+  const {togglePage} = props
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -67,12 +68,25 @@ function ResponsiveDrawer(props) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {['Search', 'Upload', 'Mission Statement', 'Contact Us'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+        
+          <ListItem button >
+            {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
+            <ListItemText primary="Search" />
           </ListItem>
-        ))}
+          <ListItem button onClick={togglePage} component={props => <Link to="/upload" {...props}/>}>
+          
+          
+            <ListItemText primary="Upload"  />
+          </ListItem>
+          <ListItem button >
+            
+            <ListItemText primary="Mission Statement" />
+          </ListItem>
+          <ListItem button >
+           
+            <ListItemText primary="Contact Us" />
+          </ListItem>
+      
       </List>
       <Divider />
       
