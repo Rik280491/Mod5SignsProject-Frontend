@@ -17,7 +17,12 @@ const reducer = (state = initialState, action) => {
         username: action.payload.username,
         signs: state.signs
         // This fixed an issue but is it going to break something else? 
-    }
+    };
+    case 'LOGOUTUSER':
+        return {
+            username: null,
+            signs: state.signs
+        }
         default:
             return state 
     

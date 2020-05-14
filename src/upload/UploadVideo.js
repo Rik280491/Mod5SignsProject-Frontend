@@ -9,16 +9,16 @@ class UploadVideo extends React.Component {
 		console.log(this.props);
 		return (
 			<div>
-				<h1>
-					To upload a video please <Link to="/login"> log in </Link> or
-					<Link to="/signup"> Sign Up </Link>
-                    
-				</h1>
+				{!this.props.username ? (
+					<h1>
+						
+						To upload a video please <Link to="/login"> log in </Link> or
+						<Link to="/signup"> Sign Up </Link>{" "}
+					</h1>
+				) : (
+					<h1>Upload a Video</h1>
+				)}
 			</div>
-
-			//
-
-			
 		);
 	}
 }

@@ -58,7 +58,7 @@ function ResponsiveDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const {togglePage} = props
+  const {togglePage, logOut} = props
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -85,6 +85,10 @@ function ResponsiveDrawer(props) {
           <ListItem button >
            
             <ListItemText primary="Contact Us" />
+          </ListItem>
+          <ListItem button onClick={logOut} >
+           
+            <ListItemText primary="Log Out" />
           </ListItem>
       
       </List>

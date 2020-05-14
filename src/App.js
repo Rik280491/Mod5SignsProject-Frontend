@@ -12,7 +12,9 @@ import { Redirect } from 'react-router';
 
 class App extends React.Component {
 	constructor() {
-		super();
+    super();
+    
+    
 	}
 
 	componentDidMount() {
@@ -33,17 +35,27 @@ class App extends React.Component {
 
     localStorage.token = token;
     
-	};
+    
+  };
+
+  logOut = () => {
+    
+      this.props.logOutUser()
+      localStorage.removeItem("token");
+      
+    
+  }
+  
+  
 
 	render() {
-		console.log(this.props);
+    const {username} = this.props
 		return (
 		
       
       <Router>
       <div>
-      
-      <Route exact path='/home' render={routerProps => <HomePageContainer {...routerProps} />} />      
+      <Route exact path='/home' render={routerProps => <HomePageContainer {...routerProps} logOut={this.logOut} />} />      
       <Route exact path="/signup" render={(props) => <Signup {...props} logIn={this.logIn}/>}/>
       <Route exact path="/login" render={(props) => <Login {...props} logIn={this.logIn} />} />
     <Route exact path="/upload" render={(props) => <UploadVideo {...props} />}/>
@@ -63,7 +75,8 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		getSigns: (signs) => dispatch({ type: "GET_SIGNS", payload: { signs } }),
 		getUsername: (username) =>
-			dispatch({ type: "USERNAME", payload: { username } }),
+      dispatch({ type: "USERNAME", payload: { username } }),
+    logOutUser: () => dispatch({ type: "LOGOUTUSER"})
 	};
 };
 

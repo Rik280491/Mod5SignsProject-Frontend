@@ -41,7 +41,7 @@ class HomePageContainer extends React.Component {
 		console.log(this.props);
 		return (
 			<div>
-				<ResponsiveDrawer togglePage={this.togglePage} />
+				<ResponsiveDrawer togglePage={this.togglePage} logOut={this.props.logOut}/>
 				
 				{this.state.drawerOption === "upload" ? 
 				   <UploadVideo /> : this.renderSigns() }
