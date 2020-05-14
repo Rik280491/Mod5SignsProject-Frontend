@@ -1,6 +1,6 @@
 import React from "react";
 import SignCard from "../signs/SignCard";
-import ResponsiveDrawer from './styleComponents/responsiveDrawer'
+import ResponsiveDrawer from './styleComponents/ResponsiveDrawer'
 
 export default class HomePageContainer extends React.Component {
 	
