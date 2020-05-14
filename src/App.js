@@ -4,13 +4,14 @@ import HomePageContainer from './homePage/HomePageContainer';
 import Login from './login/Login'
 import Signup from './signup/Signup'
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { connect } from "react-redux";
+
 
 
 class App extends React.Component {
   constructor(){
     super()
     this.state = {
-      signs: [],
       username: null,
       
     }
@@ -18,9 +19,7 @@ class App extends React.Component {
   
   componentDidMount(){
     this.checkToken();
-    API.get().then(signData => this.setState({
-      signs: signData
-    }))
+    API.get().then(this.props.getSigns)
   }
 
   checkToken = () => {
@@ -57,11 +56,20 @@ class App extends React.Component {
               component={() => <Login logIn={this.logIn} />}
             />
           </> : 
-        <HomePageContainer signs={this.state.signs} />}
+        <HomePageContainer />}
       </div>
     );
   }
   
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getSigns: (signs) => dispatch({ type: "GET_SIGNS", payload: { signs } }),
+  };
+};
+
+
+
+export default connect(null, mapDispatchToProps)(App);
+// use withRouter

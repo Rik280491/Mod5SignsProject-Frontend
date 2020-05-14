@@ -1,8 +1,9 @@
 import React from "react";
 import SignCard from "../signs/SignCard";
 import ResponsiveDrawer from './styleComponents/ResponsiveDrawer'
+import { connect } from 'react-redux'
 
-export default class HomePageContainer extends React.Component {
+class HomePageContainer extends React.Component {
 	
 
 	renderSigns = () => {
@@ -29,3 +30,11 @@ export default class HomePageContainer extends React.Component {
         )
 	}
 }
+
+const mapStateToProps = state => {
+    return {
+        signs: state.signs
+    }
+}
+
+export default connect(mapStateToProps, null)(HomePageContainer);
