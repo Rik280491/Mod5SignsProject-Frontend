@@ -9,8 +9,9 @@ export default class HomePageContainer extends React.Component {
 			return (
 				<SignCard
 					key={index}
-					name={sign.name}
-					videoURL={sign.video_url}
+                    name={sign.name}
+                    // refactor to videos[i] when implementing multiple videos option
+					videoURL={sign.videos[0].video_url}
 					id={sign.id}
 					sign={sign}
 				/>

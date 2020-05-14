@@ -2,7 +2,7 @@
 import React from "react";
 
 export default function SignCard({ name, videoURL }) {
-	console.log(name);
+	console.log(videoURL);
 
 	return (
 		<div>
