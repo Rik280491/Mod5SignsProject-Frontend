@@ -1,26 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+import API from './API/API'
+import HomePageContainer from './homePage/HomePageContainer';
+
+class App extends React.Component {
+  constructor(){
+    super()
+    this.state = {
+      signs: []
+    }
+  }
+  
+  componentDidMount(){
+    API.get().then(signData => this.setState({
+      signs: signData
+    }))
+  }
+  
+  render(){
+    return (
+      <div >
+        <HomePageContainer signs={this.state.signs} />
+      </div>
+    );
+  }
+  
 }
 
 export default App;
