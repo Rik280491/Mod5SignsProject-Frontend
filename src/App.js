@@ -7,6 +7,7 @@ import UploadVideo from "./upload/UploadVideo"
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { Redirect } from 'react-router';
 
 
 class App extends React.Component {
@@ -30,18 +31,21 @@ class App extends React.Component {
 	logIn = (username, token) => {
 		this.props.getUsername(username);
 
-		localStorage.token = token;
+    localStorage.token = token;
+    
 	};
 
 	render() {
 		console.log(this.props);
 		return (
-			<Router>
+		
+      
+      <Router>
       <div>
-      <HomePageContainer logIn={this.logIn}/>
-      {/* <Route exact path='/home' render={routerProps => <HomePageContainer {...routerProps} />} />       */}
-      <Route exact path="/signup" render={(props) => <Signup {...props} />}/>
-      <Route exact path="/login" render={(props) => <Login {...props} />} />
+      
+      <Route exact path='/home' render={routerProps => <HomePageContainer {...routerProps} />} />      
+      <Route exact path="/signup" render={(props) => <Signup {...props} logIn={this.logIn}/>}/>
+      <Route exact path="/login" render={(props) => <Login {...props} logIn={this.logIn} />} />
     <Route exact path="/upload" render={(props) => <UploadVideo {...props} />}/>
 			</div>
       </Router>

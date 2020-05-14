@@ -99,13 +99,10 @@ export default function SignUpForm({ handleChange, handleSubmit }) {
 					</Button>
 					<Grid container justify="flex-end">
 						<Grid item>
-							<Link to="/log-in" variant="body2">
+							<Link to="/login" variant="body2">
 								Already have an account? Sign in
 							</Link>
 
-							<Router>
-								<Route exact path="/log-in" component={() => <Login />} />
-							</Router>
 						</Grid>
 					</Grid>
 				</form>

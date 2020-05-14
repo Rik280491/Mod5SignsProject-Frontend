@@ -106,12 +106,9 @@ export default function LoginForm({handleChange, handleSubmit}) {
               </Link>
             </Grid>
             <Grid item>
-              <Link to="/sign-up" variant="body2">
+              <Link to="/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
-              <Router>
-                    <Route exact path="/sign-up" component={() => <Signup />} />
-              </Router>
             </Grid>
           </Grid>
         </form>

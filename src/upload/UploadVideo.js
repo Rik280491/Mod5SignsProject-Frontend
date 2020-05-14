@@ -12,7 +12,7 @@ class UploadVideo extends React.Component {
 				<h1>
 					To upload a video please <Link to="/login"> log in </Link> or
 					<Link to="/signup"> Sign Up </Link>
-                    <Login logIn={this.props.logIn}/>
+                    
 				</h1>
 			</div>
 
