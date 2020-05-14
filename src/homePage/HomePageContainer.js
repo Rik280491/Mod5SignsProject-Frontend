@@ -7,6 +7,7 @@ class HomePageContainer extends React.Component {
 	
 
 	renderSigns = () => {
+		
 		return this.props.signs.map((sign, index) => {
 			return (
 				<SignCard
@@ -22,6 +23,7 @@ class HomePageContainer extends React.Component {
 	};
 
 	render() {
+		console.log(this.props)
         return (
         <div>
             <ResponsiveDrawer />
@@ -33,7 +35,8 @@ class HomePageContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        signs: state.signs
+		signs: state.signs
+		
     }
 }
 

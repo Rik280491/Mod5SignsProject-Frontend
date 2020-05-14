@@ -1,6 +1,7 @@
 
 const initialState = {
-    signs: []
+    signs: [],
+    username: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -11,6 +12,12 @@ const reducer = (state = initialState, action) => {
           ...state,
           signs: action.payload.signs,
         };
+        case 'USERNAME':
+    return {
+        username: action.payload.username,
+        signs: state.signs
+        // This fixed an issue but is it going to break something else? 
+    }
         default:
             return state 
     

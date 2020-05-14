@@ -11,10 +11,7 @@ import { connect } from "react-redux";
 class App extends React.Component {
   constructor(){
     super()
-    this.state = {
-      username: null,
-      
-    }
+    
   }
   
   componentDidMount(){
@@ -32,17 +29,16 @@ class App extends React.Component {
   };
 
   logIn = (username, token) => {
-    this.setState({
-      username,
-    });
+    this.props.getUsername(username)
 
     localStorage.token = token;
   };
   
   render(){
+    console.log(this.props)
     return (
       <div >
-        {!this.state.username ?  <>
+        {!this.props.username ?  <>
             <Route
               exact
               path="/sign-up"
@@ -56,20 +52,29 @@ class App extends React.Component {
               component={() => <Login logIn={this.logIn} />}
             />
           </> : 
-        <HomePageContainer />}
+        <HomePageContainer  />}
       </div>
     );
   }
   
 }
 
+const mapStateToProps = state => {
+  return {
+    username: state.username
+
+
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     getSigns: (signs) => dispatch({ type: "GET_SIGNS", payload: { signs } }),
+    getUsername: (username) => dispatch({type: "USERNAME", payload:  {username}})
   };
 };
 
 
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 // use withRouter
