@@ -1,5 +1,6 @@
 import React from "react";
 import SignCard from "../signs/SignCard";
+import ResponsiveDrawer from './styleComponents/responsiveDrawer'
 
 export default class HomePageContainer extends React.Component {
 	
@@ -22,6 +23,7 @@ export default class HomePageContainer extends React.Component {
 	render() {
         return (
         <div>
+            <ResponsiveDrawer />
             {this.renderSigns()}
         </div>
         )
