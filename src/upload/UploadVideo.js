@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import SignCard from "../signs/SignCard";
+import API from "../API/API"
 
 function UploadVideo(props) {
 	const [loading, setLoading] = useState(false);
-    const [video, setVideo] = useState("");
+    const [video, setVideo] = useState(null);
     const[signName, setSignName] = useState("")
+    const [newSign, setNewSign] = useState(null)
 
 	const handleChange = async (e) => {
 		const files = e.target.files;
@@ -25,12 +27,31 @@ function UploadVideo(props) {
 
 		const file = await response.json();
 		setVideo(file.secure_url);
-		setLoading(false);
+        setLoading(false);
+        
+        
     };
     
     const handleNameChange = (e) => {
         setSignName(e.target.value)
+        
     }
+
+    const handlePost = () => {
+        API.createSign({
+            name: signName
+        }).then(sign => setNewSign(sign))
+        
+    }
+    
+    const handleVideoPost = () => {
+       console.log(newSign)
+        API.createVideo({
+            video_url: video,
+            sign: newSign
+        }, localStorage.token ).then(video => console.log(video))
+    }
+
 
 	return (
 		<div>
@@ -53,8 +74,13 @@ function UploadVideo(props) {
 					{loading ? (
 						<h2>Loading...{video}</h2>
 					) : (
-						// better loading icon, progress bar?
+                        // better loading icon, progress bar?
+                        <>
 						<SignCard name={signName} videoURL={video} />
+                        <button onClick={handlePost}>POST SIGN</button>
+                        <button onClick={handleVideoPost}>POST VIDEO</button>
+                        
+                        </>
 					)}
 				</>
 			)}
@@ -67,8 +93,6 @@ const mapStateToProps = (state) => {
 	};
 };
 
-const mapDispatchToProps = dispatch => {
 
-}
 
 export default connect(mapStateToProps, null)(UploadVideo);
