@@ -17,6 +17,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {connect} from 'react-redux'
 
 const drawerWidth = 240;
 
@@ -53,12 +54,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 function ResponsiveDrawer(props) {
   const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const {togglePage, logOut} = props
+  const {togglePage, logOut, username, logIn} = props
+  const loginLink = props => <Link to="/login" {...props}/> 
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -86,9 +90,11 @@ function ResponsiveDrawer(props) {
            
             <ListItemText primary="Contact Us" />
           </ListItem>
-          <ListItem button onClick={logOut} >
+      
+       <ListItem button  onClick={ username ? logOut : null} component={ !username ? loginLink : ""}>
            
-            <ListItemText primary="Log Out" />
+            <ListItemText primary={ username ? "Log Out" : "Log In"}/>
+            {/* LINK TO LOGIN IN THE ELSE */}
           </ListItem>
       
       </List>
@@ -157,5 +163,10 @@ function ResponsiveDrawer(props) {
   );
 }
 
+const mapStateToProps = (state) => {
+	return {
+		username: state.username,
+	};
+};
 
-export default ResponsiveDrawer;
+export default connect(mapStateToProps, null)(ResponsiveDrawer)
