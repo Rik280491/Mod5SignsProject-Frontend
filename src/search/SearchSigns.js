@@ -30,6 +30,7 @@ function SearchSigns(props) {
     const [searchModal, setSearchModal] = useState(false)
     const [listening, setListening] = useState(false);
     const [voiceSearchModal, setVoiceSearchModal] = useState(false)
+    const [speechPlaceholder, setSpeechPlaceholder] = useState("")
 
     const onChange = (e) => {
     searchSigns(e.target.value)
@@ -44,10 +45,12 @@ function SearchSigns(props) {
     recognition.onresult = e => {
         handleValue(e.results[0][0].transcript)
         console.log(e.results[0][0].transcript)
+        
     }
 
     const handleValue = searchValue => {
         const capSearchValue = searchValue.charAt(0).toUpperCase() + searchValue.slice(1)
+        setSpeechPlaceholder(capSearchValue)
         searchSigns(capSearchValue)
         setVoiceSearchModal(true)
         recognition.stop()
@@ -61,7 +64,7 @@ function SearchSigns(props) {
 					<ImageSearchIcon />
 				</Grid>
 				<Grid item>
-					<TextField onChange={onChange} id="speechinput"
+					<TextField placeholder={speechPlaceholder} onChange={onChange} id="speechinput"
         x-webkit-speech />
                     { searchModal || voiceSearchModal ? <SearchModal/> : null }
 				</Grid>
