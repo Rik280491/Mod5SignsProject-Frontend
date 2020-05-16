@@ -3,7 +3,7 @@ const signsURL = `${baseURL}/signs`
 const validateURL = `${baseURL}/validate`;
 const logInURL = `${baseURL}/log-in`;
 const createUserURL = `${baseURL}/users`;
-
+const createVideoURL = `${baseURL}/videos`;
 
 const post = (url, data, token) => {
 	const configObject = {
@@ -40,10 +40,22 @@ const signUp = (data) => {
 	return post(createUserURL, data).then((response) => response.json());
 };
 
+const createSign = (data) => {
+	return post(signsURL, data).then(response => response.json())
+}
+
+const createVideo = (data, token) => {
+	return post(createVideoURL, data, token).then((response) =>
+		response.json()
+	);
+};
+
 export default {
     get,
     getUser,
     validate,
     logIn, 
-    signUp
+	signUp,
+	createSign,
+	createVideo
 }

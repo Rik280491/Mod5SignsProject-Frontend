@@ -21,7 +21,7 @@ const reducer = (state = initialState, action) => {
     case 'LOGOUTUSER':
         return {
             username: null,
-            signs: state.signs
+            signs: state.signs 
         }
         default:
             return state 
