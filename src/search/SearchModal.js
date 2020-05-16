@@ -26,14 +26,7 @@ function SearchModal(props) {
   const { searchedSigns } = props
   console.log(searchedSigns)
   
-  // useEffect to setOpen(true) when mounted 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setOpen(true)
-  //     console.log('test')
-  //   }, 5000);
-  //   return () => clearTimeout(timer);
-  // }, []);
+  
   
   useEffect(() => {
       searchedSigns.length > 0 ? handleOpen() : handleClose()
