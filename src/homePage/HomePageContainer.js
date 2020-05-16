@@ -4,6 +4,7 @@ import ResponsiveDrawer from "./styleComponents/ResponsiveDrawer";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import UploadVideo from '../upload/UploadVideo'
+import SearchSigns from '../search/SearchSigns'
 
 
 class HomePageContainer extends React.Component {
@@ -30,20 +31,26 @@ class HomePageContainer extends React.Component {
 		});
 	};
 
-	togglePage = () => {
+	toggleUpload = () => {
 		this.setState({
 			drawerOption: "upload"
 		})
 		
 	}
 
+	
+
 	render() {
 		console.log(this.props);
 		return (
 			<div>
-				<ResponsiveDrawer togglePage={this.togglePage}/>
+				<ResponsiveDrawer toggleUpload={this.Upload}/>
 				{this.state.drawerOption === "upload" ? 
-				   <UploadVideo /> : this.renderSigns() }
+				   <UploadVideo /> :
+				 
+				   <SearchSigns /> &&
+				   this.renderSigns()  
+				   }
 				
 				
 			</div>
