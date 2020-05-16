@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import SignCard from "../signs/SignCard";
 import API from "../API/API";
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 function UploadVideo({ username }) {
 	const [loading, setLoading] = useState(false);
@@ -80,7 +82,7 @@ function UploadVideo({ username }) {
 					/>
 
 					{loading ? (
-						<h2>Loading...{video}</h2>
+						<CircularProgress/>
 					) : (
 						// better loading icon, progress bar?
 						<>

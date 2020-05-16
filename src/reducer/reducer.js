@@ -2,7 +2,7 @@
 const initialState = {
     signs: [],
     username: null,
-    searchedSigns: null
+    searchedSigns: []
 }
 
 const reducer = (state = initialState, action) => {

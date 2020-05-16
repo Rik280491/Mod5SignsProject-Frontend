@@ -6,7 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import ImageSearchIcon from '@material-ui/icons/ImageSearch';
 import VoiceOverOffIcon from '@material-ui/icons/VoiceOverOff';
-
+import SearchModal from "./SearchModal"
 
 const useStyles = makeStyles((theme) => ({
 	margin: {
@@ -17,9 +17,11 @@ const useStyles = makeStyles((theme) => ({
 function SearchSigns(props) {
     const classes = useStyles();
     const {searchSigns} = props
+    // const [searchModal, setSearchModal] = useState(false)
     
-const onChange = (e) => {
+    const onChange = (e) => {
     searchSigns(e.target.value)
+    // setSearchModal(true)
 } 
 
 	return (
@@ -29,7 +31,8 @@ const onChange = (e) => {
 					<ImageSearchIcon />
 				</Grid>
 				<Grid item>
-					<TextField onChange={onChange} id="input-with-icon-grid" label="Search"  />
+					<TextField onChange={onChange} id="input-with-icon-grid"  /><SearchModal/>
+                    {/* { searchModal ? <SearchModal/> : null } */}
 				</Grid>
                 <Grid item>
                     <VoiceOverOffIcon/>
@@ -39,9 +42,7 @@ const onChange = (e) => {
 	);
 }
 
-const mapStateToProps = state => {
-    return{}
-}
+
 
 const mapDispatchToProps = (dispatch) => {
 	return {
@@ -49,6 +50,6 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchSigns);
+export default connect(null, mapDispatchToProps)(SearchSigns);
 
 
