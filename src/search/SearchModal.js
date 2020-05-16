@@ -30,6 +30,7 @@ function SearchModal(props) {
   
   useEffect(() => {
       searchedSigns.length > 0 ? handleOpen() : handleClose()
+      
   })
   
   const handleOpen = () => {
@@ -57,6 +58,7 @@ function SearchModal(props) {
         <Fade in={open}>
           <div className={classes.paper}>
             { searchedSigns ? searchedSigns.map(sign => <SignCard name={sign.name} videoURL={sign.videos[0].video_url} />): null}
+            <button onClick={handleClose}>Go Back</button>
           </div>
         </Fade>
       </Modal>
