@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -27,6 +27,13 @@ function SearchModal(props) {
   console.log(searchedSigns)
   
   // useEffect to setOpen(true) when mounted 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setOpen(true)
+      console.log('test')
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, []);
   
   const handleOpen = () => {
     setOpen(true);
@@ -38,9 +45,6 @@ function SearchModal(props) {
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
-        SEARCH
-      </button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -55,9 +59,6 @@ function SearchModal(props) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            {/* <h2 id="transition-modal-title">Transition modal</h2>
-            <p id="transition-modal-description">react-transition-group animates me.</p> */}
-            {/* <SignCard videoURL={searchedSigns.video_url}/> */}
             { searchedSigns ? searchedSigns.map(sign => <SignCard videoURL={sign.videos[0].video_url} />): null}
           </div>
         </Fade>

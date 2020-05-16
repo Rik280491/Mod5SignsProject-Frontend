@@ -17,11 +17,11 @@ const useStyles = makeStyles((theme) => ({
 function SearchSigns(props) {
     const classes = useStyles();
     const {searchSigns} = props
-    // const [searchModal, setSearchModal] = useState(false)
+    const [searchModal, setSearchModal] = useState(false)
     
     const onChange = (e) => {
     searchSigns(e.target.value)
-    // setSearchModal(true)
+    setSearchModal(true)
 } 
 
 	return (
@@ -31,8 +31,8 @@ function SearchSigns(props) {
 					<ImageSearchIcon />
 				</Grid>
 				<Grid item>
-					<TextField onChange={onChange} id="input-with-icon-grid"  /><SearchModal/>
-                    {/* { searchModal ? <SearchModal/> : null } */}
+					<TextField onChange={onChange} id="input-with-icon-grid"  />
+                    { searchModal ? <SearchModal/> : null }
 				</Grid>
                 <Grid item>
                     <VoiceOverOffIcon/>
