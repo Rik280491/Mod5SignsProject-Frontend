@@ -75,7 +75,7 @@ function ResponsiveDrawer(props) {
 				<ListItem button
 				component={(props) => <Link to="/" {...props} />}>
 					{/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
-					<ListItemText primary="Search" />
+					<ListItemText primary="Home" />
 				</ListItem>
 				<ListItem
 					button

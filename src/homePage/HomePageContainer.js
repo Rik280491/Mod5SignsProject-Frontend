@@ -48,7 +48,6 @@ class HomePageContainer extends React.Component {
 				{this.state.drawerOption === "upload" ? 
 				   <UploadVideo /> :
 				 
-				   <SearchSigns /> &&
 				   this.renderSigns()  
 				   }
 				

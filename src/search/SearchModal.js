@@ -56,7 +56,7 @@ function SearchModal(props) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            { searchedSigns ? searchedSigns.map(sign => <SignCard videoURL={sign.videos[0].video_url} />): null}
+            { searchedSigns ? searchedSigns.map(sign => <SignCard name={sign.name} videoURL={sign.videos[0].video_url} />): null}
           </div>
         </Fade>
       </Modal>
