@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import ResponsiveDrawer from "./homePage/styleComponents/ResponsiveDrawer"
+// import SearchSigns from "./search/SearchSigns"
 
 class App extends React.Component {
 	

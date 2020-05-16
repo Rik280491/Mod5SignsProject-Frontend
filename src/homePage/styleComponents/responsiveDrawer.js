@@ -18,6 +18,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
+import SearchSigns from "../../search/SearchSigns"
 
 const drawerWidth = 240;
 
@@ -59,7 +60,7 @@ function ResponsiveDrawer(props) {
 	const classes = useStyles();
 	const theme = useTheme();
 	const [mobileOpen, setMobileOpen] = React.useState(false);
-	const { togglePage, logOut, username, logIn } = props;
+	const { toggleUpload, logOut, username, logIn } = props;
 	const loginLink = (props) => <Link to="/login" {...props} />;
 
 	const handleDrawerToggle = () => {
@@ -71,13 +72,14 @@ function ResponsiveDrawer(props) {
 			<div className={classes.toolbar} />
 			<Divider />
 			<List>
-				<ListItem button>
+				<ListItem button
+				component={(props) => <Link to="/" {...props} />}>
 					{/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
-					<ListItemText primary="Search" />
+					<ListItemText primary="Home" />
 				</ListItem>
 				<ListItem
 					button
-					onClick={togglePage}
+					onClick={toggleUpload}
 					component={(props) => <Link to="/upload" {...props} />}
 				>
 					<ListItemText primary="Upload" />
@@ -119,7 +121,7 @@ function ResponsiveDrawer(props) {
 						<MenuIcon />
 					</IconButton>
 					<Typography variant="h6" noWrap>
-						Hear Together
+						<SearchSigns/>
 					</Typography>
 				</Toolbar>
 			</AppBar>
