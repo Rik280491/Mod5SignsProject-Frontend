@@ -32,11 +32,20 @@ function SearchSigns(props) {
 	const [voiceSearchModal, setVoiceSearchModal] = useState(false);
     const [speechPlaceholder, setSpeechPlaceholder] = useState("");
     
+    const regCapConverter = value => {
+        return value.charAt(0).toUpperCase() + value.slice(1).replace(/[^\w\s]|_/g, "")
+        .replace(/\s+/g, " ");
+    }
 
 	const onChange = (e) => {
-		searchSigns(e.target.value);
+        const searchValue = regCapConverter(e.target.value)
+        searchSigns(searchValue);
 		setSearchModal(true);
 	};
+
+
+   
+
 
 	const handleSpeech = () => {
         console.log("clicked");
@@ -51,14 +60,13 @@ function SearchSigns(props) {
 	};
 
 	const handleValue = (searchValue) => {
-		const capSearchValue =
-		searchValue.charAt(0).toUpperCase() + searchValue.slice(1);
-		searchSigns(capSearchValue);
+		const voiceSearchValue = regCapConverter(searchValue)
+		searchSigns(voiceSearchValue);
 		setVoiceSearchModal(true);
         recognition.stop();
         setListening(false)
-        
-	};
+    };
+
 
 	return (
 		<div className={classes.margin}>
