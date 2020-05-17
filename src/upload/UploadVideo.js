@@ -36,15 +36,16 @@ function UploadVideo({ username }) {
 
 	const handlePost = () => {
 		const capSignName = signName.charAt(0).toUpperCase() + signName.slice(1);
-
+		const regCapSignName = capSignName.replace(/[^\w\s]|_/g, "")
+		.replace(/\s+/g, " ");
+		
 		API.createSign({
-			name: capSignName,
+			name: regCapSignName,
 		}).then((sign) => setNewSign(sign));
-        console.log(capSignName)
         // API.createVideo(
 		// 	{
 		// 		video_url: video,
-		// 		sign: newSign (this is null)
+		// 		sign: capSignName (this is null)
 		// 	},
 		// 	localStorage.token
 		// ).then((video) => console.log(video));
