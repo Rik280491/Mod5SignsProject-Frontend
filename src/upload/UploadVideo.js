@@ -7,11 +7,13 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 // import { regCapConverter } from "../search/SearchSigns"
 
 
-function UploadVideo({ username, signs }) {
+function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 	const [loading, setLoading] = useState(false);
 	const [video, setVideo] = useState(null);
 	const [signName, setSignName] = useState("");
 	const [newSign, setNewSign] = useState(null);
+
+	console.log(selectedSign)
 
 	const handleChange = async (e) => {
 		const files = e.target.files;
@@ -38,20 +40,21 @@ function UploadVideo({ username, signs }) {
 	};
 
 	
+	// already defined. import from search signs
 	const regCapConverter = value => {
         return value.charAt(0).toUpperCase() + value.slice(1).replace(/[^\w\s]|_/g, "")
         .replace(/\s+/g, " ");
     }
 	
 	const uploadPost = () => {
-		handlePost();
+		handleSignPost();
 		handleVideoPost();
 		
 	}
 	
 	
 	
-	const handlePost = () => {
+	const handleSignPost = () => {
 		const regCapSignName = regCapConverter(signName)
 
 		const found = signs.find((sign) => sign.name === regCapSignName);
@@ -68,7 +71,7 @@ function UploadVideo({ username, signs }) {
 
 	async function handleVideoPost() {
 		
-		const sign = await handlePost()
+		const sign = await handleSignPost()
 
 		API.createVideo(
 			{
@@ -121,6 +124,7 @@ const mapStateToProps = (state) => {
 	return {
 		username: state.username,
 		signs: state.signs,
+		selectedSign: state.selectedSign
 	};
 };
 

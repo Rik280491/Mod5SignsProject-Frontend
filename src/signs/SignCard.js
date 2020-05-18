@@ -10,6 +10,7 @@ export default function SignCard({ name, videoURL }) {
 				<source src={videoURL} type="video/mp4" />
 			</video>
 			<h5>{name}</h5>
+
 		</div>
 	);
 }

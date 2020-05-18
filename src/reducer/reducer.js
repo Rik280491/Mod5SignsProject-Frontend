@@ -2,7 +2,8 @@
 const initialState = {
     signs: [],
     username: null,
-    searchedSigns: []
+    searchedSigns: [],
+    selectedSign: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -29,11 +30,17 @@ const reducer = (state = initialState, action) => {
             ...state,
             searchedSigns: state.signs.filter(sign => sign.name === action.payload.searchValue)
         }
-    case 'DESELECT_SIGN':
+     case 'DESELECT_SIGN':
         return {
             ...state,
             searchedSigns: []
         }
+    case 'SELECTED_SIGN':
+        return {
+            ...state,
+            selectedSign: action.payload.sign
+        }
+
         default:
             return state 
     
