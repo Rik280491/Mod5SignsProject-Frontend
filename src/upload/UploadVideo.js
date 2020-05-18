@@ -91,13 +91,13 @@ function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 				</h1>
 			) : (
 				<>
-					<h1>Upload a Video</h1>
-					<input
+					{ selectedSign ? <h1>Upload a Video for {selectedSign.name}</h1> : <h1>Upload a Video</h1>}
+					{ !selectedSign ? <input
 						type="text"
 						name="signName"
 						placeholder="Name of Sign"
 						onChange={handleNameChange}
-					/>
+					/> : null }
 					<input
 						type="file"
 						name="file"
