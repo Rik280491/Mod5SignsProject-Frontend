@@ -16,14 +16,14 @@ const reducer = (state = initialState, action) => {
         };
         case 'USERNAME':
     return {
+        ...state,
         username: action.payload.username,
-        signs: state.signs
-        // This fixed an issue but is it going to break something else? 
+         
     };
     case 'LOGOUTUSER':
         return {
+            ...state,
             username: null,
-            signs: state.signs 
         }
     case 'SEARCH_SIGNS':
         return {
