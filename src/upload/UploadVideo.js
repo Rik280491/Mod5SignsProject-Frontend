@@ -37,24 +37,22 @@ function UploadVideo({ username }) {
 	};
 
 	const handlePost = () => {
+		const capSignName = signName.charAt(0).toUpperCase() + signName.slice(1);
+		const regCapSignName = capSignName.replace(/[^\w\s]|_/g, "")
+		.replace(/\s+/g, " ");
+		
 		API.createSign({
-			name: signName,
+			name: regCapSignName,
 		}).then((sign) => setNewSign(sign));
-        console.log(newSign)
-        // API.createVideo(
-		// 	{
-		// 		video_url: video,
-		// 		sign: newSign (this is null)
-		// 	},
-		// 	localStorage.token
-		// ).then((video) => console.log(video));
+        
 	};
 
 	const handleVideoPost = () => {
 	   console.log(newSign)
+	   debugger
 	    API.createVideo({
 	        video_url: video,
-	        sign: newSign
+	        sign_id: newSign.id,
 	    }, localStorage.token ).then(video => console.log(video))
 	}
 
@@ -101,5 +99,11 @@ const mapStateToProps = (state) => {
 		username: state.username,
 	};
 };
+
+const mapDispatchToProps = dispatch => {
+	return {
+		existingSign: (sign) => dispatch({ type: "EXISTING_SIGN", payload: {sign} })
+	}
+}
 
 export default connect(mapStateToProps, null)(UploadVideo);
