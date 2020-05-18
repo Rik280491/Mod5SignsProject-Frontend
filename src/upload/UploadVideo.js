@@ -4,9 +4,8 @@ import { connect } from "react-redux";
 import SignCard from "../signs/SignCard";
 import API from "../API/API";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import InputAutocomplete from "./InputAutocomplete"
+import InputAutocomplete from "./InputAutocomplete";
 // import { regCapConverter } from "../search/SearchSigns"
-
 
 function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 	const [loading, setLoading] = useState(false);
@@ -14,7 +13,7 @@ function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 	const [signName, setSignName] = useState("");
 	const [newSign, setNewSign] = useState(null);
 
-	console.log(selectedSign)
+	console.log(selectedSign);
 
 	const handleChange = async (e) => {
 		const files = e.target.files;
@@ -40,48 +39,51 @@ function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 		setSignName(e.target.value);
 	};
 
-	
 	// already defined. import from search signs
-	const regCapConverter = value => {
-        return value.charAt(0).toUpperCase() + value.slice(1).replace(/[^\w\s]|_/g, "")
-        .replace(/\s+/g, " ");
-    }
-	
+	const regCapConverter = (value) => {
+		return (
+			value.charAt(0).toUpperCase() +
+			value
+				.slice(1)
+				.replace(/[^\w\s]|_/g, "")
+				.replace(/\s+/g, " ")
+		);
+	};
+
 	const uploadPost = () => {
 		handleSignPost();
 		handleVideoPost();
-		
-	}
-	
-	
-	
-	const handleSignPost = () => {
-		const regCapSignName = regCapConverter(signName)
+	};
 
+	const handleSignPost = () => {
+		const regCapSignName = regCapConverter(signName);
 		const found = signs.find((sign) => sign.name === regCapSignName);
 		if (found) {
-			return found
+			return found;
 			// console.log(found)
 		} else {
 			return API.createSign({
 				name: regCapSignName,
-			})
-			
+			});
 		}
 	};
 
 	async function handleVideoPost() {
-		
-		const sign = await handleSignPost()
-
-		API.createVideo(
-			{
-				video_url: video,
-				sign_id: sign.id,
-			},
-			localStorage.token
-		).then((video) => console.log(video));
-	};
+		const sign = await handleSignPost();
+		if (video) {
+			API.createVideo(
+				{
+					video_url: video,
+					sign_id: sign.id,
+				},
+				localStorage.token
+			)
+			// .then((video) => console.log(video));
+		} else {
+			alert("A VIDEO FILE MUST BE ATTACHED");
+			// write this in red text after the upload button? or as a dialog box?
+		}
+	}
 
 	return (
 		<div>
@@ -92,12 +94,15 @@ function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 				</h1>
 			) : (
 				<>
-					{ selectedSign ? <h1>Upload a Video for {selectedSign.name}</h1> : <h1>Upload a Video</h1>}
-					{ !selectedSign ? 
-
+					{selectedSign ? (
+						<h1>Upload a Video for {selectedSign.name}</h1>
+					) : (
+						<h1>Upload a Video</h1>
+					)}
+					{!selectedSign ? (
 						<InputAutocomplete onChange={handleNameChange} />
-						// onChange={handleNameChange}
-					: null }
+					) : 
+					null}
 					<input
 						type="file"
 						name="file"
@@ -123,7 +128,7 @@ const mapStateToProps = (state) => {
 	return {
 		username: state.username,
 		signs: state.signs,
-		selectedSign: state.selectedSign
+		selectedSign: state.selectedSign,
 	};
 };
 
