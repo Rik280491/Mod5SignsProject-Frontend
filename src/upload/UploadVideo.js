@@ -3,10 +3,11 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import SignCard from "../signs/SignCard";
 import API from "../API/API";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
+// import { regCapConverter } from "../search/SearchSigns"
 
 
-function UploadVideo({ username }) {
+function UploadVideo({ username, signs }) {
 	const [loading, setLoading] = useState(false);
 	const [video, setVideo] = useState(null);
 	const [signName, setSignName] = useState("");
@@ -36,25 +37,47 @@ function UploadVideo({ username }) {
 		setSignName(e.target.value);
 	};
 
-	const handlePost = () => {
-		const capSignName = signName.charAt(0).toUpperCase() + signName.slice(1);
-		const regCapSignName = capSignName.replace(/[^\w\s]|_/g, "")
-		.replace(/\s+/g, " ");
+	
+	const regCapConverter = value => {
+        return value.charAt(0).toUpperCase() + value.slice(1).replace(/[^\w\s]|_/g, "")
+        .replace(/\s+/g, " ");
+    }
+	
+	const uploadPost = () => {
+		handlePost();
+		handleVideoPost();
 		
-		API.createSign({
-			name: regCapSignName,
-		}).then((sign) => setNewSign(sign));
-        
+	}
+	
+	
+	
+	const handlePost = () => {
+		const regCapSignName = regCapConverter(signName)
+
+		const found = signs.find((sign) => sign.name === regCapSignName);
+		if (found) {
+			return found
+			// console.log(found)
+		} else {
+			return API.createSign({
+				name: regCapSignName,
+			})
+			
+		}
 	};
 
-	const handleVideoPost = () => {
-	   console.log(newSign)
-	   debugger
-	    API.createVideo({
-	        video_url: video,
-	        sign_id: newSign.id,
-	    }, localStorage.token ).then(video => console.log(video))
-	}
+	async function handleVideoPost() {
+		
+		const sign = await handlePost()
+
+		API.createVideo(
+			{
+				video_url: video,
+				sign_id: sign.id,
+			},
+			localStorage.token
+		).then((video) => console.log(video));
+	};
 
 	return (
 		<div>
@@ -80,13 +103,13 @@ function UploadVideo({ username }) {
 					/>
 
 					{loading ? (
-						<CircularProgress/>
+						<CircularProgress />
 					) : (
 						// better loading icon, progress bar?
 						<>
 							<SignCard name={signName} videoURL={video} />
-							<button onClick={handlePost}>UPLOAD</button>
-                            <button onClick={handleVideoPost}>TEST</button>
+							<button onClick={uploadPost}>UPLOAD</button>
+							{/* <button onClick={handleVideoPost}>TEST</button> */}
 						</>
 					)}
 				</>
@@ -97,13 +120,8 @@ function UploadVideo({ username }) {
 const mapStateToProps = (state) => {
 	return {
 		username: state.username,
+		signs: state.signs,
 	};
 };
-
-const mapDispatchToProps = dispatch => {
-	return {
-		existingSign: (sign) => dispatch({ type: "EXISTING_SIGN", payload: {sign} })
-	}
-}
 
 export default connect(mapStateToProps, null)(UploadVideo);
