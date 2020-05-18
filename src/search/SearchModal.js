@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 function SearchModal(props) {
 	const classes = useStyles();
-	const [open, setOpen] = React.useState(false);
+	const [open, setOpen] = useState(false);
 	const { searchedSigns, deselectSign } = props;
 
 	// console.log(searchedSigns)
