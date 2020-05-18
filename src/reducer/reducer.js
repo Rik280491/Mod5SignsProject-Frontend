@@ -29,6 +29,11 @@ const reducer = (state = initialState, action) => {
             ...state,
             searchedSigns: state.signs.filter(sign => sign.name === action.payload.searchValue)
         }
+    case 'DESELECT_SIGN':
+        return {
+            ...state,
+            searchedSigns: []
+        }
         default:
             return state 
     

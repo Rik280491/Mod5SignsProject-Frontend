@@ -30,7 +30,7 @@ function SearchSigns(props) {
 	const [searchModal, setSearchModal] = useState(false);
 	const [listening, setListening] = useState(false);
 	const [voiceSearchModal, setVoiceSearchModal] = useState(false);
-    const [speechPlaceholder, setSpeechPlaceholder] = useState("");
+	const [speechPlaceholder, setSpeechPlaceholder] = useState("");
     
     const regCapConverter = value => {
         return value.charAt(0).toUpperCase() + value.slice(1).replace(/[^\w\s]|_/g, "")
