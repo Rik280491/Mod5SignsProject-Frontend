@@ -12,7 +12,7 @@ const reducer = (state = initialState, action) => {
         case 'GET_SIGNS':
     return {
           ...state,
-          signs: action.payload.signs,
+          signs: action.payload.signs.filter(sign => sign.videos.length > 0)
         };
         case 'USERNAME':
     return {

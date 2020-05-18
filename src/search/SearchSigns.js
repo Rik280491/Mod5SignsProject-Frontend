@@ -31,42 +31,41 @@ function SearchSigns(props) {
 	const [listening, setListening] = useState(false);
 	const [voiceSearchModal, setVoiceSearchModal] = useState(false);
 	const [speechPlaceholder, setSpeechPlaceholder] = useState("");
-    
-    const regCapConverter = value => {
-        return value.charAt(0).toUpperCase() + value.slice(1).replace(/[^\w\s]|_/g, "")
-        .replace(/\s+/g, " ");
-    }
+
+	const regCapConverter = (value) => {
+		return (
+			value.charAt(0).toUpperCase() +
+			value
+				.slice(1)
+				.replace(/[^\w\s]|_/g, "")
+				.replace(/\s+/g, " ")
+		);
+	};
 
 	const onChange = (e) => {
-        const searchValue = regCapConverter(e.target.value)
-        searchSigns(searchValue);
+		const searchValue = regCapConverter(e.target.value);
+		searchSigns(searchValue);
 		setSearchModal(true);
 	};
 
-
-   
-
-
 	const handleSpeech = () => {
-        console.log("clicked");
-        setListening(true)
+		console.log("clicked");
+		setListening(true);
 		recognition.start();
 	};
 
 	recognition.onresult = (e) => {
 		handleValue(e.results[0][0].transcript);
-        setSpeechPlaceholder(e.results[0][0].transcript);
-
+		setSpeechPlaceholder(e.results[0][0].transcript);
 	};
 
 	const handleValue = (searchValue) => {
-		const voiceSearchValue = regCapConverter(searchValue)
+		const voiceSearchValue = regCapConverter(searchValue);
 		searchSigns(voiceSearchValue);
 		setVoiceSearchModal(true);
-        recognition.stop();
-        setListening(false)
-    };
-
+		recognition.stop();
+		setListening(false);
+	};
 
 	return (
 		<div className={classes.margin}>
@@ -84,14 +83,16 @@ function SearchSigns(props) {
 					{searchModal || voiceSearchModal ? <SearchModal /> : null}
 				</Grid>
 				<Grid item>
-					{ !listening ? <VoiceOverOffIcon onClick={handleSpeech} /> : <RecordVoiceOverIcon />}
+					{!listening ? (
+						<VoiceOverOffIcon onClick={handleSpeech} />
+					) : (
+						<RecordVoiceOverIcon />
+					)}
 				</Grid>
 			</Grid>
 		</div>
 	);
 }
-
-
 
 const mapDispatchToProps = (dispatch) => {
 	return {

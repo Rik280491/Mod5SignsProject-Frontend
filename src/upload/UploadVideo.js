@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import SignCard from "../signs/SignCard";
 import API from "../API/API";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import InputAutocomplete from "./InputAutocomplete"
 // import { regCapConverter } from "../search/SearchSigns"
 
 
@@ -92,12 +93,11 @@ function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 			) : (
 				<>
 					{ selectedSign ? <h1>Upload a Video for {selectedSign.name}</h1> : <h1>Upload a Video</h1>}
-					{ !selectedSign ? <input
-						type="text"
-						name="signName"
-						placeholder="Name of Sign"
-						onChange={handleNameChange}
-					/> : null }
+					{ !selectedSign ? 
+
+						<InputAutocomplete onChange={handleNameChange} />
+						// onChange={handleNameChange}
+					: null }
 					<input
 						type="file"
 						name="file"
@@ -112,7 +112,6 @@ function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 						<>
 							<SignCard name={signName} videoURL={video} />
 							<button onClick={uploadPost}>UPLOAD</button>
-							{/* <button onClick={handleVideoPost}>TEST</button> */}
 						</>
 					)}
 				</>
