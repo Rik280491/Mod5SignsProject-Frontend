@@ -40,12 +40,10 @@ const signUp = (data) => {
 	return post(createUserURL, data).then((response) => response.json());
 };
 
-const createSign = (data) => {
-	return post(signsURL, data).then(response => response.json())
-}
 
-const createVideo = (data, token) => {
-	return post(createVideoURL, data, token).then((response) =>
+
+const createSignWithVideo = (data, token) => {
+	return post(signsURL, data, token).then((response) =>
 		response.json()
 	);
 };
@@ -56,6 +54,6 @@ export default {
     validate,
     logIn, 
 	signUp,
-	createSign,
-	createVideo
+	createSignWithVideo
+	
 }

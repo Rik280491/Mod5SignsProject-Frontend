@@ -5,6 +5,8 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import { connect } from "react-redux";
 import SignCard from "../signs/SignCard";
+import { Link } from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
 	modal: {
@@ -23,12 +25,13 @@ const useStyles = makeStyles((theme) => ({
 function SearchModal(props) {
 	const classes = useStyles();
 	const [open, setOpen] = useState(false);
-	const { searchedSigns, deselectSign } = props;
+	const { searchedSigns, deselectSign, selectedSign } = props;
 
 	// console.log(searchedSigns)
 
 	useEffect(() => {
 		searchedSigns.length > 0 ? handleOpen() : handleClose();
+		
 	});
 
 	const handleOpen = () => {
@@ -38,6 +41,13 @@ function SearchModal(props) {
 	const handleClose = () => {
 		setOpen(false);
 	};
+
+	const handleUploadLink = (sign) => {
+		console.log("clicked", sign)
+		deselectSign();
+		selectedSign(sign)
+	}
+	
 
 	return (
 		<div>
@@ -55,14 +65,22 @@ function SearchModal(props) {
 			>
 				<Fade in={open}>
 					<div className={classes.paper}>
+						
 						{searchedSigns
 							? searchedSigns.map((sign) => (
+									<>
 									<SignCard
 										name={sign.name}
 										videoURL={sign.videos[0].video_url}
 									/>
-							  ))
+									
+									<Link to="/upload" onClick={() => handleUploadLink(sign)}> Add your own version? </Link>
+									</>
+									)) 
 							: null}
+							
+							
+
 					</div>
 				</Fade>
 			</Modal>
@@ -79,6 +97,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		deselectSign: () => dispatch({ type: "DESELECT_SIGN" }),
+		selectedSign: (sign) => dispatch({type: "SELECTED_SIGN", payload: {sign}})
 	};
 };
 

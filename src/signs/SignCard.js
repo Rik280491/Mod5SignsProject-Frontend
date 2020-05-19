@@ -1,15 +1,34 @@
 //implement video.js after func reached
-import React from "react";
+import React, { useState } from "react";
+import SearchModal from "../search/SearchModal";
+import { connect } from 'react-redux'
 
-export default function SignCard({ name, videoURL }) {
+function SignCard({ name, videoURL, searchSigns }) {
 	console.log(videoURL);
+	const [modalLoad, setModalLoad] = useState(false);
 
+	const toggleLoad = (name) => {
+		console.log("clicked");
+		searchSigns(name)
+		setModalLoad(true);
+	};
 	return (
 		<div>
 			<video width="300" height="240" controls>
 				<source src={videoURL} type="video/mp4" />
 			</video>
-			<h5>{name}</h5>
+			<button onClick={() => toggleLoad(name)}> {name} </button>
+			{modalLoad ? <SearchModal /> : null}
 		</div>
 	);
 }
+
+
+const mapDispatchToProps = dispatch => {
+	return {
+		searchSigns: (searchValue) =>
+		dispatch({ type: "SEARCH_SIGNS", payload: { searchValue } }),	
+	}
+}
+
+export default connect(null, mapDispatchToProps)(SignCard)

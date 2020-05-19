@@ -2,7 +2,8 @@
 const initialState = {
     signs: [],
     username: null,
-    searchedSigns: []
+    searchedSigns: [],
+    selectedSign: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -11,29 +12,35 @@ const reducer = (state = initialState, action) => {
         case 'GET_SIGNS':
     return {
           ...state,
-          signs: action.payload.signs,
+          signs: action.payload.signs.filter(sign => sign.videos.length > 0)
         };
         case 'USERNAME':
     return {
+        ...state,
         username: action.payload.username,
-        signs: state.signs
-        // This fixed an issue but is it going to break something else? 
+         
     };
     case 'LOGOUTUSER':
         return {
+            ...state,
             username: null,
-            signs: state.signs 
         }
     case 'SEARCH_SIGNS':
         return {
             ...state,
             searchedSigns: state.signs.filter(sign => sign.name === action.payload.searchValue)
         }
-    case 'DESELECT_SIGN':
+     case 'DESELECT_SIGN':
         return {
             ...state,
             searchedSigns: []
         }
+    case 'SELECTED_SIGN':
+        return {
+            ...state,
+            selectedSign: action.payload.sign
+        }
+
         default:
             return state 
     

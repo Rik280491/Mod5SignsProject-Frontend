@@ -3,14 +3,17 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import SignCard from "../signs/SignCard";
 import API from "../API/API";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
+import InputAutocomplete from "./InputAutocomplete";
+// import { regCapConverter } from "../search/SearchSigns"
 
-
-function UploadVideo({ username }) {
+function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 	const [loading, setLoading] = useState(false);
 	const [video, setVideo] = useState(null);
 	const [signName, setSignName] = useState("");
 	const [newSign, setNewSign] = useState(null);
+
+	console.log(selectedSign);
 
 	const handleChange = async (e) => {
 		const files = e.target.files;
@@ -36,25 +39,48 @@ function UploadVideo({ username }) {
 		setSignName(e.target.value);
 	};
 
-	const handlePost = () => {
-		const capSignName = signName.charAt(0).toUpperCase() + signName.slice(1);
-		const regCapSignName = capSignName.replace(/[^\w\s]|_/g, "")
-		.replace(/\s+/g, " ");
-		
-		API.createSign({
-			name: regCapSignName,
-		}).then((sign) => setNewSign(sign));
-        
+	// already defined. import from search signs
+	const regCapConverter = (value) => {
+		return (
+			value.charAt(0).toUpperCase() +
+			value
+				.slice(1)
+				.replace(/[^\w\s]|_/g, "")
+				.replace(/\s+/g, " ")
+		);
 	};
 
-	const handleVideoPost = () => {
-	   console.log(newSign)
-	   debugger
-	    API.createVideo({
-	        video_url: video,
-	        sign_id: newSign.id,
-	    }, localStorage.token ).then(video => console.log(video))
+	
+
+	
+	
+	const handleSignAndVideoPost = () => {
+		const regCapSignName = regCapConverter(signName);
+
+		if (video) {
+			API.createSignWithVideo(
+				{
+					video_url: video,
+					sign_name: regCapSignName,
+				},
+				localStorage.token
+			)
+			// .then((video) => console.log(video));
+			if (selectedSign){
+				API.createSignWithVideo(
+					{
+						video_url: video,
+						sign_name: selectedSign.name,
+					},
+					localStorage.token
+				)
+			}
+		} else {
+			alert("A VIDEO FILE MUST BE ATTACHED");
+			// write this in red text after the upload button? or as a dialog box?
+		}
 	}
+
 
 	return (
 		<div>
@@ -65,13 +91,15 @@ function UploadVideo({ username }) {
 				</h1>
 			) : (
 				<>
-					<h1>Upload a Video</h1>
-					<input
-						type="text"
-						name="signName"
-						placeholder="Name of Sign"
-						onChange={handleNameChange}
-					/>
+					{selectedSign ? (
+						<h1>Upload a Video for {selectedSign.name}</h1>
+					) : (
+						<h1>Upload a Video</h1>
+					)}
+					{!selectedSign ? (
+						<InputAutocomplete onChange={handleNameChange} />
+					) : 
+					null}
 					<input
 						type="file"
 						name="file"
@@ -80,13 +108,12 @@ function UploadVideo({ username }) {
 					/>
 
 					{loading ? (
-						<CircularProgress/>
+						<CircularProgress />
 					) : (
 						// better loading icon, progress bar?
 						<>
 							<SignCard name={signName} videoURL={video} />
-							<button onClick={handlePost}>UPLOAD</button>
-                            <button onClick={handleVideoPost}>TEST</button>
+							<button onClick={handleSignAndVideoPost}>UPLOAD</button>
 						</>
 					)}
 				</>
@@ -97,13 +124,9 @@ function UploadVideo({ username }) {
 const mapStateToProps = (state) => {
 	return {
 		username: state.username,
+		signs: state.signs,
+		selectedSign: state.selectedSign,
 	};
 };
-
-const mapDispatchToProps = dispatch => {
-	return {
-		existingSign: (sign) => dispatch({ type: "EXISTING_SIGN", payload: {sign} })
-	}
-}
 
 export default connect(mapStateToProps, null)(UploadVideo);
