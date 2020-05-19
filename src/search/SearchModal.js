@@ -31,6 +31,7 @@ function SearchModal(props) {
 
 	useEffect(() => {
 		searchedSigns.length > 0 ? handleOpen() : handleClose();
+		
 	});
 
 	const handleOpen = () => {
