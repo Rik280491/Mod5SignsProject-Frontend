@@ -1,7 +1,6 @@
 
 const initialState = {
     signs: [],
-    userVideos: [],
     username: null,
     searchedSigns: [],
     selectedSign: null
@@ -41,12 +40,7 @@ const reducer = (state = initialState, action) => {
             ...state,
             selectedSign: action.payload.sign
         }
-    
-    case 'USER_VIDEOS':
-        return {
-            ...state,
-            userVideos: action.payload.videos
-        }
+   
 
         default:
             return state 

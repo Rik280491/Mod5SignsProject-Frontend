@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import SignCard from "../signs/SignCard";
 import API from "../API/API";
 import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
+import DeleteDialog from './DeleteDialog'
 
 function UserVideos(props) {
-	const { username, deleteVideo} = props;
+	const { username, deleteSignVideo } = props;
     const [allVideos, setAllVideos] = useState([]);
-
-	useEffect(() => {
+    const [loadDialog, setLoadDialog] = useState(false)
+    const [deleteVideoID, setDeleteVideoID] = useState(null)
+    
+    useEffect(() => {
 		API.getVideos().then((videos) => {
             setAllVideos(videos);
             
@@ -26,31 +28,35 @@ function UserVideos(props) {
                         <source src={video.video_url} type="video/mp4" />
                     </video>
                     <h4>{video.sign.name}</h4>
-                    <DeleteForeverOutlinedIcon onClick={() => removeVideo(video.id)}/>
+                    <DeleteForeverOutlinedIcon onClick={() => openDialog(video.id)}/>
                     </div>
                     )
         })
 
     };
 
+    const openDialog = (id) => {
+        setDeleteVideoID(id)
+        setLoadDialog(true)
+    }
 
-    const removeVideo = (id) => {
-        console.log("clicked", id)      
-        // deleteVideo(id)
+    const removeVideo = () => {
+        console.log("clicked", deleteVideoID)      
               
-        API.deleteVideo(id).then(() => {
-           const updatedVideos = allVideos.filter(video => video.id !== id)  
+        API.deleteVideo(deleteVideoID).then(() => {
+           const updatedVideos = allVideos.filter(video => video.id !== deleteVideoID)  
            setAllVideos(updatedVideos)
         })
+        
         
     }
 
 	return (
 		<div>
 			<h1>{username}'s uploaded Videos</h1>
-			{findUserVideos()}
-            
-        
+			
+            {findUserVideos()}
+            {loadDialog ? <DeleteDialog removeVideo={removeVideo} setLoadDialog={setLoadDialog} /> : null }
 
 
 
@@ -65,10 +71,12 @@ const mapStateToProps = (state) => {
 	};
 };
 
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         deleteVideo: (id) => dispatch({type: "DELETE_VIDEO", payload: {id}})
-//     }
-// }
+const mapDispatchToProps = dispatch => {
+    return {
+        deleteSignVideo: (id) => dispatch({type: "DELETE_SIGN_VIDEO", payload: {id}})
+    }
+}
 
-export default connect(mapStateToProps, null)(UserVideos);
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserVideos);
