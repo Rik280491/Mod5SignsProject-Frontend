@@ -66,11 +66,21 @@ function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 				localStorage.token
 			)
 			// .then((video) => console.log(video));
+			if (selectedSign){
+				API.createSignWithVideo(
+					{
+						video_url: video,
+						sign_name: selectedSign.name,
+					},
+					localStorage.token
+				)
+			}
 		} else {
 			alert("A VIDEO FILE MUST BE ATTACHED");
 			// write this in red text after the upload button? or as a dialog box?
 		}
 	}
+
 
 	return (
 		<div>
