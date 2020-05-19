@@ -50,31 +50,18 @@ function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 		);
 	};
 
-	const uploadPost = () => {
-		handleSignPost();
-		handleVideoPost();
-	};
+	
 
-	const handleSignPost = () => {
+	
+	
+	const handleSignAndVideoPost = () => {
 		const regCapSignName = regCapConverter(signName);
-		const found = signs.find((sign) => sign.name === regCapSignName);
-		if (found) {
-			return found;
-			// console.log(found)
-		} else {
-			return API.createSign({
-				name: regCapSignName,
-			});
-		}
-	};
 
-	async function handleVideoPost() {
-		const sign = await handleSignPost();
 		if (video) {
-			API.createVideo(
+			API.createSignWithVideo(
 				{
 					video_url: video,
-					sign_id: sign.id,
+					sign_name: regCapSignName,
 				},
 				localStorage.token
 			)
@@ -116,7 +103,7 @@ function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 						// better loading icon, progress bar?
 						<>
 							<SignCard name={signName} videoURL={video} />
-							<button onClick={uploadPost}>UPLOAD</button>
+							<button onClick={handleSignAndVideoPost}>UPLOAD</button>
 						</>
 					)}
 				</>
