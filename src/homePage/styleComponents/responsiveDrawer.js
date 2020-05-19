@@ -18,7 +18,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
-import SearchSigns from "../../search/SearchSigns"
+import SearchSigns from "../../search/SearchSigns";
 
 const drawerWidth = 240;
 
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ResponsiveDrawer(props) {
-	console.log(props)
+	console.log(props);
 	const { window } = props;
 	const classes = useStyles();
 	const theme = useTheme();
@@ -73,8 +73,7 @@ function ResponsiveDrawer(props) {
 			<div className={classes.toolbar} />
 			<Divider />
 			<List>
-				<ListItem button
-				component={(props) => <Link to="/" {...props} />}>
+				<ListItem button component={(props) => <Link to="/" {...props} />}>
 					{/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
 					<ListItemText primary="Home" />
 				</ListItem>
@@ -85,15 +84,14 @@ function ResponsiveDrawer(props) {
 				>
 					<ListItemText primary="Upload" />
 				</ListItem>
-				{/* only render if user has uploaded videos */}
-				<ListItem
+				
+				{ username ? <ListItem
 					button
-					
 					component={(props) => <Link to="/user-uploads" {...props} />}
 				>
 					<ListItemText primary="User Videos" />
-				</ListItem>
-				
+				</ListItem> : null }
+
 				<ListItem button>
 					<ListItemText primary="Mission Statement" />
 				</ListItem>
@@ -131,7 +129,7 @@ function ResponsiveDrawer(props) {
 						<MenuIcon />
 					</IconButton>
 					<Typography variant="h6" noWrap>
-						<SearchSigns/>
+						<SearchSigns />
 					</Typography>
 				</Toolbar>
 			</AppBar>
