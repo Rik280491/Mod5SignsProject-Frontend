@@ -85,6 +85,15 @@ function ResponsiveDrawer(props) {
 				>
 					<ListItemText primary="Upload" />
 				</ListItem>
+				{/* only render if user has uploaded videos */}
+				<ListItem
+					button
+					
+					component={(props) => <Link to="/user-uploads" {...props} />}
+				>
+					<ListItemText primary="User Videos" />
+				</ListItem>
+				
 				<ListItem button>
 					<ListItemText primary="Mission Statement" />
 				</ListItem>

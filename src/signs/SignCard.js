@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 function SignCard({ name, videoURL, searchSigns }) {
 	console.log(videoURL);
 	const [modalLoad, setModalLoad] = useState(false);
+	// const [userVideos, setUserVideos] = useState([])
 
 	const toggleLoad = (name) => {
 		console.log("clicked");
@@ -14,6 +15,7 @@ function SignCard({ name, videoURL, searchSigns }) {
 	};
 	return (
 		<div>
+			{/* TWO OR MORE VIDEOS? */}
 			<video width="300" height="240" controls>
 				<source src={videoURL} type="video/mp4" />
 			</video>

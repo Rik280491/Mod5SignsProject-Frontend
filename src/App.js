@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import ResponsiveDrawer from "./homePage/styleComponents/ResponsiveDrawer"
+import UserVideos from "./userUploads/UserVideos"
 // import SearchSigns from "./search/SearchSigns"
 
 class App extends React.Component {
@@ -71,6 +72,9 @@ class App extends React.Component {
 							path="/upload"
 							render={(props) => <UploadVideo {...props} />}
 						/>
+						<Route 
+							exact path="/user-uploads"
+							render={props => <UserVideos {...props} />}/>
 					</div>
 			
 			</>

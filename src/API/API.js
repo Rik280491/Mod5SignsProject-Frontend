@@ -1,9 +1,9 @@
-const baseURL = "http://localhost:3001"
-const signsURL = `${baseURL}/signs`
+const baseURL = "http://localhost:3001";
+const signsURL = `${baseURL}/signs`;
 const validateURL = `${baseURL}/validate`;
 const logInURL = `${baseURL}/log-in`;
 const createUserURL = `${baseURL}/users`;
-const createVideoURL = `${baseURL}/videos`;
+const videosURL = `${baseURL}/videos`;
 
 const post = (url, data, token) => {
 	const configObject = {
@@ -18,18 +18,16 @@ const post = (url, data, token) => {
 	return fetch(url, configObject);
 };
 
-
-
 const get = () => {
-    return fetch(signsURL).then((response => response.json()))
-}
+	return fetch(signsURL).then((response) => response.json());
+};
 
 const getUser = (url, token) => {
 	return token ? fetch(url, { headers: { AUTHORIZATION: token } }) : fetch(url);
 };
 
 const validate = (token) => {
-    return getUser(validateURL, token).then((response) => response.json())
+	return getUser(validateURL, token).then((response) => response.json());
 };
 
 const logIn = (data) => {
@@ -40,20 +38,25 @@ const signUp = (data) => {
 	return post(createUserURL, data).then((response) => response.json());
 };
 
-
-
 const createSignWithVideo = (data, token) => {
-	return post(signsURL, data, token).then((response) =>
-		response.json()
-	);
+	return post(signsURL, data, token).then((response) => response.json());
 };
 
-export default {
-    get,
-    getUser,
-    validate,
-    logIn, 
-	signUp,
-	createSignWithVideo
-	
+const getVideos = () => {
+	return fetch(videosURL).then((response) => response.json());
+};
+
+const deleteVideo = (id) => {
+	return fetch(`${videosURL}/${id}`, { method: "DELETE"})
 }
+
+export default {
+	get,
+	getUser,
+	validate,
+	logIn,
+	signUp,
+	createSignWithVideo,
+	getVideos,
+	deleteVideo
+};
