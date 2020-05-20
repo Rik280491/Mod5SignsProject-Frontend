@@ -83,6 +83,7 @@ function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 					},
 					localStorage.token
 				).then(response => setUploadResponse(response))
+
 			}
 		} else {
 			alert("A VIDEO FILE MUST BE ATTACHED");
@@ -145,5 +146,11 @@ const mapStateToProps = (state) => {
 		selectedSign: state.selectedSign,
 	};
 };
+
+// const mapDispatchToProps = dispatch => {
+// 	return {
+
+// 	}
+// }
 
 export default connect(mapStateToProps, null)(UploadVideo);
