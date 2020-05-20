@@ -71,7 +71,7 @@ function SearchModal(props) {
 									<>
 									<SignCard
 										name={sign.name}
-										videoURL={sign.videos[0].video_url}
+										videoArr={sign.videos}
 									/>
 									
 									<Link to="/upload" onClick={() => handleUploadLink(sign)}> Add your own version? </Link>

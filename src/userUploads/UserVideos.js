@@ -50,6 +50,7 @@ function UserVideos(props) {
 						height="140"
 						src={video.video_url}
 						title={video.sign.name}
+						// cant full screen!
 					/>
 					<Typography gutterBottom variant="h5" component="h2">
 						{video.sign.name}

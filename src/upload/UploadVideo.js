@@ -139,6 +139,7 @@ function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 		</div>
 	);
 }
+
 const mapStateToProps = (state) => {
 	return {
 		username: state.username,
@@ -147,10 +148,6 @@ const mapStateToProps = (state) => {
 	};
 };
 
-// const mapDispatchToProps = dispatch => {
-// 	return {
 
-// 	}
-// }
 
 export default connect(mapStateToProps, null)(UploadVideo);
