@@ -22,6 +22,7 @@ function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 	const [video, setVideo] = useState(null);
 	const [signName, setSignName] = useState("");
 	const [newSign, setNewSign] = useState(null);
+	const [uploadResponse, setUploadResponse] = useState("")
 
 	const classes = useStyles();
 
@@ -72,8 +73,8 @@ function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 					sign_name: regCapSignName,
 				},
 				localStorage.token
-			)
-			// .then((video) => console.log(video));
+			).then(response => setUploadResponse(response))
+			
 			if (selectedSign) {
 				API.createSignWithVideo(
 					{
@@ -81,7 +82,7 @@ function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 						sign_name: selectedSign.name,
 					},
 					localStorage.token
-				)
+				).then(response => setUploadResponse(response))
 			}
 		} else {
 			alert("A VIDEO FILE MUST BE ATTACHED");
@@ -129,6 +130,7 @@ function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 							>
 								Upload
 							</Button>
+							{ uploadResponse ? <h4>{uploadResponse.message}</h4> : null}
 						</>
 					)}
 				</>
