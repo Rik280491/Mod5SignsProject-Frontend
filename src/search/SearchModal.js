@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 function SearchModal(props) {
 	const classes = useStyles();
 	const [open, setOpen] = useState(false);
-	const { searchedSigns, deselectSign, selectedSign } = props;
+	const { searchedSigns, clearSigns, selectedSign } = props;
 
 	// console.log(searchedSigns)
 
@@ -44,7 +44,7 @@ function SearchModal(props) {
 
 	const handleUploadLink = (sign) => {
 		console.log("clicked", sign)
-		deselectSign();
+		clearSigns();
 		selectedSign(sign)
 	}
 	
@@ -56,7 +56,7 @@ function SearchModal(props) {
 				aria-describedby="transition-modal-description"
 				className={classes.modal}
 				open={open}
-				onClose={() => deselectSign()}
+				onClose={() => clearSigns()}
 				closeAfterTransition
 				BackdropComponent={Backdrop}
 				BackdropProps={{
@@ -96,7 +96,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		deselectSign: () => dispatch({ type: "DESELECT_SIGN" }),
+		clearSigns: () => dispatch({ type: "CLEAR_SIGNS" }),
 		selectedSign: (sign) => dispatch({type: "SELECTED_SIGN", payload: {sign}})
 	};
 };

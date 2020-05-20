@@ -85,12 +85,14 @@ function UploadVideo({ username, signs, searchedSign, selectedSign, deselectSign
 					},
 					localStorage.token
 				).then(response => setUploadResponse(response))
-				deselectSign()	
+				
+					
 			}
 		} else {
 			alert("A VIDEO FILE MUST BE ATTACHED");
 			// write this in red text after the upload button? or as a dialog box?
 		}
+		deselectSign()
 	};
 
 	return (

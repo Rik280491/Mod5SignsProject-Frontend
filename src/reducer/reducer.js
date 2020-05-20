@@ -30,7 +30,7 @@ const reducer = (state = initialState, action) => {
             ...state,
             searchedSigns: state.signs.filter(sign => sign.name === action.payload.searchValue)
         }
-     case 'DESELECT_SIGN':
+     case 'CLEAR_SIGNS':
         return {
             ...state,
             searchedSigns: []
@@ -39,6 +39,11 @@ const reducer = (state = initialState, action) => {
         return {
             ...state,
             selectedSign: action.payload.sign
+        }
+    case 'DESELECT_SIGN':
+        return {
+            ...state, 
+            selectedSign: null
         }
     // case 'DELETE_SIGN_VIDEO':
     //     return {
