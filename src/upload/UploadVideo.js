@@ -5,13 +5,25 @@ import SignCard from "../signs/SignCard";
 import API from "../API/API";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import InputAutocomplete from "./InputAutocomplete";
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+
 // import { regCapConverter } from "../search/SearchSigns"
+
+const useStyles = makeStyles((theme) => ({
+	button: {
+		margin: theme.spacing(1),
+	},
+}));
 
 function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 	const [loading, setLoading] = useState(false);
 	const [video, setVideo] = useState(null);
 	const [signName, setSignName] = useState("");
 	const [newSign, setNewSign] = useState(null);
+
+	const classes = useStyles();
 
 	console.log(selectedSign);
 
@@ -50,10 +62,6 @@ function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 		);
 	};
 
-	
-
-	
-	
 	const handleSignAndVideoPost = () => {
 		const regCapSignName = regCapConverter(signName);
 
@@ -66,7 +74,7 @@ function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 				localStorage.token
 			)
 			// .then((video) => console.log(video));
-			if (selectedSign){
+			if (selectedSign) {
 				API.createSignWithVideo(
 					{
 						video_url: video,
@@ -79,8 +87,7 @@ function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 			alert("A VIDEO FILE MUST BE ATTACHED");
 			// write this in red text after the upload button? or as a dialog box?
 		}
-	}
-
+	};
 
 	return (
 		<div>
@@ -98,8 +105,7 @@ function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 					)}
 					{!selectedSign ? (
 						<InputAutocomplete onChange={handleNameChange} />
-					) : 
-					null}
+					) : null}
 					<input
 						type="file"
 						name="file"
@@ -113,7 +119,16 @@ function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 						// better loading icon, progress bar?
 						<>
 							<SignCard name={signName} videoURL={video} />
-							<button onClick={handleSignAndVideoPost}>UPLOAD</button>
+
+							<Button
+								variant="contained"
+								color="default"
+								onClick={handleSignAndVideoPost}
+								className={classes.button}
+								startIcon={<CloudUploadIcon />}
+							>
+								Upload
+							</Button>
 						</>
 					)}
 				</>

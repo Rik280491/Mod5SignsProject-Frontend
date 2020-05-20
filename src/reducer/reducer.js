@@ -40,7 +40,11 @@ const reducer = (state = initialState, action) => {
             ...state,
             selectedSign: action.payload.sign
         }
-   
+    // case 'DELETE_SIGN_VIDEO':
+    //     return {
+    //         ...state,
+    //         signs: state.signs.filter(sign => sign.movie)
+    //     }
 
         default:
             return state 

@@ -18,8 +18,10 @@ class HomePageContainer extends React.Component {
 	
 	renderSigns = () => {
 		console.log(this.props.signs)
+		
 		return this.props.signs.map((sign, index) => {
 			return (
+				
 				<SignCard
 					key={index}
 					name={sign.name}
