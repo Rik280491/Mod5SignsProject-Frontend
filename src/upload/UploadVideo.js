@@ -8,6 +8,8 @@ import InputAutocomplete from "./InputAutocomplete";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import CardMedia from "@material-ui/core/CardMedia";
+
 
 // import { regCapConverter } from "../search/SearchSigns"
 
@@ -17,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-function UploadVideo({ username, signs, searchedSign, selectedSign }) {
+function UploadVideo({ username, signs, searchedSign, selectedSign, deselectSign }) {
 	const [loading, setLoading] = useState(false);
 	const [video, setVideo] = useState(null);
 	const [signName, setSignName] = useState("");
@@ -83,7 +85,7 @@ function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 					},
 					localStorage.token
 				).then(response => setUploadResponse(response))
-
+				deselectSign()	
 			}
 		} else {
 			alert("A VIDEO FILE MUST BE ATTACHED");
@@ -120,7 +122,15 @@ function UploadVideo({ username, signs, searchedSign, selectedSign }) {
 					) : (
 						// better loading icon, progress bar?
 						<>
-							<SignCard name={signName} videoURL={video} />
+							{/* <SignCard name={signName} videoArr={video} /> */}
+							{/* view video youve just uploaded */}
+							<CardMedia
+								component="iframe"
+								// doesn't full screen video
+								height="140"
+								src={video}
+								
+							/>
 
 							<Button
 								variant="contained"
@@ -148,6 +158,11 @@ const mapStateToProps = (state) => {
 	};
 };
 
+const mapDispatchToProps = dispatch => {
+	return {
+		deselectSign: () => dispatch({ type: "DESELECT_SIGN" })
+	}
+}
 
 
-export default connect(mapStateToProps, null)(UploadVideo);
+export default connect(mapStateToProps, mapDispatchToProps)(UploadVideo);
