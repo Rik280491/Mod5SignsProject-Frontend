@@ -4,6 +4,7 @@ const validateURL = `${baseURL}/validate`;
 const logInURL = `${baseURL}/log-in`;
 const createUserURL = `${baseURL}/users`;
 const videosURL = `${baseURL}/videos`;
+const dictionaryAPI = "https://api.dictionaryapi.dev/api/v2/entries/en"
 
 const post = (url, data, token) => {
 	const configObject = {
@@ -50,6 +51,12 @@ const deleteVideo = (id) => {
 	return fetch(`${videosURL}/${id}`, { method: "DELETE"})
 }
 
+// https://github.com/meetDeveloper/googleDictionaryAPI
+
+const checkWord = (value) => {
+	return fetch(`${dictionaryAPI}/${value}`)
+	
+}
 export default {
 	get,
 	getUser,
@@ -58,5 +65,6 @@ export default {
 	signUp,
 	createSignWithVideo,
 	getVideos,
-	deleteVideo
+	deleteVideo,
+	checkWord
 };

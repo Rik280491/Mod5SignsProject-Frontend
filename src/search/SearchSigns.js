@@ -8,6 +8,8 @@ import ImageSearchIcon from "@material-ui/icons/ImageSearch";
 import VoiceOverOffIcon from "@material-ui/icons/VoiceOverOff";
 import RecordVoiceOverIcon from "@material-ui/icons/RecordVoiceOver";
 import SearchModal from "./SearchModal";
+import MissingWordDialog from "./MissingWordDialog";
+import API from "../API/API";
 
 const useStyles = makeStyles((theme) => ({
 	margin: {
@@ -26,11 +28,13 @@ recognition.lang = "en-US";
 
 function SearchSigns(props) {
 	const classes = useStyles();
-	const { searchSigns } = props;
+	const { searchSigns, searchedSigns } = props;
 	const [searchModal, setSearchModal] = useState(false);
 	const [listening, setListening] = useState(false);
 	const [voiceSearchModal, setVoiceSearchModal] = useState(false);
 	const [speechPlaceholder, setSpeechPlaceholder] = useState("");
+	const [suggestedWord, setSuggestedWord] = useState("");
+	const [definition, setDefinition] = useState([]);
 
 	const regCapConverter = (value) => {
 		return (
@@ -42,10 +46,25 @@ function SearchSigns(props) {
 		);
 	};
 
+	// const getDefinition = searchValue => {
+	// 	return API.checkWord(searchValue).then(response => response.json()).then(data => setDefinition(data))
+	// }
+
+	// searchValue should not be equal to anything in the db
+	const isDefined = (searchValue) => {
+		API.checkWord(searchValue).then((response) => {
+			response.json().then((data) => setDefinition(data));
+
+			response.ok ? setSuggestedWord(searchValue) : setSuggestedWord("");
+		});
+	};
+
+	
 	const onChange = (e) => {
 		const searchValue = regCapConverter(e.target.value);
 		searchSigns(searchValue);
 		setSearchModal(true);
+		isDefined(searchValue);
 	};
 
 	const handleSpeech = () => {
@@ -57,12 +76,14 @@ function SearchSigns(props) {
 	recognition.onresult = (e) => {
 		handleValue(e.results[0][0].transcript);
 		setSpeechPlaceholder(e.results[0][0].transcript);
+		console.log(e.results[0][0].transcript)
 	};
 
 	const handleValue = (searchValue) => {
 		const voiceSearchValue = regCapConverter(searchValue);
 		searchSigns(voiceSearchValue);
 		setVoiceSearchModal(true);
+		isDefined(voiceSearchValue);
 		recognition.stop();
 		setListening(false);
 	};
@@ -89,10 +110,23 @@ function SearchSigns(props) {
 						<RecordVoiceOverIcon />
 					)}
 				</Grid>
+				{suggestedWord ? (
+					<MissingWordDialog
+						setDefinition={setDefinition}
+						definition={definition}
+						suggestedWord={suggestedWord}
+					/>
+				) : null}
 			</Grid>
 		</div>
 	);
 }
+
+const mapStateToProps = (state) => {
+	return {
+		searchedSigns: state.searchedSigns,
+	};
+};
 
 const mapDispatchToProps = (dispatch) => {
 	return {
