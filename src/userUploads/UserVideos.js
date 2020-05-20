@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
 	button: {
@@ -43,14 +44,17 @@ function UserVideos(props) {
 					{/* <video width="300" height="240" controls>
 						<source src={video.video_url} type="video/mp4" />
 					</video> */}
+					
 					<CardMedia
 						component="iframe"
-						// alt="Contemplative Reptile"
 						height="140"
-                        src={video.video_url}
+						src={video.video_url}
 						title={video.sign.name}
 					/>
-					<h4>{video.sign.name}</h4>
+					<Typography gutterBottom variant="h5" component="h2">
+						{video.sign.name}
+					</Typography>
+
 					<Button
 						variant="contained"
 						color="secondary"
