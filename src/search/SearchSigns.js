@@ -60,11 +60,23 @@ function SearchSigns(props) {
 
 	// searchValue should not be equal to anything in the db
 	const isDefined = (searchValue) => {
-		API.checkWord(searchValue).then((response) => {
-			response.json().then((definitionsData) => setDefinition(definitionsData));
-
-			response.ok ? setSuggestedWord(searchValue) : setSuggestedWord("");
-		});
+		// console.log("- - - - - isDefined")
+		if (searchValue.length > 1){
+			API.checkWord(searchValue).then((response) => {
+				if(response.ok) {
+					return response.json()
+				} else {
+					throw Error
+				}
+			})
+			.then(definitionsData => {
+				setDefinition(definitionsData)
+				setSuggestedWord(searchValue)
+			})
+		} else {
+			throw Error
+		}
+		
 	};
 
 	const onChange = (e) => {
@@ -74,8 +86,8 @@ function SearchSigns(props) {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log("clicked");
-		searchSigns(searchValue);
-		searchedSigns.length > 0 ? setSearchModal(true) : isDefined(searchValue);
+		searchSigns(searchValue)
+		searchedSigns.length > 0 ? setSearchModal(true) : isDefined(searchValue)
 	};
 
 	const handleSpeech = () => {
@@ -103,7 +115,9 @@ function SearchSigns(props) {
 	return (
 		<div className={classes.margin}>
 			<Grid container spacing={3} alignItems="flex-end">
-				<Grid item></Grid>
+				<Grid item>
+				<ImageSearchIcon />
+				</Grid>
 				<Grid item>
 					<form onSubmit={handleSubmit}>
 						<TextField
@@ -127,17 +141,19 @@ function SearchSigns(props) {
 						setDefinition={setDefinition}
 						definition={definition}
 						suggestedWord={suggestedWord}
+						setSuggestedWord={setSuggestedWord}
 					/>
 				) : (
-					<Button
-						variant="contained"
-						color="primary"
-						size="small"
-						className={classes.button}
-						endIcon={<ImageSearchIcon />}
-					>
-						Search
-					</Button>
+					// <Button
+					// 	variant="contained"
+					// 	color="primary"
+					// 	size="small"
+					// 	className={classes.button}
+					// 	endIcon={<ImageSearchIcon />}
+					// >
+					// 	Search
+					// </Button>
+					null
 				)}
 			</Grid>
 		</div>

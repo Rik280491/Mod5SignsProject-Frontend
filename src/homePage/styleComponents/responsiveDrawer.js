@@ -19,6 +19,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import SearchSigns from "../../search/SearchSigns";
+import MissingWordDialog from '../../search/MissingWordDialog'
 
 const drawerWidth = 240;
 
