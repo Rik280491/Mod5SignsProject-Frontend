@@ -10,11 +10,18 @@ import RecordVoiceOverIcon from "@material-ui/icons/RecordVoiceOver";
 import SearchModal from "./SearchModal";
 import MissingWordDialog from "./MissingWordDialog";
 import API from "../API/API";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
-	margin: {
+	button: {
 		margin: theme.spacing(1),
+	 
 	},
+	// voiceButton: {
+	// 	margin: theme.spacing(1)
+	// }
+	
+	
 }));
 
 const SpeechRecognition =
@@ -35,6 +42,7 @@ function SearchSigns(props) {
 	const [speechPlaceholder, setSpeechPlaceholder] = useState("");
 	const [suggestedWord, setSuggestedWord] = useState("");
 	const [definition, setDefinition] = useState([]);
+	const [searchValue, setSearchValue] = useState("");
 
 	const regCapConverter = (value) => {
 		return (
@@ -53,18 +61,21 @@ function SearchSigns(props) {
 	// searchValue should not be equal to anything in the db
 	const isDefined = (searchValue) => {
 		API.checkWord(searchValue).then((response) => {
-			response.json().then((data) => setDefinition(data));
+			response.json().then((definitionsData) => setDefinition(definitionsData));
 
 			response.ok ? setSuggestedWord(searchValue) : setSuggestedWord("");
 		});
 	};
 
-	
 	const onChange = (e) => {
-		const searchValue = regCapConverter(e.target.value);
+		setSearchValue(regCapConverter(e.target.value));
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		console.log("clicked");
 		searchSigns(searchValue);
-		setSearchModal(true);
-		isDefined(searchValue);
+		searchedSigns.length > 0 ? setSearchModal(true) : isDefined(searchValue);
 	};
 
 	const handleSpeech = () => {
@@ -76,14 +87,15 @@ function SearchSigns(props) {
 	recognition.onresult = (e) => {
 		handleValue(e.results[0][0].transcript);
 		setSpeechPlaceholder(e.results[0][0].transcript);
-		console.log(e.results[0][0].transcript)
+		console.log(e.results[0][0].transcript);
 	};
 
-	const handleValue = (searchValue) => {
-		const voiceSearchValue = regCapConverter(searchValue);
+	const handleValue = (speechValue) => {
+		const voiceSearchValue = regCapConverter(speechValue);
 		searchSigns(voiceSearchValue);
-		setVoiceSearchModal(true);
-		isDefined(voiceSearchValue);
+		searchedSigns.length > 0 ? setVoiceSearchModal(true) : isDefined(voiceSearchValue);
+
+		
 		recognition.stop();
 		setListening(false);
 	};
@@ -91,23 +103,23 @@ function SearchSigns(props) {
 	return (
 		<div className={classes.margin}>
 			<Grid container spacing={3} alignItems="flex-end">
+				<Grid item></Grid>
 				<Grid item>
-					<ImageSearchIcon />
-				</Grid>
-				<Grid item>
-					<TextField
-						placeholder={speechPlaceholder}
-						onChange={onChange}
-						id="speechinput"
-						x-webkit-speech
-					/>
+					<form onSubmit={handleSubmit}>
+						<TextField
+							placeholder={speechPlaceholder}
+							onChange={onChange}
+							id="speechinput"
+							x-webkit-speech
+						/>
+					</form>
 					{searchModal || voiceSearchModal ? <SearchModal /> : null}
 				</Grid>
 				<Grid item>
 					{!listening ? (
-						<VoiceOverOffIcon onClick={handleSpeech} />
+						<VoiceOverOffIcon className={classes.voiceButton}  onClick={handleSpeech}  />
 					) : (
-						<RecordVoiceOverIcon />
+						<RecordVoiceOverIcon className={classes.voiceButton}/>
 					)}
 				</Grid>
 				{suggestedWord ? (
@@ -116,7 +128,17 @@ function SearchSigns(props) {
 						definition={definition}
 						suggestedWord={suggestedWord}
 					/>
-				) : null}
+				) : (
+					<Button
+						variant="contained"
+						color="primary"
+						size="small"
+						className={classes.button}
+						endIcon={<ImageSearchIcon />}
+					>
+						Search
+					</Button>
+				)}
 			</Grid>
 		</div>
 	);
@@ -125,6 +147,7 @@ function SearchSigns(props) {
 const mapStateToProps = (state) => {
 	return {
 		searchedSigns: state.searchedSigns,
+		
 	};
 };
 
@@ -135,4 +158,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default connect(null, mapDispatchToProps)(SearchSigns);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchSigns);

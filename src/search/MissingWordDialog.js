@@ -17,7 +17,7 @@ export default function MissingWordDialog(props) {
     const [open, setOpen] = React.useState(false);
     
     console.log(definition[0])
-    debugger
+    
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -51,7 +51,7 @@ export default function MissingWordDialog(props) {
           </Button>
           <Button onClick={handleClose} component={ Link } to="/upload"
              color="primary">
-            Yes Please
+            Let's Go
           </Button>
         </DialogActions>
       </Dialog>
