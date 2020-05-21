@@ -11,18 +11,15 @@ import SearchModal from "./SearchModal";
 import MissingWordDialog from "./MissingWordDialog";
 import API from "../API/API";
 import Button from "@material-ui/core/Button";
-import DropdownSearch from "./DropdownSearch"
+import DropdownSearch from "./DropdownSearch";
 
 const useStyles = makeStyles((theme) => ({
 	button: {
 		margin: theme.spacing(1),
-	 
 	},
 	// voiceButton: {
 	// 	margin: theme.spacing(1)
 	// }
-	
-	
 }));
 
 const SpeechRecognition =
@@ -55,42 +52,37 @@ function SearchSigns(props) {
 		);
 	};
 
-	
 	const isDefined = (searchValue) => {
-		
-		if (searchValue.length > 1){
-			API.checkWord(searchValue).then((response) => {
-				if(response.ok) {
-					return response.json()
-				} else {
-					throw Error
-				}
-			})
-			.then(definitionsData => {
-				setDefinition(definitionsData)
-				setSuggestedWord(searchValue)
-			})
+		if (searchValue.length > 1) {
+			API.checkWord(searchValue)
+				.then((response) => {
+					if (response.ok) {
+						return response.json();
+					} else {
+						throw Error;
+					}
+				})
+				.then((definitionsData) => {
+					setDefinition(definitionsData);
+					setSuggestedWord(searchValue);
+				});
 		} else {
-			throw Error
+			throw Error;
 		}
-		
 	};
 
 	const onChange = (e) => {
-		console.log(e.target.innerText)
-		if (Number.isInteger(e.target.value)) {
-			setSearchValue(regCapConverter(e.target.innerText))
-		} else {
-			setSearchValue(regCapConverter(e.target.value))
-		}
-		
+		console.log(e.target.innerText);
+		Number.isInteger(e.target.value)
+			? setSearchValue(regCapConverter(e.target.innerText))
+			: setSearchValue(regCapConverter(e.target.value));
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log("clicked");
-		searchSigns(searchValue)
-		searchedSigns.length > 0 ? setSearchModal(true) : isDefined(searchValue)
+		searchSigns(searchValue);
+		searchedSigns.length > 0 ? setSearchModal(true) : isDefined(searchValue);
 	};
 
 	const handleSpeech = () => {
@@ -108,9 +100,10 @@ function SearchSigns(props) {
 	const handleValue = (speechValue) => {
 		const voiceSearchValue = regCapConverter(speechValue);
 		searchSigns(voiceSearchValue);
-		searchedSigns.length > 0 ? setVoiceSearchModal(true) : isDefined(voiceSearchValue);
+		searchedSigns.length > 0
+			? setVoiceSearchModal(true)
+			: isDefined(voiceSearchValue);
 
-		
 		recognition.stop();
 		setListening(false);
 	};
@@ -119,21 +112,22 @@ function SearchSigns(props) {
 		<div className={classes.margin}>
 			<Grid container spacing={3} alignItems="flex-end">
 				<Grid item>
-				<ImageSearchIcon />
+					<ImageSearchIcon />
 				</Grid>
 				<Grid item>
 					<form onSubmit={handleSubmit}>
-					<DropdownSearch onChange={onChange}
-							
-							 />
+						<DropdownSearch onChange={onChange} />
 					</form>
 					{searchModal || voiceSearchModal ? <SearchModal /> : null}
 				</Grid>
 				<Grid item>
 					{!listening ? (
-						<VoiceOverOffIcon className={classes.voiceButton}  onClick={handleSpeech}  />
+						<VoiceOverOffIcon
+							className={classes.voiceButton}
+							onClick={handleSpeech}
+						/>
 					) : (
-						<RecordVoiceOverIcon className={classes.voiceButton}/>
+						<RecordVoiceOverIcon className={classes.voiceButton} />
 					)}
 				</Grid>
 				{suggestedWord ? (
@@ -152,7 +146,6 @@ function SearchSigns(props) {
 const mapStateToProps = (state) => {
 	return {
 		searchedSigns: state.searchedSigns,
-		
 	};
 };
 
