@@ -15,7 +15,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function MissingWordDialog(props) {
     const { suggestedWord, definition, setDefinition, setSuggestedWord } = props
     const [open, setOpen] = React.useState(false);
-    console.log(definition[0].meanings[0].definitions)
+    console.log(definition)
     
     
   const handleClickOpen = () => {
@@ -46,7 +46,7 @@ export default function MissingWordDialog(props) {
         <DialogContent>
         
           <DialogContentText id="alert-dialog-slide-description">
-          {definition[0].meanings[0].definitions.map(definition => definition.definition)}
+            {definition.definitions.map(definition => <li>{definition.definition}</li>)}
           </DialogContentText>
           <DialogContentText>
             Do you know the BSL sign for {suggestedWord} and want to contribute to our dictionary?

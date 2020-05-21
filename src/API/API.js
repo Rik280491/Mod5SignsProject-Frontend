@@ -4,7 +4,6 @@ const validateURL = `${baseURL}/validate`;
 const logInURL = `${baseURL}/log-in`;
 const createUserURL = `${baseURL}/users`;
 const videosURL = `${baseURL}/videos`;
-const dictionaryAPI = "https://api.dictionaryapi.dev/api/v2/entries/en"
 
 const post = (url, data, token) => {
 	const configObject = {
@@ -51,10 +50,17 @@ const deleteVideo = (id) => {
 	return fetch(`${videosURL}/${id}`, { method: "DELETE"})
 }
 
-// https://github.com/meetDeveloper/googleDictionaryAPI
+
 
 const checkWord = (value) => {
-	return fetch(`${dictionaryAPI}/${value}`)
+	return fetch(`https://wordsapiv1.p.rapidapi.com/words/${value}/definitions`, {
+		"method": "GET",
+		"headers": {
+			"x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
+			"x-rapidapi-key": "b6ab925e73mshc85e09479bf16dbp1dcd6ajsn56ffd8f4fbe0"
+		}
+	})
+	
 	
 }
 export default {

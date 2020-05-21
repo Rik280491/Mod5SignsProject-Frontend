@@ -54,13 +54,9 @@ function SearchSigns(props) {
 		);
 	};
 
-	// const getDefinition = searchValue => {
-	// 	return API.checkWord(searchValue).then(response => response.json()).then(data => setDefinition(data))
-	// }
-
-	// searchValue should not be equal to anything in the db
+	
 	const isDefined = (searchValue) => {
-		// console.log("- - - - - isDefined")
+		
 		if (searchValue.length > 1){
 			API.checkWord(searchValue).then((response) => {
 				if(response.ok) {
@@ -143,18 +139,7 @@ function SearchSigns(props) {
 						suggestedWord={suggestedWord}
 						setSuggestedWord={setSuggestedWord}
 					/>
-				) : (
-					// <Button
-					// 	variant="contained"
-					// 	color="primary"
-					// 	size="small"
-					// 	className={classes.button}
-					// 	endIcon={<ImageSearchIcon />}
-					// >
-					// 	Search
-					// </Button>
-					null
-				)}
+				) : null}
 			</Grid>
 		</div>
 	);
