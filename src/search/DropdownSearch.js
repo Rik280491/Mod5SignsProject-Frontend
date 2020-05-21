@@ -10,10 +10,12 @@ function DropdownSearch(props) {
     <div style={{ width: 150, height: 75 }}>
       <Autocomplete
         id="free-solo-demo"
-        freeSolo
+		freeSolo
+		autoComplete 
+		onChange={onChange}
         options={signs.map((option) => option.name)}
         renderInput={(params) => (
-          <TextField {...params} label="freeSolo" margin="normal" variant="outlined" onChange={onChange} />
+          <TextField {...params} label="Search" margin="normal" variant="outlined" onChange={onChange} />
         )}
       />
 	  </div>

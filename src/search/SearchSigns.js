@@ -77,6 +77,7 @@ function SearchSigns(props) {
 	};
 
 	const onChange = (e) => {
+		console.log(e.target.value)
 		setSearchValue(regCapConverter(e.target.value));
 	};
 
