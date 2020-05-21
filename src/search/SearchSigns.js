@@ -77,8 +77,13 @@ function SearchSigns(props) {
 	};
 
 	const onChange = (e) => {
-		console.log(e.target.value)
-		setSearchValue(regCapConverter(e.target.value));
+		console.log(e.target.innerText)
+		if (Number.isInteger(e.target.value)) {
+			setSearchValue(regCapConverter(e.target.innerText))
+		} else {
+			setSearchValue(regCapConverter(e.target.value))
+		}
+		
 	};
 
 	const handleSubmit = (e) => {
