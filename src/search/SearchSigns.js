@@ -33,7 +33,7 @@ recognition.lang = "en-US";
 
 function SearchSigns(props) {
 	const classes = useStyles();
-	const { searchSigns, searchedSigns } = props;
+	const { searchSigns, searchedSigns, signs } = props;
 	const [searchModal, setSearchModal] = useState(false);
 	const [listening, setListening] = useState(false);
 	const [voiceSearchModal, setVoiceSearchModal] = useState(false);
@@ -53,6 +53,7 @@ function SearchSigns(props) {
 	};
 
 	const isDefined = (searchValue) => {
+		console.log("here");
 		if (searchValue.length > 1) {
 			API.checkWord(searchValue)
 				.then((response) => {
@@ -82,7 +83,14 @@ function SearchSigns(props) {
 		e.preventDefault();
 		console.log("clicked");
 		searchSigns(searchValue);
-		searchedSigns.length > 0 ? setSearchModal(true) : isDefined(searchValue);
+		// searchedSigns from mapStateToProps is an empty array here, even when it isnt empty in the redux DevTools. Why?
+
+		if (signs.filter((sign) => sign.name === searchValue).length > 0) {
+			setSearchModal(true);
+		} else {
+			console.log("reached");
+			isDefined(searchValue);
+		}
 	};
 
 	const handleSpeech = () => {
@@ -146,6 +154,7 @@ function SearchSigns(props) {
 const mapStateToProps = (state) => {
 	return {
 		searchedSigns: state.searchedSigns,
+		signs: state.signs,
 	};
 };
 
