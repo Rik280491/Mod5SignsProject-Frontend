@@ -11,6 +11,7 @@ import SearchModal from "./SearchModal";
 import MissingWordDialog from "./MissingWordDialog";
 import API from "../API/API";
 import Button from "@material-ui/core/Button";
+import DropdownSearch from "./DropdownSearch"
 
 const useStyles = makeStyles((theme) => ({
 	button: {
@@ -116,12 +117,9 @@ function SearchSigns(props) {
 				</Grid>
 				<Grid item>
 					<form onSubmit={handleSubmit}>
-						<TextField
-							placeholder={speechPlaceholder}
-							onChange={onChange}
-							id="speechinput"
-							x-webkit-speech
-						/>
+					<DropdownSearch onChange={onChange}
+							
+							 />
 					</form>
 					{searchModal || voiceSearchModal ? <SearchModal /> : null}
 				</Grid>
