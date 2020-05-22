@@ -20,6 +20,13 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import SearchSigns from "../../search/SearchSigns";
 import MissingWordDialog from '../../search/MissingWordDialog'
+import HearingIcon from '@material-ui/icons/Hearing';
+import HomeIcon from '@material-ui/icons/Home';
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import FaceIcon from '@material-ui/icons/Face';
+import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
+import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
+
 
 const drawerWidth = 240;
 
@@ -75,7 +82,7 @@ function ResponsiveDrawer(props) {
 			<Divider />
 			<List>
 				<ListItem button component={(props) => <Link to="/" {...props} />}>
-					{/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
+				<ListItemIcon><HomeIcon/></ListItemIcon>
 					<ListItemText primary="Home" />
 				</ListItem>
 				<ListItem
@@ -83,6 +90,7 @@ function ResponsiveDrawer(props) {
 					onClick={toggleUpload}
 					component={(props) => <Link to="/upload" {...props} />}
 				>
+					<ListItemIcon><CloudUploadIcon/></ListItemIcon>
 					<ListItemText primary="Upload" />
 				</ListItem>
 				
@@ -90,13 +98,16 @@ function ResponsiveDrawer(props) {
 					button
 					component={(props) => <Link to="/user-uploads" {...props} />}
 				>
+					<ListItemIcon><FaceIcon/></ListItemIcon>
 					<ListItemText primary="User Videos" />
 				</ListItem> : null }
 
 				<ListItem button>
-					<ListItemText primary="Mission Statement" />
+					<ListItemIcon><HearingIcon/></ListItemIcon>
+				<ListItemText  primary="Mission Statement" />
 				</ListItem>
 				<ListItem button>
+				<ListItemIcon><AlternateEmailIcon/></ListItemIcon>
 					<ListItemText primary="Contact Us" />
 				</ListItem>
 
@@ -105,6 +116,7 @@ function ResponsiveDrawer(props) {
 					onClick={username ? logOut : null}
 					component={!username ? loginLink : ""}
 				>
+					<ListItemIcon><VpnKeyOutlinedIcon/></ListItemIcon>
 					<ListItemText primary={username ? "Log Out" : "Log In"} />
 				</ListItem>
 			</List>

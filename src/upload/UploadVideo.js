@@ -9,8 +9,11 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import CardMedia from "@material-ui/core/CardMedia";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import Input from '@material-ui/core/Input';
 
-const toxicity = require('@tensorflow-models/toxicity');
+
+const toxicity = require("@tensorflow-models/toxicity");
 
 // import { regCapConverter } from "../search/SearchSigns"
 
@@ -32,9 +35,9 @@ function UploadVideo({
 	const [signName, setSignName] = useState("");
 	// const [newSign, setNewSign] = useState(null);
 	const [uploadResponse, setUploadResponse] = useState("");
-	const [valid, setValid] = useState(false)
-	const [warningMessage, setWarningMessage] = useState("")
-	const [loadingValid, setLoadingValid] = useState(false)
+	const [valid, setValid] = useState(false);
+	const [warningMessage, setWarningMessage] = useState("");
+	const [loadingValid, setLoadingValid] = useState(false);
 
 	const classes = useStyles();
 
@@ -62,33 +65,31 @@ function UploadVideo({
 
 	const handleNameChange = (e) => {
 		console.log(e.target.value);
-		 Number.isInteger(e.target.value)
+		Number.isInteger(e.target.value)
 			? setSignName(e.target.innerText)
 			: setSignName(e.target.value);
 	};
 
 	const checkToxicity = (signName) => {
-		
-		console.log(signName)
+		setLoadingValid(true);
+		console.log(signName);
 		// The minimum prediction confidence.
-		const threshold = 0.80;
+		const threshold = 0.8;
 
 		// Which toxicity labels to return.
-		const labelsToInclude = ['toxicity'];
+		const labelsToInclude = ["toxicity"];
 
 		toxicity.load(threshold, labelsToInclude).then((model) => {
 			// Now you can use the `model` object to label sentences.
 			model.classify([signName]).then((predictions) => {
-			
-				predictions[0].results[0].match === true ? setWarningMessage('This is a family friendly app') : setValid(true)
+				predictions[0].results[0].match === true
+					? setWarningMessage("This is a family friendly app")
+					: setValid(true);
 
-				console.log(predictions[0])
-				
-				
+				setLoadingValid(false);
+				console.log(predictions[0]);
 			});
-		})
-		
-		
+		});
 	};
 
 	// already defined. import from search signs
@@ -103,8 +104,6 @@ function UploadVideo({
 	};
 
 	const handleSignAndVideoPost = () => {
-
-
 		const regCapSignName = regCapConverter(signName);
 		console.log(regCapSignName);
 
@@ -131,7 +130,7 @@ function UploadVideo({
 			// write this in red text after the upload button? or as a dialog box?
 		}
 		deselectSign();
-		setValid(false)
+		setValid(false);
 	};
 
 	return (
@@ -150,12 +149,23 @@ function UploadVideo({
 					)}
 					{!selectedSign ? (
 						<>
-						<InputAutocomplete onChange={handleNameChange} />
-						<button onClick={() => checkToxicity(signName)}>CHECK VALID</button>
-						<h2 style={{ color: 'red' }}>{warningMessage}</h2>
+							<InputAutocomplete onChange={handleNameChange} />
+
+							<Button
+								onClick={() => checkToxicity(signName)}
+								variant="contained"
+								color="secondary"
+							>
+								check validity
+							</Button>
+							{loadingValid ? (
+								<LinearProgress color={"secondary"} />
+							) : (
+								<h2 style={{ color: "red" }}>{warningMessage}</h2>
+							)}
 						</>
 					) : null}
-					<input
+					<Input
 						type="file"
 						name="file"
 						placeholder="Upload a Video"
@@ -167,7 +177,6 @@ function UploadVideo({
 					) : (
 						// better loading icon, progress bar?
 						<>
-							
 							{/* view video youve just uploaded */}
 							<CardMedia
 								component="iframe"
@@ -176,15 +185,17 @@ function UploadVideo({
 								src={video}
 							/>
 
-							{ valid ? <Button
-								variant="contained"
-								color="default"
-								onClick={handleSignAndVideoPost}
-								className={classes.button}
-								startIcon={<CloudUploadIcon />}
-							>
-								Upload
-							</Button> : null}
+							{valid ? (
+								<Button
+									variant="contained"
+									color="default"
+									onClick={handleSignAndVideoPost}
+									className={classes.button}
+									startIcon={<CloudUploadIcon />}
+								>
+									Upload
+								</Button>
+							) : null}
 							{uploadResponse ? <h4>{uploadResponse.message}</h4> : null}
 						</>
 					)}
