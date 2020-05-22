@@ -10,8 +10,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import CardMedia from "@material-ui/core/CardMedia";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import Input from '@material-ui/core/Input';
-
+import Input from "@material-ui/core/Input";
 
 const toxicity = require("@tensorflow-models/toxicity");
 
@@ -24,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function UploadVideo(props) {
-	const {username, selectedSign, deselectSign } = props
+	const { username, selectedSign, deselectSign } = props;
 	const [loading, setLoading] = useState(false);
 	const [video, setVideo] = useState(null);
 	const [signName, setSignName] = useState("");
@@ -118,16 +117,14 @@ function UploadVideo(props) {
 					},
 					localStorage.token
 				).then((response) => setUploadResponse(response));
-				
+
 				setValid(false);
 				deselectSign();
 			}
 		} else {
 			alert("A VIDEO FILE MUST BE ATTACHED");
-			// write this in red text after the upload button? or as a dialog box?
+			//as a dialog box?
 		}
-		
-		
 	};
 
 	return (
@@ -152,6 +149,7 @@ function UploadVideo(props) {
 								onClick={() => checkToxicity(signName)}
 								variant="contained"
 								color="secondary"
+								size="small"
 							>
 								check validity
 							</Button>
@@ -161,12 +159,7 @@ function UploadVideo(props) {
 								<h2 style={{ color: "red" }}>{warningMessage}</h2>
 							)}
 						</>
-					) : <button>Upload a video for another sign</button>
-					
-					
-					}
-
-
+					) : null}
 
 					<Input
 						type="file"
@@ -174,7 +167,7 @@ function UploadVideo(props) {
 						placeholder="Upload a Video"
 						onChange={handleChange}
 					/>
-					
+
 					{loading ? (
 						<CircularProgress />
 					) : (
@@ -188,7 +181,7 @@ function UploadVideo(props) {
 								src={video}
 							/>
 
-							{valid ? (
+							{valid || selectedSign ? (
 								<Button
 									variant="contained"
 									color="default"
@@ -204,6 +197,11 @@ function UploadVideo(props) {
 					)}
 				</>
 			)}
+			{selectedSign ? (
+				<Button onClick={() => deselectSign()} variant="outlined">
+					reset form
+				</Button>
+			) : null}
 		</div>
 	);
 }
