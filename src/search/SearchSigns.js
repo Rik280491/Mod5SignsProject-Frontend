@@ -108,9 +108,12 @@ function SearchSigns(props) {
 	const handleValue = (speechValue) => {
 		const voiceSearchValue = regCapConverter(speechValue);
 		searchSigns(voiceSearchValue);
-		searchedSigns.length > 0
-			? setVoiceSearchModal(true)
-			: isDefined(voiceSearchValue);
+		if (signs.filter((sign) => sign.name === voiceSearchValue).length > 0) {
+			setSearchModal(true);
+		} else {
+			console.log("reached");
+			isDefined(voiceSearchValue);
+		}
 
 		recognition.stop();
 		setListening(false);
