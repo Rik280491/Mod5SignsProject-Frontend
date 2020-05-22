@@ -33,6 +33,8 @@ function UploadVideo({
 	// const [newSign, setNewSign] = useState(null);
 	const [uploadResponse, setUploadResponse] = useState("");
 	const [valid, setValid] = useState(false)
+	const [warningMessage, setWarningMessage] = useState("")
+	const [loadingValid, setLoadingValid] = useState(false)
 
 	const classes = useStyles();
 
@@ -78,7 +80,7 @@ function UploadVideo({
 			// Now you can use the `model` object to label sentences.
 			model.classify([signName]).then((predictions) => {
 			
-				predictions[0].results[0].match === true ? setValid(false) : setValid(true)
+				predictions[0].results[0].match === true ? setWarningMessage('This is a family friendly app') : setValid(true)
 
 				console.log(predictions[0])
 				
@@ -150,6 +152,7 @@ function UploadVideo({
 						<>
 						<InputAutocomplete onChange={handleNameChange} />
 						<button onClick={() => checkToxicity(signName)}>CHECK VALID</button>
+						<h2 style={{ color: 'red' }}>{warningMessage}</h2>
 						</>
 					) : null}
 					<input
