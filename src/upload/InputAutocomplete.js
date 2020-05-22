@@ -43,6 +43,7 @@ function InputAutocomplete(props) {
       handleHomeEndKeys
       id="input-autocomplete"
       options={signs}
+      onChange={onChange}
       getOptionLabel={(option) => {
         // Value selected with enter, right from the input
         if (typeof option === 'string') {
@@ -54,6 +55,8 @@ function InputAutocomplete(props) {
         }
         // Regular option
         return option.name;
+        
+
       }}
       renderOption={(option) => option.name}
       style={{ width: 300 }}

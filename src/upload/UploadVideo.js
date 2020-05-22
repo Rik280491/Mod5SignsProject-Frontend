@@ -51,6 +51,9 @@ function UploadVideo({ username, signs, searchedSign, selectedSign, deselectSign
 	};
 
 	const handleNameChange = (e) => {
+		console.log(e.target.value)
+		Number.isInteger(e.target.value) ?
+		setSignName(e.target.innerText) :
 		setSignName(e.target.value);
 	};
 
@@ -67,6 +70,8 @@ function UploadVideo({ username, signs, searchedSign, selectedSign, deselectSign
 
 	const handleSignAndVideoPost = () => {
 		const regCapSignName = regCapConverter(signName);
+		console.log(regCapSignName)
+		
 
 		if (video) {
 			API.createSignWithVideo(
