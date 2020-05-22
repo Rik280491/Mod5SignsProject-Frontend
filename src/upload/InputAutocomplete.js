@@ -4,12 +4,22 @@ import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete
 import { connect } from 'react-redux'
 
 
+
 const filter = createFilterOptions();
 
 function InputAutocomplete(props) {
 //   const [value, setValue] = useState(null);
   const { onChange, signs } = props
 
+
+  
+  
+  
+  
+  
+  
+  
+  
   return (
     <Autocomplete
     //   value={value}
@@ -32,7 +42,7 @@ function InputAutocomplete(props) {
         if (params.inputValue !== '') {
           filtered.push({
             inputValue: params.inputValue,
-            name: `Add "${params.inputValue}"`,
+            name: `${params.inputValue}`,
           });
         }
 

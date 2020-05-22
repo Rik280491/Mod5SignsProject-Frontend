@@ -10,6 +10,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import CardMedia from "@material-ui/core/CardMedia";
 
+const toxicity = require('@tensorflow-models/toxicity');
 
 // import { regCapConverter } from "../search/SearchSigns"
 
@@ -19,12 +20,19 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-function UploadVideo({ username, signs, searchedSign, selectedSign, deselectSign }) {
+function UploadVideo({
+	username,
+	signs,
+	searchedSign,
+	selectedSign,
+	deselectSign,
+}) {
 	const [loading, setLoading] = useState(false);
 	const [video, setVideo] = useState(null);
 	const [signName, setSignName] = useState("");
-	const [newSign, setNewSign] = useState(null);
-	const [uploadResponse, setUploadResponse] = useState("")
+	// const [newSign, setNewSign] = useState(null);
+	const [uploadResponse, setUploadResponse] = useState("");
+	const [valid, setValid] = useState(false)
 
 	const classes = useStyles();
 
@@ -51,10 +59,34 @@ function UploadVideo({ username, signs, searchedSign, selectedSign, deselectSign
 	};
 
 	const handleNameChange = (e) => {
-		console.log(e.target.value)
-		Number.isInteger(e.target.value) ?
-		setSignName(e.target.innerText) :
-		setSignName(e.target.value);
+		console.log(e.target.value);
+		 Number.isInteger(e.target.value)
+			? setSignName(e.target.innerText)
+			: setSignName(e.target.value);
+	};
+
+	const checkToxicity = (signName) => {
+		
+		console.log(signName)
+		// The minimum prediction confidence.
+		const threshold = 0.80;
+
+		// Which toxicity labels to return.
+		const labelsToInclude = ['toxicity'];
+
+		toxicity.load(threshold, labelsToInclude).then((model) => {
+			// Now you can use the `model` object to label sentences.
+			model.classify([signName]).then((predictions) => {
+			
+				predictions[0].results[0].match === true ? setValid(false) : setValid(true)
+
+				console.log(predictions[0])
+				
+				
+			});
+		})
+		
+		
 	};
 
 	// already defined. import from search signs
@@ -69,9 +101,10 @@ function UploadVideo({ username, signs, searchedSign, selectedSign, deselectSign
 	};
 
 	const handleSignAndVideoPost = () => {
+
+
 		const regCapSignName = regCapConverter(signName);
-		console.log(regCapSignName)
-		
+		console.log(regCapSignName);
 
 		if (video) {
 			API.createSignWithVideo(
@@ -80,8 +113,8 @@ function UploadVideo({ username, signs, searchedSign, selectedSign, deselectSign
 					sign_name: regCapSignName,
 				},
 				localStorage.token
-			).then(response => setUploadResponse(response))
-			
+			).then((response) => setUploadResponse(response));
+
 			if (selectedSign) {
 				API.createSignWithVideo(
 					{
@@ -89,15 +122,14 @@ function UploadVideo({ username, signs, searchedSign, selectedSign, deselectSign
 						sign_name: selectedSign.name,
 					},
 					localStorage.token
-				).then(response => setUploadResponse(response))
-				
-					
+				).then((response) => setUploadResponse(response));
 			}
 		} else {
 			alert("A VIDEO FILE MUST BE ATTACHED");
 			// write this in red text after the upload button? or as a dialog box?
 		}
-		deselectSign()
+		deselectSign();
+		setValid(false)
 	};
 
 	return (
@@ -115,7 +147,10 @@ function UploadVideo({ username, signs, searchedSign, selectedSign, deselectSign
 						<h1>Upload a Video</h1>
 					)}
 					{!selectedSign ? (
+						<>
 						<InputAutocomplete onChange={handleNameChange} />
+						<button onClick={() => checkToxicity(signName)}>CHECK VALID</button>
+						</>
 					) : null}
 					<input
 						type="file"
@@ -129,17 +164,16 @@ function UploadVideo({ username, signs, searchedSign, selectedSign, deselectSign
 					) : (
 						// better loading icon, progress bar?
 						<>
-							{/* <SignCard name={signName} videoArr={video} /> */}
+							
 							{/* view video youve just uploaded */}
 							<CardMedia
 								component="iframe"
 								// doesn't full screen video
 								height="140"
 								src={video}
-								
 							/>
 
-							<Button
+							{ valid ? <Button
 								variant="contained"
 								color="default"
 								onClick={handleSignAndVideoPost}
@@ -147,8 +181,8 @@ function UploadVideo({ username, signs, searchedSign, selectedSign, deselectSign
 								startIcon={<CloudUploadIcon />}
 							>
 								Upload
-							</Button>
-							{ uploadResponse ? <h4>{uploadResponse.message}</h4> : null}
+							</Button> : null}
+							{uploadResponse ? <h4>{uploadResponse.message}</h4> : null}
 						</>
 					)}
 				</>
@@ -165,11 +199,10 @@ const mapStateToProps = (state) => {
 	};
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
 	return {
-		deselectSign: () => dispatch({ type: "DESELECT_SIGN" })
-	}
-}
-
+		deselectSign: () => dispatch({ type: "DESELECT_SIGN" }),
+	};
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(UploadVideo);
