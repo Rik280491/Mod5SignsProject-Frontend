@@ -19,14 +19,13 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import SearchSigns from "../../search/SearchSigns";
-import MissingWordDialog from '../../search/MissingWordDialog'
-import HearingIcon from '@material-ui/icons/Hearing';
-import HomeIcon from '@material-ui/icons/Home';
+import MissingWordDialog from "../../search/MissingWordDialog";
+import HearingIcon from "@material-ui/icons/Hearing";
+import HomeIcon from "@material-ui/icons/Home";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
-import FaceIcon from '@material-ui/icons/Face';
-import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
-import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
-
+import FaceIcon from "@material-ui/icons/Face";
+import AlternateEmailIcon from "@material-ui/icons/AlternateEmail";
+import VpnKeyOutlinedIcon from "@material-ui/icons/VpnKeyOutlined";
 
 const drawerWidth = 240;
 
@@ -81,45 +80,61 @@ function ResponsiveDrawer(props) {
 			<div className={classes.toolbar} />
 			<Divider />
 			<List>
-				<ListItem onClick={handleDrawerToggle} button component={(props) => <Link to="/" {...props} />}>
-				<ListItemIcon><HomeIcon/></ListItemIcon>
+				<ListItem
+					onClick={handleDrawerToggle}
+					button
+					component={(props) => <Link to="/" {...props} />}
+				>
+					<ListItemIcon>
+						<HomeIcon />
+					</ListItemIcon>
 					<ListItemText primary="Home" />
 				</ListItem>
 				<ListItem
-				onClick={handleDrawerToggle}
 					button
-					onClick={toggleUpload}
+					onClick={(toggleUpload, handleDrawerToggle)}
 					component={(props) => <Link to="/upload" {...props} />}
 				>
-					<ListItemIcon><CloudUploadIcon/></ListItemIcon>
+					<ListItemIcon>
+						<CloudUploadIcon />
+					</ListItemIcon>
 					<ListItemText primary="Upload" />
 				</ListItem>
-				
-				{ username ? <ListItem
-				onClick={handleDrawerToggle}
-					button
-					component={(props) => <Link to="/user-uploads" {...props} />}
-				>
-					<ListItemIcon><FaceIcon/></ListItemIcon>
-					<ListItemText primary="User Videos" />
-				</ListItem> : null }
+
+				{username ? (
+					<ListItem
+						onClick={handleDrawerToggle}
+						button
+						component={(props) => <Link to="/user-uploads" {...props} />}
+					>
+						<ListItemIcon>
+							<FaceIcon />
+						</ListItemIcon>
+						<ListItemText primary="User Videos" />
+					</ListItem>
+				) : null}
 
 				<ListItem button>
-					<ListItemIcon><HearingIcon/></ListItemIcon>
-				<ListItemText  primary="Mission Statement" />
+					<ListItemIcon>
+						<HearingIcon />
+					</ListItemIcon>
+					<ListItemText primary="Mission Statement" />
 				</ListItem>
 				<ListItem button>
-				<ListItemIcon><AlternateEmailIcon/></ListItemIcon>
+					<ListItemIcon>
+						<AlternateEmailIcon />
+					</ListItemIcon>
 					<ListItemText primary="Contact Us" />
 				</ListItem>
 
 				<ListItem
-					
 					button
-					onClick={username ? logOut : null, handleDrawerToggle}
+					onClick={(username ? logOut : null, handleDrawerToggle)}
 					component={!username ? loginLink : ""}
 				>
-					<ListItemIcon><VpnKeyOutlinedIcon/></ListItemIcon>
+					<ListItemIcon>
+						<VpnKeyOutlinedIcon />
+					</ListItemIcon>
 					<ListItemText primary={username ? "Log Out" : "Log In"} />
 				</ListItem>
 			</List>

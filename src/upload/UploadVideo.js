@@ -23,17 +23,11 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-function UploadVideo({
-	username,
-	signs,
-	searchedSign,
-	selectedSign,
-	deselectSign,
-}) {
+function UploadVideo(props) {
+	const {username, selectedSign, deselectSign } = props
 	const [loading, setLoading] = useState(false);
 	const [video, setVideo] = useState(null);
 	const [signName, setSignName] = useState("");
-	// const [newSign, setNewSign] = useState(null);
 	const [uploadResponse, setUploadResponse] = useState("");
 	const [valid, setValid] = useState(false);
 	const [warningMessage, setWarningMessage] = useState("");
@@ -124,13 +118,16 @@ function UploadVideo({
 					},
 					localStorage.token
 				).then((response) => setUploadResponse(response));
+				
+				setValid(false);
+				deselectSign();
 			}
 		} else {
 			alert("A VIDEO FILE MUST BE ATTACHED");
 			// write this in red text after the upload button? or as a dialog box?
 		}
-		deselectSign();
-		setValid(false);
+		
+		
 	};
 
 	return (
@@ -164,7 +161,13 @@ function UploadVideo({
 								<h2 style={{ color: "red" }}>{warningMessage}</h2>
 							)}
 						</>
-					) : null}
+					) : <button>Upload a video for another sign</button>
+					
+					
+					}
+
+
+
 					<Input
 						type="file"
 						name="file"
@@ -208,7 +211,6 @@ function UploadVideo({
 const mapStateToProps = (state) => {
 	return {
 		username: state.username,
-		signs: state.signs,
 		selectedSign: state.selectedSign,
 	};
 };
