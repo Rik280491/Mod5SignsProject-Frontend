@@ -81,11 +81,12 @@ function ResponsiveDrawer(props) {
 			<div className={classes.toolbar} />
 			<Divider />
 			<List>
-				<ListItem button component={(props) => <Link to="/" {...props} />}>
+				<ListItem onClick={handleDrawerToggle} button component={(props) => <Link to="/" {...props} />}>
 				<ListItemIcon><HomeIcon/></ListItemIcon>
 					<ListItemText primary="Home" />
 				</ListItem>
 				<ListItem
+				onClick={handleDrawerToggle}
 					button
 					onClick={toggleUpload}
 					component={(props) => <Link to="/upload" {...props} />}
@@ -95,6 +96,7 @@ function ResponsiveDrawer(props) {
 				</ListItem>
 				
 				{ username ? <ListItem
+				onClick={handleDrawerToggle}
 					button
 					component={(props) => <Link to="/user-uploads" {...props} />}
 				>
@@ -112,8 +114,9 @@ function ResponsiveDrawer(props) {
 				</ListItem>
 
 				<ListItem
+					
 					button
-					onClick={username ? logOut : null}
+					onClick={username ? logOut : null, handleDrawerToggle}
 					component={!username ? loginLink : ""}
 				>
 					<ListItemIcon><VpnKeyOutlinedIcon/></ListItemIcon>
