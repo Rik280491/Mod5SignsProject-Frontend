@@ -7,6 +7,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import { Link } from "react-router-dom";
+import InfoIcon from '@material-ui/icons/Info';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -31,13 +32,15 @@ export default function MissingWordDialog(props) {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      {/* <Button variant="outlined" >
         MISSING WORD. CAN YOU HELP?
-      </Button>
+      </Button> */}
+      { suggestedWord ? <InfoIcon onClick={handleClickOpen} /> : null}
       <Dialog
         open={open}
         TransitionComponent={Transition}
         keepMounted
+
         onClose={handleClose}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"

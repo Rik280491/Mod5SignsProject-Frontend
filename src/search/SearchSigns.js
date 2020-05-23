@@ -12,6 +12,9 @@ import MissingWordDialog from "./MissingWordDialog";
 import API from "../API/API";
 import Button from "@material-ui/core/Button";
 import DropdownSearch from "./DropdownSearch";
+import InfoIcon from '@material-ui/icons/Info';
+
+
 
 const useStyles = makeStyles((theme) => ({
 	button: {
@@ -123,7 +126,17 @@ function SearchSigns(props) {
 		<div className={classes.margin}>
 			<Grid container spacing={3} alignItems="flex-end">
 				<Grid item>
-					<ImageSearchIcon />
+				
+				{suggestedWord ? (
+				
+					<MissingWordDialog
+						setDefinition={setDefinition}
+						definition={definition}
+						suggestedWord={suggestedWord}
+						setSuggestedWord={setSuggestedWord}
+					/>
+					
+				) : <InfoIcon color="disabled"/>}
 				</Grid>
 				<Grid item>
 					<form onSubmit={handleSubmit}>
@@ -141,14 +154,7 @@ function SearchSigns(props) {
 						<RecordVoiceOverIcon className={classes.voiceButton} />
 					)}
 				</Grid>
-				{suggestedWord ? (
-					<MissingWordDialog
-						setDefinition={setDefinition}
-						definition={definition}
-						suggestedWord={suggestedWord}
-						setSuggestedWord={setSuggestedWord}
-					/>
-				) : null}
+				
 			</Grid>
 		</div>
 	);

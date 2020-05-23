@@ -75,11 +75,14 @@ function UploadVideo(props) {
 		toxicity.load(threshold, labelsToInclude).then((model) => {
 			// Now you can use the `model` object to label sentences.
 			model.classify([signName]).then((predictions) => {
-				predictions[0].results[0].match === true
-					? setWarningMessage("This is a family friendly app")
-					: setValid(true);
-
-				setLoadingValid(false);
+				if (predictions[0].results[0].match === true) {
+					setWarningMessage("This is a family friendly app")
+				} else {
+					setValid(true) 
+					setWarningMessage("")
+				}
+				setLoadingValid(false); 
+				
 				console.log(predictions[0]);
 			});
 		});
@@ -97,6 +100,7 @@ function UploadVideo(props) {
 	};
 
 	const handleSignAndVideoPost = () => {
+		
 		const regCapSignName = regCapConverter(signName);
 		console.log(regCapSignName);
 
