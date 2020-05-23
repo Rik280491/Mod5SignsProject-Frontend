@@ -124,8 +124,8 @@ function SearchSigns(props) {
 
 	return (
 		<div className={classes.margin}>
-			<Grid container spacing={3} alignItems="flex-end">
-				<Grid item>
+			<Grid container spacing={4} alignItems="center"  >
+				<Grid item style={{ height: 55 }}>
 				
 				{suggestedWord ? (
 				
@@ -138,13 +138,13 @@ function SearchSigns(props) {
 					
 				) : <InfoIcon color="disabled"/>}
 				</Grid>
-				<Grid item>
+				<Grid item  >
 					<form onSubmit={handleSubmit}>
 						<DropdownSearch onChange={onChange} />
 					</form>
 					{searchModal || voiceSearchModal ? <SearchModal /> : null}
 				</Grid>
-				<Grid item>
+				<Grid item style={{ height: 55 }}>
 					{!listening ? (
 						<VoiceOverOffIcon
 							className={classes.voiceButton}

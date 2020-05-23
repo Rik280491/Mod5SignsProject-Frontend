@@ -7,8 +7,9 @@ function DropdownSearch(props) {
 	const { signs, onChange } = props;
 
 	return (
-		<div style={{ width: 150, height: 75 }}>
+		<div style={{ width: 150, height: 70 }}>
 			<Autocomplete
+      size="small"
 				id="free-solo-demo"
 				freeSolo
 				autoComplete
