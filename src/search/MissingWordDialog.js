@@ -51,10 +51,10 @@ export default function MissingWordDialog(props) {
           <DialogContentText id="alert-dialog-slide-description">
             {definition.definitions.map(definition => <li>{definition.definition}</li>)}
           </DialogContentText>
-          <DialogContentText>
-            Do you know the BSL sign for {suggestedWord} and want to contribute to our dictionary?
+          <DialogContentText style={{"font-weight": "bold" }}>
+            Do you know the BSL sign for {suggestedWord} and want to contribute to the dictionary?
           </DialogContentText>
-          <DialogContentText>
+          <DialogContentText style={{ color: "red" }}>
           Note: Subject to Word Validation 
           </DialogContentText>
         </DialogContent>
