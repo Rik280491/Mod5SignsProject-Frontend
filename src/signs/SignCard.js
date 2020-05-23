@@ -26,10 +26,7 @@ function SignCard({ name, videoArr, searchSigns }) {
 	};
 	return (
 		<Card className={classes.root}>
-		
-			{/* <video width="300" height="240" controls>
-				<source src={videoURL} type="video/mp4" />
-			</video> */}
+
 			{videoArr
 				? videoArr.map((video) => {
 						return (

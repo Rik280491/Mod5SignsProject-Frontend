@@ -8,6 +8,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
+import Grid from '@material-ui/core/Grid';
+
 
 const useStyles = makeStyles((theme) => ({
 	button: {
@@ -40,12 +42,11 @@ function UserVideos(props) {
 
 		return userVideos.map((video) => {
 			return (
-				<Card className={classes.root}>
-					{/* <video width="300" height="240" controls>
-						<source src={video.video_url} type="video/mp4" />
-					</video> */}
-					
+			<Grid container spacing={4}>
+				<Grid item key={video.id} xs={12} sm={6} md={4}>
+				<Card className={classes.root} >
 					<CardMedia
+						
 						component="iframe"
 						height="140"
 						src={video.video_url}
@@ -57,6 +58,7 @@ function UserVideos(props) {
 					</Typography>
 
 					<Button
+						size="small"
 						variant="contained"
 						color="secondary"
 						onClick={() => openDialog(video.id)}
@@ -66,6 +68,8 @@ function UserVideos(props) {
 						Delete
 					</Button>
 				</Card>
+			  </Grid>
+			</Grid>
 			);
 		});
 	};
