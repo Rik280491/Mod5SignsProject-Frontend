@@ -51,6 +51,9 @@ export default function MissingWordDialog(props) {
           <DialogContentText>
             Do you know the BSL sign for {suggestedWord} and want to contribute to our dictionary?
           </DialogContentText>
+          <DialogContentText>
+          Note: Subject to Word Validation 
+          </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
