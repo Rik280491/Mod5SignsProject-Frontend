@@ -46,12 +46,14 @@ function SearchSigns(props) {
 	const [searchValue, setSearchValue] = useState("");
 
 	const regCapConverter = (value) => {
+		// only allows alphanumeric characters, capitilises first letter and no whitespaces
 		return (
 			value.charAt(0).toUpperCase() +
 			value
 				.slice(1)
 				.replace(/[^\w\s]|_/g, "")
 				.replace(/\s+/g, " ")
+				.trim()
 		);
 	};
 
@@ -63,7 +65,8 @@ function SearchSigns(props) {
 					if (response.ok) {
 						return response.json();
 					} else {
-						alert("This Word is not in the English Dictionary!")
+						// alert("This Word is not in the English Dictionary!")
+						// stops phrases from being recognised. Find phrases dictionary?
 						throw Error;
 
 					}

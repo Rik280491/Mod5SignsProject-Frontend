@@ -64,27 +64,17 @@ function UploadVideo(props) {
 			: setSignName(e.target.value);
 	};
 
-	const checkWord = (signName) => {
-		API.checkWord(signName).then((response) => {
-			response.ok ? setIsWord(true) : setIsWord(false);
-		});
-	};
+	
 
 	const checkToxicity = (signName) => {
-		checkWord(signName);
-
+	
 		if (signName.length <= 1) {
 			alert(
 				"Word must be more than one character long!"
 			);
 			return;
 		}
-		if (!isWord) {
-			alert("This Word is not in the English Dictionary!");
-			return;
-		}
-
-		checkWord(signName);
+		
 		setLoadingValid(true);
 		console.log(signName);
 		// The minimum prediction confidence.
@@ -117,6 +107,7 @@ function UploadVideo(props) {
 				.slice(1)
 				.replace(/[^\w\s]|_/g, "")
 				.replace(/\s+/g, " ")
+				.trim()
 		);
 	};
 
