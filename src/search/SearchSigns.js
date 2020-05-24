@@ -63,7 +63,9 @@ function SearchSigns(props) {
 					if (response.ok) {
 						return response.json();
 					} else {
+						alert("This Word is not in the English Dictionary!")
 						throw Error;
+
 					}
 				})
 				.then((definitionsData) => {
@@ -71,7 +73,9 @@ function SearchSigns(props) {
 					setSuggestedWord(searchValue);
 				});
 		} else {
+			
 			throw Error;
+			
 		}
 	};
 

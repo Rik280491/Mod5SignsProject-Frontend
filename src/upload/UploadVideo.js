@@ -80,7 +80,7 @@ function UploadVideo(props) {
 			return;
 		}
 		if (!isWord) {
-			alert("Word must exist!");
+			alert("This Word is not in the English Dictionary!");
 			return;
 		}
 
