@@ -31,7 +31,7 @@ function UploadVideo(props) {
 	const [valid, setValid] = useState(false);
 	const [warningMessage, setWarningMessage] = useState("");
 	const [loadingValid, setLoadingValid] = useState(false);
-	const [isWord, setIsWord] = useState(false)
+	const [isWord, setIsWord] = useState(false);
 
 	const classes = useStyles();
 
@@ -58,6 +58,8 @@ function UploadVideo(props) {
 	};
 
 	const handleNameChange = (e) => {
+		setIsWord(false)
+		setWarningMessage("")
 		console.log(e.target.value);
 		Number.isInteger(e.target.value)
 			? setSignName(e.target.innerText)
@@ -65,60 +67,55 @@ function UploadVideo(props) {
 	};
 
 	const checkWord = (signName) => {
-		const regWord = regCapConverter(signName)
-		console.log(regWord)
+		const regWord = regCapConverter(signName);
+		console.log(regWord);
 		API.checkWord(regWord).then((response) => {
 			if (!response.ok) {
-				alert("This Word is not in the English Dictionary!")
-				setIsWord(false)
+				alert("This Word is not in the English Dictionary!");
+				setIsWord(false);
 				// future. consider a phrases api so phrases func can be added to app
 			} else {
-				setIsWord(true)
+				setIsWord(true);
 			}
-		
 		});
 	};
 
 	const checkToxicity = (signName) => {
-		
 		checkWord(signName);
 
 		if (signName.length <= 1) {
-			alert(
-				"Word must be more than one character long!"
-			);
+			alert("Word must be more than one character long!");
 			return;
 		}
-		
 
 		checkWord(signName);
 
 		if (isWord) {
-		setLoadingValid(true);
-		console.log(signName);
-		// The minimum prediction confidence.
-		const threshold = 0.8;
+			setLoadingValid(true);
+			console.log(signName);
+			// The minimum prediction confidence.
+			const threshold = 0.8;
 
-		// Which toxicity labels to return.
-		const labelsToInclude = ["toxicity"];
+			// Which toxicity labels to return.
+			const labelsToInclude = ["toxicity"];
 
-		toxicity.load(threshold, labelsToInclude).then((model) => {
-			// Now you can use the `model` object to label sentences.
-			model.classify([signName]).then((predictions) => {
-				if (predictions[0].results[0].match === true) {
-					setWarningMessage("This is a family friendly app");
-					setValid(false);
-				} else {
-					setValid(true);
-					setWarningMessage("");
-				}
-				setLoadingValid(false);
+			toxicity.load(threshold, labelsToInclude).then((model) => {
+				// Now you can use the `model` object to label sentences.
+				model.classify([signName]).then((predictions) => {
+					if (predictions[0].results[0].match === true) {
+						setWarningMessage("This is a family friendly app");
+						setValid(false);
+					} else {
+						setValid(true);
+						setWarningMessage("");
+					}
+					setLoadingValid(false);
+					
+				});
+				// error handling
 			});
-			// error handling
-		});
 		}
-	}
-	
+	};
 
 	// already defined. import from search signs
 	const regCapConverter = (value) => {
