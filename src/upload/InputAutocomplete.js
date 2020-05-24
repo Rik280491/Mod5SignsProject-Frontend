@@ -59,12 +59,16 @@ function InputAutocomplete(props) {
       renderOption={(option) => option.name}
       style={{ width: 300 }}
       freeSolo
+      inputProps
       renderInput={(params) => (
-        <TextField {...params}  label="Add a BSL Sign" variant="outlined" onChange={onChange} />
+        <TextField {...params} 
+        label="Add a BSL Sign" variant="outlined"  />
       )}
     />
   );
 }
+
+// {...params}
 
 const mapStateToProps = state => {
     return {
