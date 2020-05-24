@@ -31,6 +31,7 @@ function UploadVideo(props) {
 	const [valid, setValid] = useState(false);
 	const [warningMessage, setWarningMessage] = useState("");
 	const [loadingValid, setLoadingValid] = useState(false);
+	const [isWord, setIsWord] = useState(false);
 
 	const classes = useStyles();
 
@@ -61,14 +62,29 @@ function UploadVideo(props) {
 		Number.isInteger(e.target.value)
 			? setSignName(e.target.innerText)
 			: setSignName(e.target.value);
-		
+	};
+
+	const checkWord = (signName) => {
+		API.checkWord(signName).then((response) => {
+			response.ok ? setIsWord(true) : setIsWord(false);
+		});
 	};
 
 	const checkToxicity = (signName) => {
-		if (!signName) {
-			alert("The text field must include text!")
-			return
-		}  
+		checkWord(signName);
+
+		if (signName.length <= 1) {
+			alert(
+				"Word must be more than one character long!"
+			);
+			return;
+		}
+		if (!isWord) {
+			alert("Word must exist!");
+			return;
+		}
+
+		checkWord(signName);
 		setLoadingValid(true);
 		console.log(signName);
 		// The minimum prediction confidence.
@@ -81,14 +97,13 @@ function UploadVideo(props) {
 			// Now you can use the `model` object to label sentences.
 			model.classify([signName]).then((predictions) => {
 				if (predictions[0].results[0].match === true) {
-					setWarningMessage("This is a family friendly app")
-					setValid(false)
+					setWarningMessage("This is a family friendly app");
+					setValid(false);
 				} else {
-					setValid(true) 
-					setWarningMessage("")
+					setValid(true);
+					setWarningMessage("");
 				}
-				setLoadingValid(false); 
-				
+				setLoadingValid(false);
 			});
 			// error handling
 		});
@@ -106,7 +121,6 @@ function UploadVideo(props) {
 	};
 
 	const handleSignAndVideoPost = () => {
-		
 		const regCapSignName = regCapConverter(signName);
 		console.log(regCapSignName);
 
@@ -154,7 +168,7 @@ function UploadVideo(props) {
 					{!selectedSign ? (
 						<>
 							<InputAutocomplete onChange={handleNameChange} />
-							
+
 							<Button
 								onClick={() => checkToxicity(signName)}
 								variant="contained"
@@ -162,7 +176,7 @@ function UploadVideo(props) {
 								size="small"
 							>
 								check validity
-							</Button> 
+							</Button>
 							{loadingValid ? (
 								<LinearProgress color={"secondary"} />
 							) : (
@@ -172,7 +186,7 @@ function UploadVideo(props) {
 					) : null}
 
 					<Input
-						inputProps={{ accept: "video/*"}}
+						inputProps={{ accept: "video/*" }}
 						type="file"
 						name="file"
 						placeholder="Upload a Video"
