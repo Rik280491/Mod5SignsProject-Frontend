@@ -31,7 +31,7 @@ function UploadVideo(props) {
 	const [valid, setValid] = useState(false);
 	const [warningMessage, setWarningMessage] = useState("");
 	const [loadingValid, setLoadingValid] = useState(false);
-	const [isWord, setIsWord] = useState(false);
+	const [isWord, setIsWord] = useState(false)
 
 	const classes = useStyles();
 
@@ -64,10 +64,25 @@ function UploadVideo(props) {
 			: setSignName(e.target.value);
 	};
 
-	
+	const checkWord = (signName) => {
+		const regWord = regCapConverter(signName)
+		console.log(regWord)
+		API.checkWord(regWord).then((response) => {
+			if (!response.ok) {
+				alert("This Word is not in the English Dictionary!")
+				setIsWord(false)
+				// future. consider a phrases api so phrases func can be added to app
+			} else {
+				setIsWord(true)
+			}
+		
+		});
+	};
 
 	const checkToxicity = (signName) => {
-	
+		
+		checkWord(signName);
+
 		if (signName.length <= 1) {
 			alert(
 				"Word must be more than one character long!"
@@ -75,6 +90,10 @@ function UploadVideo(props) {
 			return;
 		}
 		
+
+		checkWord(signName);
+
+		if (isWord) {
 		setLoadingValid(true);
 		console.log(signName);
 		// The minimum prediction confidence.
@@ -97,7 +116,9 @@ function UploadVideo(props) {
 			});
 			// error handling
 		});
-	};
+		}
+	}
+	
 
 	// already defined. import from search signs
 	const regCapConverter = (value) => {
