@@ -68,7 +68,6 @@ function InputAutocomplete(props) {
   );
 }
 
-// {...params}
 
 const mapStateToProps = state => {
     return {

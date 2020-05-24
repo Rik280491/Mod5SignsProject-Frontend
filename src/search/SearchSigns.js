@@ -140,7 +140,7 @@ function SearchSigns(props) {
 				</Grid>
 				<Grid item  >
 					<form onSubmit={handleSubmit}>
-						<DropdownSearch onChange={onChange} />
+						<DropdownSearch onChange={onChange} speechPlaceholder={speechPlaceholder} />
 					</form>
 					{searchModal || voiceSearchModal ? <SearchModal /> : null}
 				</Grid>

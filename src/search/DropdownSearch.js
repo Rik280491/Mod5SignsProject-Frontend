@@ -4,15 +4,17 @@ import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
 function DropdownSearch(props) {
-	const { signs, onChange } = props;
+	const { signs, onChange, speechPlaceholder} = props;
 
+  console.log(speechPlaceholder)
 	return (
 		<div style={{ width: 150, height: 70 }}>
 			<Autocomplete
       size="small"
 				id="free-solo-demo"
 				freeSolo
-				autoComplete
+        autoComplete
+        
 				onChange={onChange}
 				options={signs.map((option) => option.name)}
 				renderInput={(params) => (
@@ -21,7 +23,8 @@ function DropdownSearch(props) {
 						label="Search"
 						margin="normal"
 						variant="outlined"
-						onChange={onChange}
+            // onChange={onChange}
+            // placeholder={speechPlaceholder}
 					/>
 				)}
 			/>
