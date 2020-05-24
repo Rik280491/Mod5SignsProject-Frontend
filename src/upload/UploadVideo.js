@@ -61,9 +61,14 @@ function UploadVideo(props) {
 		Number.isInteger(e.target.value)
 			? setSignName(e.target.innerText)
 			: setSignName(e.target.value);
+		
 	};
 
 	const checkToxicity = (signName) => {
+		if (!signName) {
+			alert("The text field must include text!")
+			return
+		}  
 		setLoadingValid(true);
 		console.log(signName);
 		// The minimum prediction confidence.
@@ -77,6 +82,7 @@ function UploadVideo(props) {
 			model.classify([signName]).then((predictions) => {
 				if (predictions[0].results[0].match === true) {
 					setWarningMessage("This is a family friendly app")
+					setValid(false)
 				} else {
 					setValid(true) 
 					setWarningMessage("")
@@ -148,7 +154,7 @@ function UploadVideo(props) {
 					{!selectedSign ? (
 						<>
 							<InputAutocomplete onChange={handleNameChange} />
-
+							
 							<Button
 								onClick={() => checkToxicity(signName)}
 								variant="contained"
@@ -156,7 +162,7 @@ function UploadVideo(props) {
 								size="small"
 							>
 								check validity
-							</Button>
+							</Button> 
 							{loadingValid ? (
 								<LinearProgress color={"secondary"} />
 							) : (
