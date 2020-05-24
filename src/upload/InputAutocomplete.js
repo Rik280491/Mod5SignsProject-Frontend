@@ -22,19 +22,7 @@ function InputAutocomplete(props) {
   
   return (
     <Autocomplete
-    //   value={value}
-    //   onChange={(event, newValue) => {
-    //     // Create a new value from the user input
-    //     if (newValue && newValue.inputValue) {
-    //       setValue({
-    //         name: newValue.inputValue,
-    //       });
-
-    //       return;
-    //     }
-
-    //     setValue(newValue);
-    //   }}
+   
       filterOptions={(options, params) => {
         const filtered = filter(options, params);
 
@@ -72,7 +60,7 @@ function InputAutocomplete(props) {
       style={{ width: 300 }}
       freeSolo
       renderInput={(params) => (
-        <TextField {...params} label="Add a BSL Sign" variant="outlined" onChange={onChange} />
+        <TextField {...params}  label="Add a BSL Sign" variant="outlined" onChange={onChange} />
       )}
     />
   );

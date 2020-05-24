@@ -89,8 +89,8 @@ function UploadVideo(props) {
 				}
 				setLoadingValid(false); 
 				
-				console.log(predictions[0]);
 			});
+			// error handling
 		});
 	};
 
@@ -172,6 +172,7 @@ function UploadVideo(props) {
 					) : null}
 
 					<Input
+						inputProps={{ accept: "video/*"}}
 						type="file"
 						name="file"
 						placeholder="Upload a Video"
