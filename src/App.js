@@ -9,7 +9,6 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import ResponsiveDrawer from "./homePage/styleComponents/ResponsiveDrawer";
 import UserVideos from "./userUploads/UserVideos";
-// import SearchSigns from "./search/SearchSigns"
 
 class App extends React.Component {
 	componentDidMount() {
@@ -46,7 +45,7 @@ class App extends React.Component {
 					<Route
 						exact
 						path="/"
-						render={(routerProps) => <HomePageContainer {...routerProps} />}
+						render={(props) => <HomePageContainer {...props} />}
 					/>
 					<Route
 						exact
