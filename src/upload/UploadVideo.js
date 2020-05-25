@@ -58,8 +58,8 @@ function UploadVideo(props) {
 	};
 
 	const handleNameChange = (e) => {
-		setIsWord(false)
-		setWarningMessage("")
+		setIsWord(false);
+		setWarningMessage("");
 		console.log(e.target.value);
 		Number.isInteger(e.target.value)
 			? setSignName(e.target.innerText)
@@ -110,7 +110,6 @@ function UploadVideo(props) {
 						setWarningMessage("");
 					}
 					setLoadingValid(false);
-					
 				});
 				// error handling
 			});
@@ -194,14 +193,6 @@ function UploadVideo(props) {
 						</>
 					) : null}
 
-					<Input
-						inputProps={{ accept: "video/*" }}
-						type="file"
-						name="file"
-						placeholder="Upload a Video"
-						onChange={handleChange}
-					/>
-
 					{loading ? (
 						<CircularProgress />
 					) : (
@@ -216,15 +207,25 @@ function UploadVideo(props) {
 							/>
 
 							{valid || selectedSign ? (
-								<Button
-									variant="contained"
-									color="default"
-									onClick={handleSignAndVideoPost}
-									className={classes.button}
-									startIcon={<CloudUploadIcon />}
-								>
-									Upload
-								</Button>
+								<>
+									<Input
+										inputProps={{ accept: "video/*" }}
+										type="file"
+										name="file"
+										placeholder="Upload a Video"
+										onChange={handleChange}
+									/>
+
+									<Button
+										variant="contained"
+										color="default"
+										onClick={handleSignAndVideoPost}
+										className={classes.button}
+										startIcon={<CloudUploadIcon />}
+									>
+										Upload
+									</Button>
+								</>
 							) : null}
 							{uploadResponse ? <h4>{uploadResponse.message}</h4> : null}
 						</>

@@ -129,7 +129,7 @@ function ResponsiveDrawer(props) {
 
 				<ListItem
 					button
-					onClick={(username ? logOut : null, handleDrawerToggle)}
+					onClick={username ? logOut : null}
 					component={!username ? loginLink : ""}
 				>
 					<ListItemIcon>
