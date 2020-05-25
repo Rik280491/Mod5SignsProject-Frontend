@@ -193,6 +193,17 @@ function UploadVideo(props) {
 						</>
 					) : null}
 
+					{/* when i move this down to line 229 the input stops functioning correctly */}
+					{valid || selectedSign ? (
+						<Input
+							inputProps={{ accept: "video/*" }}
+							type="file"
+							name="file"
+							placeholder="Upload a Video"
+							onChange={handleChange}
+						/>
+					) : null}
+
 					{loading ? (
 						<CircularProgress />
 					) : (
@@ -208,14 +219,6 @@ function UploadVideo(props) {
 
 							{valid || selectedSign ? (
 								<>
-									<Input
-										inputProps={{ accept: "video/*" }}
-										type="file"
-										name="file"
-										placeholder="Upload a Video"
-										onChange={handleChange}
-									/>
-
 									<Button
 										variant="contained"
 										color="default"
