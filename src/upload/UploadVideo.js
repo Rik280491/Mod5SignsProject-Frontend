@@ -163,8 +163,18 @@ function UploadVideo(props) {
 		<div>
 			{!username ? (
 				<h1>
-					To upload a video please <Link to="/login"> log in </Link> or
-					<Link to="/signup"> Sign Up </Link>{" "}
+					To upload a video please
+					
+					<Button variant="outlined" component={(props) => <Link to="/login" {...props} />} >
+						Log in  
+					</Button>
+					
+					<br></br>
+					<Button variant="outlined"  component={(props) => <Link to="/signup" {...props} />} >
+						Sign up 
+					</Button>
+					
+					
 				</h1>
 			) : (
 				<>
