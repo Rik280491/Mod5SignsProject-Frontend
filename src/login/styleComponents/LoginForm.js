@@ -14,13 +14,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Signup from '../../signup/Signup'
+import HearingIcon from '@material-ui/icons/Hearing';
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      {/* link to mission statement */}
+      <Link color="inherit" >
+        Hear Together
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -56,10 +58,10 @@ export default function LoginForm({handleChange, handleSubmit}) {
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+          <HearingIcon/>
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Log in
         </Typography>
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
           <TextField
@@ -86,10 +88,10 @@ export default function LoginForm({handleChange, handleSubmit}) {
             id="password"
             autoComplete="current-password"
           />
-          <FormControlLabel
+          {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
-          />
+          /> */}
           <Button
             type="submit"
             fullWidth
@@ -97,13 +99,13 @@ export default function LoginForm({handleChange, handleSubmit}) {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            Log In
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              {/* <Link href="#" variant="body2">
                 Forgot password?
-              </Link>
+              </Link> */}
             </Grid>
             <Grid item>
               <Link to="/signup" variant="body2">

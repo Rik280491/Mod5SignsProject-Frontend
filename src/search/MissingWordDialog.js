@@ -32,9 +32,7 @@ export default function MissingWordDialog(props) {
 
   return (
     <div>
-      {/* <Button variant="outlined" >
-        MISSING WORD. CAN YOU HELP?
-      </Button> */}
+      
       { suggestedWord ? <InfoIcon onClick={handleClickOpen} /> : null}
       <Dialog
         open={open}

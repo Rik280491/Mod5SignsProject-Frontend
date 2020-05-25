@@ -12,14 +12,16 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Login from "../../login/Login";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew';
 
 function Copyright() {
 	return (
 		<Typography variant="body2" color="textSecondary" align="center">
 			{"Copyright © "}
-			{/* <Link color="inherit" href="https://material-ui.com/"> */}
-			Your Website
-			{/* </Link>{' '} */}
+			{/* link to mission statement */}
+			<Link color="inherit" >
+				Hear Together
+			</Link>{' '}
 			{new Date().getFullYear()}
 			{"."}
 		</Typography>
@@ -54,7 +56,7 @@ export default function SignUpForm({ handleChange, handleSubmit }) {
 			<CssBaseline />
 			<div className={classes.paper}>
 				<Avatar className={classes.avatar}>
-					<LockOutlinedIcon />
+				<AccessibilityNewIcon/>
 				</Avatar>
 				<Typography component="h1" variant="h5">
 					Sign up
@@ -100,7 +102,7 @@ export default function SignUpForm({ handleChange, handleSubmit }) {
 					<Grid container justify="flex-end">
 						<Grid item>
 							<Link to="/login" variant="body2">
-								Already have an account? Sign in
+								Already have an account? Log in
 							</Link>
 
 						</Grid>
