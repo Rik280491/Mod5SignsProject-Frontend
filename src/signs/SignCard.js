@@ -33,7 +33,7 @@ function SignCard({ name, videoArr, searchSigns }) {
 							<CardMedia
 								component="iframe"
 								// doesn't full screen video
-								height="140"
+								height="200"
 								src={video.video_url}
 								title={name}
 							/>
