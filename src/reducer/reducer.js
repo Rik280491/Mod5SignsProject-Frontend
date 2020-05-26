@@ -54,6 +54,11 @@ const reducer = (state = initialState, action) => {
             ...state,
             signs: updatedSigns.filter(sign => sign.videos.length > 0)
         }
+    case 'UPDATE_SIGNS_INDEX':
+        return {
+            ...state,
+            signs: [...state.signs, action.payload.sign]
+        }
 
         default:
             return state 

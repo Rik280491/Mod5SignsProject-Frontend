@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function UploadVideo(props) {
-	const { username, selectedSign, deselectSign } = props;
+	const { username, selectedSign, deselectSign, updateSignsIndex } = props;
 	const [loading, setLoading] = useState(false);
 	const [video, setVideo] = useState(null);
 	const [signName, setSignName] = useState("");
@@ -139,7 +139,12 @@ function UploadVideo(props) {
 					sign_name: regCapSignName,
 				},
 				localStorage.token
-			).then((response) => setUploadResponse(response));
+			).then((response) => {
+				setUploadResponse(response.message)
+				updateSignsIndex(response.sign)
+				console.log(response.sign)
+				
+			});
 
 			if (selectedSign) {
 				API.createSignWithVideo(
@@ -240,7 +245,7 @@ function UploadVideo(props) {
 									</Button>
 								</>
 							) : null}
-							{uploadResponse ? <h4>{uploadResponse.message}</h4> : null}
+							{uploadResponse ? <h4>{uploadResponse}</h4> : null}
 						</>
 					)}
 				</>
@@ -264,6 +269,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		deselectSign: () => dispatch({ type: "DESELECT_SIGN" }),
+		updateSignsIndex: (sign) => dispatch({ type: "UPDATE_SIGNS_INDEX", payload: {sign}})
 	};
 };
 

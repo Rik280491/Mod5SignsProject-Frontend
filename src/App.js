@@ -11,20 +11,20 @@ import ResponsiveDrawer from "./homePage/styleComponents/ResponsiveDrawer";
 import UserVideos from "./userUploads/UserVideos";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-
 class App extends React.Component {
 	state = {
-		isLoading: true
-	}
-	
-	
-	
+		isLoading: true,
+	};
+
 	componentDidMount() {
 		this.checkToken();
-		API.get().then(this.props.getSigns);
-		this.setState({
-			isLoading: false
-		})
+		API.get()
+			.then(this.props.getSigns)
+			.then(() =>
+				this.setState({
+					isLoading: false,
+				})
+			);
 	}
 
 	checkToken = () => {
@@ -51,7 +51,7 @@ class App extends React.Component {
 		return (
 			<>
 				{/* { this.state.isLoading ? <CircularProgress /> : null} */}
-			
+
 				<ResponsiveDrawer logIn={this.logIn} logOut={this.logOut} />
 
 				<div>
@@ -81,7 +81,6 @@ class App extends React.Component {
 						render={(props) => <UserVideos {...props} />}
 					/>
 				</div>
-	
 			</>
 		);
 	}
@@ -96,7 +95,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		getSigns: (signs) => dispatch({ type: "GET_SIGNS", payload: { signs } }),
-		getUsername: (username) => dispatch({ type: "USERNAME", payload: { username } }),
+		getUsername: (username) =>
+			dispatch({ type: "USERNAME", payload: { username } }),
 		logOutUser: () => dispatch({ type: "LOGOUTUSER" }),
 	};
 };
