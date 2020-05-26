@@ -25,7 +25,8 @@ function SignCard({ name, videoArr, searchSigns }) {
 		setModalLoad(true);
 	};
 	return (
-		<Card className={classes.root}>
+		
+		<Card className={classes.root} >
 
 			{videoArr
 				? videoArr.map((video) => {
