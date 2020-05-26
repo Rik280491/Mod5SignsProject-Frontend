@@ -55,12 +55,12 @@ const reducer = (state = initialState, action) => {
             signs: updatedSigns.filter(sign => sign.videos.length > 0)
         }
     case 'UPDATE_SIGNS_INDEX':
-        const updateSign = state.signs.map( sign => sign.id === action.payload.sign.id ? action.payload.sign : sign )
+        const updatedSignsIndex = state.signs.map( sign => sign.id === action.payload.sign.id ? action.payload.sign : sign )
         
         return {
             ...state,
             
-            signs: updateSign
+            signs: updatedSignsIndex
         }
 
         default:

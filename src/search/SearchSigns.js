@@ -47,14 +47,19 @@ function SearchSigns(props) {
 
 	const regCapConverter = (value) => {
 		// only allows alphanumeric characters, capitilises first letter and no whitespaces
-		return (
-			value.charAt(0).toUpperCase() +
-			value
-				.slice(1)
-				.replace(/[^\w\s]|_/g, "")
-				.replace(/\s+/g, " ")
-				.trim()
-		);
+		if (value) {
+			return (
+				value.charAt(0).toUpperCase() +
+				value
+					.slice(1)
+					.replace(/[^\w\s]|_/g, "")
+					.replace(/\s+/g, " ")
+					.trim()
+			);
+		} else {
+			return
+		}
+		
 	};
 
 	const isDefined = (searchValue) => {
