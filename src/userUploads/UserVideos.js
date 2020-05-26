@@ -92,7 +92,7 @@ function UserVideos(props) {
 
 	return (
 		<div>
-			<h1>{username}'s uploaded Videos</h1>
+			<h1 className="title">{username}'s uploaded Videos</h1>
 
 			{findUserVideos()}
 			{loadDialog ? (

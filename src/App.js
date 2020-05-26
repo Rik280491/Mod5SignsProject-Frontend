@@ -53,7 +53,6 @@ class App extends React.Component {
 				{/* { this.state.isLoading ? <CircularProgress /> : null} */}
 
 				<ResponsiveDrawer logIn={this.logIn} logOut={this.logOut} />
-
 				<div>
 					<Route
 						exact

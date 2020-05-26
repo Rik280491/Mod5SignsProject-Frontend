@@ -1,6 +1,14 @@
+
 body {
-     /* color: white; */
-    padding: 15px;
-     font-family: Roboto; 
-    /* text-align: center; */
-  }
+    /* color: white; */
+   padding: 15px;
+    font-family: Roboto; 
+   /* text-align: center; */
+ }
+
+ 
+
+.title {
+
+    font-family: 'Carter One', cursive;
+}

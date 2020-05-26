@@ -50,8 +50,11 @@ class HomePageContainer extends React.Component {
 				<ResponsiveDrawer toggleUpload={this.Upload}/>
 				{this.state.drawerOption === "upload" ? 
 				   <UploadVideo /> :
-				 
-				   this.renderSigns()  
+				   <>
+				   <h1 className="title">Hear Together</h1>
+
+				   {this.renderSigns()}  
+				   </>
 				   }
 				
 				
