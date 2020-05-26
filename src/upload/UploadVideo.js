@@ -58,6 +58,7 @@ function UploadVideo(props) {
 	};
 
 	const handleNameChange = (e) => {
+		setValid(false)
 		setIsWord(false);
 		setWarningMessage("");
 		console.log(e.target.value);
@@ -143,10 +144,10 @@ function UploadVideo(props) {
 				setUploadResponse(response.message)
 				updateSignsIndex(response.sign)
 				console.log(response.sign)
-				
-			});
-			setValid(false);
+				setValid(false);
 
+			});
+				
 
 		} else if (selectedSign) {
 				API.createSignWithVideo(
@@ -157,12 +158,13 @@ function UploadVideo(props) {
 					localStorage.token
 				).then((response) => {
 					setUploadResponse(response.message)
-					updateSignsIndex(response.sign)		
-					console.log(response.sign)		
+					updateSignsIndex(response.sign)				
+					setValid(false);
+					deselectSign();
+				
 				});
 			
-				setValid(false);
-				deselectSign();
+				
 			
 		} else {
 			alert("A VIDEO FILE MUST BE ATTACHED");
