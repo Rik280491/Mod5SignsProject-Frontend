@@ -191,7 +191,7 @@ function UploadVideo(props) {
 			) : (
 				<>
 					{selectedSign ? (
-						<h1 style={{fontFamily: 'Damion'}}>Upload a Video for {selectedSign.name}</h1>
+						<h1 style={{ fontFamily: "Roboto" }}>Upload a Video for {selectedSign.name}</h1>
 					) : (
 						<h1>Upload a Video</h1>
 					)}
