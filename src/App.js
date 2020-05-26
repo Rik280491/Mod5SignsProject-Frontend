@@ -9,11 +9,22 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import ResponsiveDrawer from "./homePage/styleComponents/ResponsiveDrawer";
 import UserVideos from "./userUploads/UserVideos";
+import CircularProgress from "@material-ui/core/CircularProgress";
+
 
 class App extends React.Component {
+	state = {
+		isLoading: true
+	}
+	
+	
+	
 	componentDidMount() {
 		this.checkToken();
 		API.get().then(this.props.getSigns);
+		this.setState({
+			isLoading: false
+		})
 	}
 
 	checkToken = () => {
@@ -39,6 +50,8 @@ class App extends React.Component {
 	render() {
 		return (
 			<>
+				{/* { this.state.isLoading ? <CircularProgress /> : null} */}
+			
 				<ResponsiveDrawer logIn={this.logIn} logOut={this.logOut} />
 
 				<div>
@@ -68,6 +81,7 @@ class App extends React.Component {
 						render={(props) => <UserVideos {...props} />}
 					/>
 				</div>
+	
 			</>
 		);
 	}

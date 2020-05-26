@@ -45,11 +45,15 @@ const reducer = (state = initialState, action) => {
             ...state, 
             selectedSign: null
         }
-    // case 'DELETE_SIGN_VIDEO':
-    //     return {
-    //         ...state,
-    //         signs: state.signs.filter(sign => sign.movie)
-    //     }
+    case 'DELETE_SIGN_VIDEO':
+        const targetSign = state.signs.find( sign => sign.videos.map(video => video.id).includes(action.payload.deleteVideoID) )
+        const updatedSign = { ...targetSign, videos: targetSign.videos.filter(video => video.id !== action.payload.deleteVideoID) }        
+        const updatedSigns = state.signs.map( sign => sign.id === updatedSign.id ? updatedSign : sign )
+
+        return {
+            ...state,
+            signs: updatedSigns.filter(sign => sign.videos.length > 0)
+        }
 
         default:
             return state 

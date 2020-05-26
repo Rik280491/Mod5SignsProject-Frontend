@@ -87,7 +87,7 @@ function UserVideos(props) {
 				(video) => video.id !== deleteVideoID
 			);
 			setAllVideos(updatedVideos);
-		});
+		}).then(() => deleteSignVideo(deleteVideoID))
 	};
 
 	return (
@@ -110,8 +110,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		deleteSignVideo: (id) =>
-			dispatch({ type: "DELETE_SIGN_VIDEO", payload: { id } }),
+		deleteSignVideo: (deleteVideoID) =>
+			dispatch({ type: "DELETE_SIGN_VIDEO", payload: { deleteVideoID } }),
 	};
 };
 
