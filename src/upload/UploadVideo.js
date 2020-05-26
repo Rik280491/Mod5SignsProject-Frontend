@@ -132,7 +132,7 @@ function UploadVideo(props) {
 		const regCapSignName = regCapConverter(signName);
 		console.log(regCapSignName);
 
-		if (video) {
+		if (video && !selectedSign) {
 			API.createSignWithVideo(
 				{
 					video_url: video,
@@ -145,8 +145,10 @@ function UploadVideo(props) {
 				console.log(response.sign)
 				
 			});
+			setValid(false);
 
-			if (selectedSign) {
+
+		} else if (selectedSign) {
 				API.createSignWithVideo(
 					{
 						video_url: video,
@@ -156,12 +158,12 @@ function UploadVideo(props) {
 				).then((response) => {
 					setUploadResponse(response.message)
 					updateSignsIndex(response.sign)		
-					console.log(response)		
+					console.log(response.sign)		
 				});
-
+			
 				setValid(false);
 				deselectSign();
-			}
+			
 		} else {
 			alert("A VIDEO FILE MUST BE ATTACHED");
 			//as a dialog box?
