@@ -153,7 +153,11 @@ function UploadVideo(props) {
 						sign_name: selectedSign.name,
 					},
 					localStorage.token
-				).then((response) => setUploadResponse(response));
+				).then((response) => {
+					setUploadResponse(response.message)
+					updateSignsIndex(response.sign)		
+					console.log(response)		
+				});
 
 				setValid(false);
 				deselectSign();
