@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function SignCard({ name, videoArr, searchSigns }) {
-	console.log(videoArr);
+
 	const [modalLoad, setModalLoad] = useState(false);
 
 	const classes = useStyles();

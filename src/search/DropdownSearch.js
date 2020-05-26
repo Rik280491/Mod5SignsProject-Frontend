@@ -16,7 +16,6 @@ function DropdownSearch(props) {
 	const { signs, onChange, speechPlaceholder} = props;
   const classes = useStyles();
 
-  console.log(speechPlaceholder)
 	return (
 		<div style={{ width: 150, height: 70}}>
 			<Autocomplete

@@ -35,7 +35,6 @@ function UploadVideo(props) {
 
 	const classes = useStyles();
 
-	console.log(selectedSign);
 
 	const handleChange = async (e) => {
 		const files = e.target.files;
