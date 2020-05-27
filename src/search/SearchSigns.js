@@ -121,6 +121,7 @@ function SearchSigns(props) {
 	};
 
 	const handleValue = (speechValue) => {
+		
 		const voiceSearchValue = regCapConverter(speechValue);
 		searchSigns(voiceSearchValue);
 		if (signs.filter((sign) => sign.name === voiceSearchValue).length > 0) {
@@ -134,6 +135,12 @@ function SearchSigns(props) {
 		setListening(false);
 	};
 
+	const override = () => {
+		recognition.stop()
+		setListening(false)
+	}
+
+	
 	return (
 		<div className={classes.margin}>
 			<Grid container spacing={4} alignItems="center"  >
@@ -163,7 +170,7 @@ function SearchSigns(props) {
 							onClick={handleSpeech}
 						/>
 					) : (
-						<RecordVoiceOverIcon className={classes.voiceButton} />
+						<RecordVoiceOverIcon className={classes.voiceButton} onClick={override}/>
 					)}
 				</Grid>
 				

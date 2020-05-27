@@ -81,7 +81,6 @@ function UploadVideo(props) {
 	};
 
 	const checkToxicity = (signName) => {
-		checkWord(signName);
 
 		if (signName.length <= 1) {
 			alert("Word must be more than one character long!");
@@ -92,7 +91,6 @@ function UploadVideo(props) {
 
 		if (isWord) {
 			setLoadingValid(true);
-			console.log(signName);
 			// The minimum prediction confidence.
 			const threshold = 0.8;
 
@@ -229,7 +227,7 @@ function UploadVideo(props) {
 					{loading ? (
 						<CircularProgress />
 					) : (
-						// better loading icon, progress bar?
+
 						<>
 							{/* view video youve just uploaded */}
 							<CardMedia

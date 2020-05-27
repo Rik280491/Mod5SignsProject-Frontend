@@ -24,7 +24,6 @@ function DropdownSearch(props) {
 				freeSolo
         autoComplete
         classes={classes}
-
         
 				onChange={onChange}
 				options={signs.map((option) => option.name)}
