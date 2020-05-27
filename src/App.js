@@ -25,7 +25,6 @@ class App extends React.Component {
 					isLoading: false,
 				})
 			);
-
 	}
 
 	checkToken = () => {
@@ -51,40 +50,41 @@ class App extends React.Component {
 	render() {
 		return (
 			<>
-			
-				{ this.state.isLoading ? <CircularProgress /> :
-<>
-				<ResponsiveDrawer logIn={this.logIn} logOut={this.logOut} />
-				
-				<div>
-					<Route
-						exact
-						path="/"
-						render={(props) => <HomePageContainer {...props} />}
-					/>
-					<Route
-						exact
-						path="/signup"
-						render={(props) => <Signup {...props} logIn={this.logIn} />}
-					/>
-					<Route
-						exact
-						path="/login"
-						render={(props) => <Login {...props} logIn={this.logIn} />}
-					/>
-					<Route
-						exact
-						path="/upload"
-						render={(props) => <UploadVideo {...props} />}
-					/>
-					<Route
-						exact
-						path="/user-uploads"
-						render={(props) => <UserVideos {...props} />}
-					/>
-				</div>
-			</>
-				}
+				{this.state.isLoading ? (
+					<CircularProgress />
+				) : (
+					<>
+						<ResponsiveDrawer logIn={this.logIn} logOut={this.logOut} />
+
+						<div>
+							<Route
+								exact
+								path="/"
+								render={(props) => <HomePageContainer {...props} />}
+							/>
+							<Route
+								exact
+								path="/signup"
+								render={(props) => <Signup {...props} logIn={this.logIn} />}
+							/>
+							<Route
+								exact
+								path="/login"
+								render={(props) => <Login {...props} logIn={this.logIn} />}
+							/>
+							<Route
+								exact
+								path="/upload"
+								render={(props) => <UploadVideo {...props} />}
+							/>
+							<Route
+								exact
+								path="/user-uploads"
+								render={(props) => <UserVideos {...props} />}
+							/>
+						</div>
+					</>
+				)}
 			</>
 		);
 	}
