@@ -45,7 +45,7 @@ function SignCard({ name, videoArr, searchSigns }) {
 			<Typography
 				onClick={() => toggleLoad(name)}
 				gutterBottom
-				variant="h5"
+				variant="h6"
 				component="h4"
 			>
 				{name}

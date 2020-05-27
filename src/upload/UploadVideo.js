@@ -210,7 +210,7 @@ function UploadVideo(props) {
 							{loadingValid ? (
 								<LinearProgress color={"secondary"} />
 							) : (
-								<h2 style={{ color: "red" }}>{warningMessage}</h2>
+								<h2 className="title" style={{ color: "red" }}>{warningMessage}</h2>
 							)}
 						</>
 					) : null}
@@ -235,7 +235,7 @@ function UploadVideo(props) {
 							<CardMedia
 								component="iframe"
 								// doesn't full screen video
-								height="140"
+								height="200"
 								src={video}
 							/>
 
