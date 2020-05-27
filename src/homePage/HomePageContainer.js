@@ -25,7 +25,6 @@ class HomePageContainer extends React.Component {
 				<SignCard
 					key={index}
 					name={sign.name}
-					// refactor to videos[i] when implementing multiple videos option. currently only shows first video of sign on home page
 					videoArr={sign.videos}
 					id={sign.id}
 					sign={sign}

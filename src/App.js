@@ -25,6 +25,7 @@ class App extends React.Component {
 					isLoading: false,
 				})
 			);
+
 	}
 
 	checkToken = () => {
@@ -50,9 +51,11 @@ class App extends React.Component {
 	render() {
 		return (
 			<>
-				{/* { this.state.isLoading ? <CircularProgress /> : null} */}
-
+			
+				{ this.state.isLoading ? <CircularProgress /> :
+<>
 				<ResponsiveDrawer logIn={this.logIn} logOut={this.logOut} />
+				
 				<div>
 					<Route
 						exact
@@ -80,6 +83,8 @@ class App extends React.Component {
 						render={(props) => <UserVideos {...props} />}
 					/>
 				</div>
+			</>
+				}
 			</>
 		);
 	}
