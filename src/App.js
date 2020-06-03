@@ -7,7 +7,7 @@ import UploadVideo from "./upload/UploadVideo";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import ResponsiveDrawer from "./homePage/styleComponents/responsiveDrawer";
+import ResponsiveDrawer from "./homePage/styleComponents/ResponsiveDrawer";
 import UserVideos from "./userUploads/UserVideos";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
