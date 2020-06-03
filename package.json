@@ -1,6 +1,6 @@
 {
   "name": "mod5signsproject-frontend",
-  "homepage": "https://heartogether.netlify.app/",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
