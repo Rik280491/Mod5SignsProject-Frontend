@@ -255,7 +255,7 @@ function UploadVideo(props) {
 					)}
 				</>
 			)}
-			{selectedSign ? (
+			{selectedSign && username ? (
 				<Button onClick={() => deselectSign()} variant="outlined">
 					reset form
 				</Button>

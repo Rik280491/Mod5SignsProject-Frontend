@@ -1,4 +1,5 @@
-const baseURL = "http://localhost:3001";
+// change this to heroku url, and change cors to accept only url
+const baseURL = "https://serene-harbor-87663.herokuapp.com/";
 const signsURL = `${baseURL}/signs`;
 const validateURL = `${baseURL}/validate`;
 const logInURL = `${baseURL}/log-in`;
@@ -6,7 +7,7 @@ const createUserURL = `${baseURL}/users`;
 const videosURL = `${baseURL}/videos`;
 
 const post = (url, data, token) => {
-	const configObject = {
+	const configObject = {       
 		method: "POST",
 		headers: {
 			Accept: "application/json",
