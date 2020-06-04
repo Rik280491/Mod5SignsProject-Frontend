@@ -74,8 +74,8 @@ const reducer = (state = initialState, action) => {
 				signs: inIndex
 					? state.signs.map((sign) =>
 							sign.id === action.payload.sign.id ? action.payload.sign : sign
-					  )
-					: [...state.signs, action.payload.sign],
+					  ).sort((a, b) => a.name.localeCompare(b.name))
+					: [...state.signs, action.payload.sign].sort((a, b) => a.name.localeCompare(b.name))
 			};
 
 		default:
