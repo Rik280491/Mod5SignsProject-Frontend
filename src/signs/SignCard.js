@@ -8,7 +8,6 @@ import Typography from "@material-ui/core/Typography";
 import { Player, ControlBar, VolumeMenuButton } from "video-react";
 import "../../node_modules/video-react/dist/video-react.css";
 
-
 const useStyles = makeStyles((theme) => ({
 	root: {
 		maxWidth: 345,
@@ -30,10 +29,7 @@ function SignCard({ name, videoArr, searchSigns }) {
 			{videoArr
 				? videoArr.map((video) => {
 						return (
-							<Player 
-							fluid={false}
-							width={300}
-							height={200}>
+							<Player fluid={false} width={300} height={200}>
 								<source src={video.video_url} />
 								<ControlBar>
 									<VolumeMenuButton disabled />
