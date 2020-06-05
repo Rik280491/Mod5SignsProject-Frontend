@@ -16,7 +16,6 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import SearchSigns from "../../search/SearchSigns";
-import MissingWordDialog from "../../search/MissingWordDialog";
 import HearingIcon from "@material-ui/icons/Hearing";
 import HomeIcon from "@material-ui/icons/Home";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
@@ -70,6 +69,7 @@ function ResponsiveDrawer(props) {
 
 	const handleDrawerToggle = () => {
 		setMobileOpen(!mobileOpen);
+
 	};
 
 	const drawer = (
@@ -143,10 +143,10 @@ function ResponsiveDrawer(props) {
 		window !== undefined ? () => window().document.body : undefined;
 
 	return (
-		<div className={classes.root}>
+		<div  className={classes.root}>
 			<CssBaseline />
 			<AppBar position="fixed" className={classes.appBar}>
-				<Toolbar>
+				<Toolbar id="app-bar">
 					<IconButton
 						color="inherit"
 						aria-label="open drawer"
@@ -161,7 +161,7 @@ function ResponsiveDrawer(props) {
 					</Typography>
 				</Toolbar>
 			</AppBar>
-			<nav className={classes.drawer} aria-label="mailbox folders">
+			<nav className={classes.drawer} aria-label="nav folders">
 				{/* The implementation can be swapped with js to avoid SEO duplication of links. */}
 				<Hidden smUp implementation="css">
 					<Drawer
@@ -180,17 +180,21 @@ function ResponsiveDrawer(props) {
 						{drawer}
 					</Drawer>
 				</Hidden>
+				
 				<Hidden xsDown implementation="css">
-					<Drawer
+
+					<Drawer 
+	
 						classes={{
 							paper: classes.drawerPaper,
 						}}
 						variant="permanent"
 						open
+						
 					>
 						{drawer}
 					</Drawer>
-				</Hidden>
+				 </Hidden> 
 			</nav>
 			<main className={classes.content}>
 				<div className={classes.toolbar} />

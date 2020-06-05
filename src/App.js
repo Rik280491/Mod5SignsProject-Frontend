@@ -54,9 +54,9 @@ class App extends React.Component {
 					<CircularProgress />
 				) : (
 					<>
-						<ResponsiveDrawer logIn={this.logIn} logOut={this.logOut} />
+						<ResponsiveDrawer id="app-bar" logIn={this.logIn} logOut={this.logOut} />
 
-						<div>
+						<div id="child-app-bar">
 							<Route
 								exact
 								path="/"

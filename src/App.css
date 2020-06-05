@@ -1,14 +1,26 @@
-
 body {
-    /* color: white; */
-   padding: 15px;
-    font-family: Roboto; 
-   /* text-align: center; */
- }
-
- 
+	padding: 15px;
+	font-family: Roboto;
+}
 
 .title {
+	font-family: "Carter One", cursive;
+}
 
-    font-family: 'Carter One', cursive;
+
+#app-bar {
+    position: relative;
+    
+}
+
+#child-app-bar {
+    position: absolute; 
+    
+    right: 35px;
+   
+   
+
+    
+    
+    
 }

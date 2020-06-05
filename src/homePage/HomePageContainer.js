@@ -2,9 +2,7 @@ import React from "react";
 import SignCard from "../signs/SignCard";
 import ResponsiveDrawer from "./styleComponents/ResponsiveDrawer";
 import { connect } from "react-redux";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import UploadVideo from '../upload/UploadVideo'
-import SearchSigns from '../search/SearchSigns'
 
 
 class HomePageContainer extends React.Component {
