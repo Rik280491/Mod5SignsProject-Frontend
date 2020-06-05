@@ -29,7 +29,7 @@ function SignCard({ name, videoArr, searchSigns }) {
 			{videoArr
 				? videoArr.map((video) => {
 						return (
-							<Player fluid={false} width={300} height={200}>
+							<Player fluid={false} width={350} height={200}>
 								<source src={video.video_url} />
 								<ControlBar>
 									<VolumeMenuButton disabled />

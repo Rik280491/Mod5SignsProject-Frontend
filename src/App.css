@@ -10,14 +10,5 @@ body {
 	font-family: "Carter One", cursive;
 }
 
-#app-bar {
-	position: relative;
-}
 
-#child-app-bar {
-	position: absolute;
-	top: 10%;
-	right: 10%;
-	left: 10%;
-}
 

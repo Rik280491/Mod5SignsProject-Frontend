@@ -11,8 +11,6 @@ import ResponsiveDrawer from "./homePage/styleComponents/ResponsiveDrawer";
 import UserVideos from "./userUploads/UserVideos";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-
-
 class App extends React.Component {
 	state = {
 		isLoading: true,
@@ -56,9 +54,9 @@ class App extends React.Component {
 					<CircularProgress />
 				) : (
 					<>
-						<ResponsiveDrawer id="app-bar" logIn={this.logIn} logOut={this.logOut} />
+						<ResponsiveDrawer logIn={this.logIn} logOut={this.logOut} />
 
-						<div id="child-app-bar">
+						<div>
 							<Route
 								exact
 								path="/"
