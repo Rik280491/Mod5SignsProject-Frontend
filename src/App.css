@@ -7,20 +7,13 @@ body {
 	font-family: "Carter One", cursive;
 }
 
-
 #app-bar {
-    position: relative;
-    
+	position: relative;
 }
 
 #child-app-bar {
-    position: absolute; 
-    
-    right: 35px;
-   
-   
-
-    
-    
-    
+	position: absolute;
+	top: 10%;
+	right: 10%;
+	left: 10%;
 }

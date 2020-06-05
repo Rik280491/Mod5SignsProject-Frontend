@@ -32,7 +32,7 @@ function SignCard({ name, videoArr, searchSigns }) {
 				? videoArr.map((video) => {
 						return (
 							<CardMedia
-								component="iframe"
+							
 								// doesn't full screen video
 								height="200"
 								src={video.video_url}
