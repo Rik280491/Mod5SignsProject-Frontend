@@ -6,9 +6,9 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-import Grid from '@material-ui/core/Grid';
+import Grid from "@material-ui/core/Grid";
+import { Player, ControlBar, VolumeMenuButton } from "video-react";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -42,34 +42,32 @@ function UserVideos(props) {
 
 		return userVideos.map((video) => {
 			return (
-			<Grid container spacing={4}>
-				<Grid item key={video.id} xs={12} sm={6} md={4}>
-				<Card className={classes.root} >
-					<CardMedia
-						
-						component="iframe"
-						height="140"
-						src={video.video_url}
-						title={video.sign.name}
-						// cant full screen!
-					/>
-					<Typography gutterBottom variant="h5" component="h2">
-						{video.sign.name}
-					</Typography>
+				<Grid container spacing={4}>
+					<Grid item key={video.id} xs={12} sm={6} md={4}>
+						<Card className={classes.root}>
+							<Player>
+								<source src={video.video_url} />
+								<ControlBar>
+									<VolumeMenuButton disabled />
+								</ControlBar>
+							</Player>
+							<Typography gutterBottom variant="h5" component="h2">
+								{video.sign.name}
+							</Typography>
 
-					<Button
-						size="small"
-						variant="contained"
-						color="secondary"
-						onClick={() => openDialog(video.id)}
-						className={classes.button}
-						startIcon={<DeleteIcon />}
-					>
-						Delete
-					</Button>
-				</Card>
-			  </Grid>
-			</Grid>
+							<Button
+								size="small"
+								variant="contained"
+								color="secondary"
+								onClick={() => openDialog(video.id)}
+								className={classes.button}
+								startIcon={<DeleteIcon />}
+							>
+								Delete
+							</Button>
+						</Card>
+					</Grid>
+				</Grid>
 			);
 		});
 	};
@@ -82,12 +80,14 @@ function UserVideos(props) {
 	const removeVideo = () => {
 		console.log("clicked", deleteVideoID);
 
-		API.deleteVideo(deleteVideoID).then(() => {
-			const updatedVideos = allVideos.filter(
-				(video) => video.id !== deleteVideoID
-			);
-			setAllVideos(updatedVideos);
-		}).then(() => deleteSignVideo(deleteVideoID))
+		API.deleteVideo(deleteVideoID)
+			.then(() => {
+				const updatedVideos = allVideos.filter(
+					(video) => video.id !== deleteVideoID
+				);
+				setAllVideos(updatedVideos);
+			})
+			.then(() => deleteSignVideo(deleteVideoID));
 	};
 
 	return (

@@ -11,6 +11,8 @@ import ResponsiveDrawer from "./homePage/styleComponents/ResponsiveDrawer";
 import UserVideos from "./userUploads/UserVideos";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
+
+
 class App extends React.Component {
 	state = {
 		isLoading: true,

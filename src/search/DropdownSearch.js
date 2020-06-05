@@ -5,40 +5,34 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
-  inputRoot: {
-    color: "white",
-  
-  }
+	inputRoot: {
+		color: "white",
+	},
 }));
 
-
 function DropdownSearch(props) {
-	const { signs, onChange, speechPlaceholder} = props;
-  const classes = useStyles();
+	const { signs, onChange, speechPlaceholder } = props;
+	const classes = useStyles();
 
 	return (
-		<div style={{ width: 150, height: 70}}>
+		<div style={{ width: 150, height: 70 }}>
 			<Autocomplete
-      size="small"
+				size="small"
 				id="free-solo-demo"
 				freeSolo
-        autoComplete
-        classes={classes}
-        
+				autoComplete
+				classes={classes}
 				onChange={onChange}
 				options={signs.map((option) => option.name)}
 				renderInput={(params) => (
 					<TextField
-             {...params}
-            
-            
+						{...params}
 						label="Search"
 						margin="normal"
-            variant="outlined"
-            
-            // onChange={onChange}
-            // placeholder={speechPlaceholder}
-          
+						variant="outlined"
+
+						// onChange={onChange}
+						// placeholder={speechPlaceholder}
 					/>
 				)}
 			/>

@@ -11,6 +11,8 @@ import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import CardMedia from "@material-ui/core/CardMedia";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Input from "@material-ui/core/Input";
+import { Player, ControlBar, VolumeMenuButton } from "video-react";
+
 
 const toxicity = require("@tensorflow-models/toxicity");
 
@@ -230,12 +232,12 @@ function UploadVideo(props) {
 
 						<>
 							{/* view video youve just uploaded */}
-							<CardMedia
-								component="iframe"
-								// doesn't full screen video
-								height="200"
-								src={video}
-							/>
+							<Player>
+								<source src={video} />
+								<ControlBar>
+									<VolumeMenuButton disabled />
+								</ControlBar>
+							</Player>
 
 							{valid || selectedSign ? (
 								<>
