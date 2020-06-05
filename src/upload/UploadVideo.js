@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
-import SignCard from "../signs/SignCard";
 import API from "../API/API";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import InputAutocomplete from "./InputAutocomplete";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
-import CardMedia from "@material-ui/core/CardMedia";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Input from "@material-ui/core/Input";
 import { Player, ControlBar, VolumeMenuButton } from "video-react";
+import "../../node_modules/video-react/dist/video-react.css";
 
 
 const toxicity = require("@tensorflow-models/toxicity");
@@ -93,14 +92,12 @@ function UploadVideo(props) {
 
 		if (isWord) {
 			setLoadingValid(true);
-			// The minimum prediction confidence.
-			const threshold = 0.8;
 
-			// Which toxicity labels to return.
+			const threshold = 0.8;
 			const labelsToInclude = ["toxicity"];
 
 			toxicity.load(threshold, labelsToInclude).then((model) => {
-				// Now you can use the `model` object to label sentences.
+				
 				model.classify([signName]).then((predictions) => {
 					if (predictions[0].results[0].match === true) {
 						setWarningMessage("This is a family friendly app");
@@ -167,7 +164,7 @@ function UploadVideo(props) {
 			
 		} else {
 			alert("A VIDEO FILE MUST BE ATTACHED");
-			//as a dialog box?
+		
 		}
 	};
 
@@ -232,13 +229,14 @@ function UploadVideo(props) {
 
 						<>
 							{/* view video youve just uploaded */}
-							<Player>
+
+							<Player fluid={false} width={350} height={200} >
 								<source src={video} />
 								<ControlBar>
 									<VolumeMenuButton disabled />
 								</ControlBar>
 							</Player>
-
+							
 							{valid || selectedSign ? (
 								<>
 									<Button
