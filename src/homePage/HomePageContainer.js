@@ -6,12 +6,7 @@ import UploadVideo from '../upload/UploadVideo'
 
 
 class HomePageContainer extends React.Component {
-	constructor(){
-		super()
-		this.state = {
-			drawerOption: ""
-		}
-	}
+	
 	
 	
 	renderSigns = () => {
@@ -38,15 +33,15 @@ class HomePageContainer extends React.Component {
 		
 	}
 
-	
+
+
+
 
 	render() {
 		
 		return (
 			<div>
-				<ResponsiveDrawer toggleUpload={this.Upload}/>
-				{this.state.drawerOption === "upload" ? 
-				   <UploadVideo /> :
+			
 				   <>
 				   <h1 className="title">Hear Together</h1>
 

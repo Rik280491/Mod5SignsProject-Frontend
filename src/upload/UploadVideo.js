@@ -236,7 +236,7 @@ function UploadVideo(props) {
 									<VolumeMenuButton disabled />
 								</ControlBar>
 							</Player>
-							
+						
 							{valid || selectedSign ? (
 								<>
 									<Button

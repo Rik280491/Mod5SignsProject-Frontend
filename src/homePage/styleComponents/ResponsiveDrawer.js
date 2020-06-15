@@ -43,7 +43,7 @@ function ResponsiveDrawer(props) {
 	const classes = useStyles();
 	const theme = useTheme();
 	const [mobileOpen, setMobileOpen] = React.useState(false);
-	const { toggleUpload, logOut, username, logIn } = props;
+	const { toggleUpload, toggleMS, toggleContact, logOut, username, logIn } = props;
 	const loginLink = (props) => <Link to="/login" {...props} />;
 
 	const handleDrawerToggle = () => {
