@@ -9,6 +9,8 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import ResponsiveDrawer from "./homePage/styleComponents/ResponsiveDrawer";
 import UserVideos from "./userUploads/UserVideos";
+import MissionStatement from "./missionStatement/MissionStatement"
+import ContactUs from "./contactUs/ContactUs"
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 class App extends React.Component {
@@ -81,6 +83,16 @@ class App extends React.Component {
 								exact
 								path="/user-uploads"
 								render={(props) => <UserVideos {...props} />}
+							/>
+							<Route
+								exact
+								path="/mission-statement"
+								render={(props) => <MissionStatement {...props} />}
+							/>
+							<Route
+								exact
+								path="/contact-us"
+								render={(props) => <ContactUs {...props} />}
 							/>
 						</div>
 					</>

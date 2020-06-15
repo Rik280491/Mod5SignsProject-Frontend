@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		display: "flex",
 	},
-	
+
 	// necessary for content to be below app bar
 	toolbar: theme.mixins.toolbar,
 	drawerPaper: {
@@ -38,17 +38,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ResponsiveDrawer(props) {
-
 	const { window } = props;
 	const classes = useStyles();
 	const theme = useTheme();
 	const [mobileOpen, setMobileOpen] = React.useState(false);
-	const { toggleUpload, toggleMS, toggleContact, logOut, username, logIn } = props;
+	const {
+		toggleUpload,
+		toggleMS,
+		toggleContact,
+		logOut,
+		username,
+		logIn,
+	} = props;
 	const loginLink = (props) => <Link to="/login" {...props} />;
 
 	const handleDrawerToggle = () => {
 		setMobileOpen(!mobileOpen);
-
 	};
 
 	const drawer = (
@@ -68,7 +73,7 @@ function ResponsiveDrawer(props) {
 				</ListItem>
 				<ListItem
 					button
-					onClick={(toggleUpload, handleDrawerToggle)}
+					onClick={handleDrawerToggle}
 					component={(props) => <Link to="/upload" {...props} />}
 				>
 					<ListItemIcon>
@@ -90,13 +95,20 @@ function ResponsiveDrawer(props) {
 					</ListItem>
 				) : null}
 
-				<ListItem button>
+				<ListItem
+					onClick={handleDrawerToggle}
+					button
+					component={(props) => <Link to="/mission-statement" {...props} />}
+				>
 					<ListItemIcon>
 						<HearingIcon />
 					</ListItemIcon>
 					<ListItemText primary="Mission Statement" />
 				</ListItem>
-				<ListItem button>
+				<ListItem button
+				onClick={handleDrawerToggle}
+				button
+				component={(props) => <Link to="/contact-us" {...props} />}>
 					<ListItemIcon>
 						<AlternateEmailIcon />
 					</ListItemIcon>
@@ -122,10 +134,10 @@ function ResponsiveDrawer(props) {
 		window !== undefined ? () => window().document.body : undefined;
 
 	return (
-		<div  className={classes.root}>
+		<div className={classes.root}>
 			<CssBaseline />
 			<AppBar position="fixed" className={classes.appBar}>
-				<Toolbar >
+				<Toolbar>
 					<IconButton
 						color="inherit"
 						aria-label="open drawer"
@@ -141,23 +153,21 @@ function ResponsiveDrawer(props) {
 				</Toolbar>
 			</AppBar>
 			<nav className={classes.drawer} aria-label="nav folders">
-				
-					<Drawer
-						container={container}
-						variant="temporary"
-						anchor={theme.direction === "rtl" ? "right" : "left"}
-						open={mobileOpen}
-						onClose={handleDrawerToggle}
-						classes={{
-							paper: classes.drawerPaper,
-						}}
-						ModalProps={{
-							keepMounted: true, // Better open performance on mobile.
-						}}
-					>
-						{drawer}
-					</Drawer>
-				
+				<Drawer
+					container={container}
+					variant="temporary"
+					anchor={theme.direction === "rtl" ? "right" : "left"}
+					open={mobileOpen}
+					onClose={handleDrawerToggle}
+					classes={{
+						paper: classes.drawerPaper,
+					}}
+					ModalProps={{
+						keepMounted: true, // Better open performance on mobile.
+					}}
+				>
+					{drawer}
+				</Drawer>
 			</nav>
 			<main className={classes.content}>
 				<div className={classes.toolbar} />
