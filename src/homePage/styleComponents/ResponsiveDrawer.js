@@ -105,10 +105,12 @@ function ResponsiveDrawer(props) {
 					</ListItemIcon>
 					<ListItemText primary="Mission Statement" />
 				</ListItem>
-				<ListItem button
-				onClick={handleDrawerToggle}
-				button
-				component={(props) => <Link to="/contact-us" {...props} />}>
+				<ListItem
+					button
+					onClick={handleDrawerToggle}
+					button
+					component={(props) => <Link to="/contact-us" {...props} />}
+				>
 					<ListItemIcon>
 						<AlternateEmailIcon />
 					</ListItemIcon>
