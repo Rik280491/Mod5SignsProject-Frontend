@@ -26,12 +26,7 @@ class HomePageContainer extends React.Component {
 		});
 	};
 
-	toggleUpload = () => {
-		this.setState({
-			drawerOption: "upload"
-		})
-		
-	}
+
 
 
 
