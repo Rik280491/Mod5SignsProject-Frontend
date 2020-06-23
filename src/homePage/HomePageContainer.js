@@ -3,8 +3,8 @@ import SignCard from "../signs/SignCard";
 import { connect } from "react-redux";
 
 function HomePageContainer(props) {
-	const { signs } = props
-	
+	const { signs } = props;
+
 	const renderSigns = () => {
 		return signs.map((sign, index) => {
 			return (
@@ -19,15 +19,14 @@ function HomePageContainer(props) {
 		});
 	};
 
-	
-		return (
-			<div>
-				<h1 className="title">Hear Together</h1>
+	return (
+		<div>
+			<h1 className="title">Hear Together</h1>
 
-				{renderSigns()}
-			</div>
-		);
-	}
+			{renderSigns()}
+		</div>
+	);
+}
 
 const mapStateToProps = (state) => {
 	return {

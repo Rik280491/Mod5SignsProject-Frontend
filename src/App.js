@@ -4,13 +4,13 @@ import HomePageContainer from "./homePage/HomePageContainer";
 import Login from "./login/Login";
 import Signup from "./signup/Signup";
 import UploadVideo from "./upload/UploadVideo";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import ResponsiveDrawer from "./homePage/styleComponents/ResponsiveDrawer";
 import UserVideos from "./userUploads/UserVideos";
-import MissionStatement from "./missionStatement/MissionStatement"
-import ContactUs from "./contactUs/ContactUs"
+import MissionStatement from "./missionStatement/MissionStatement";
+import ContactUs from "./contactUs/ContactUs";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 class App extends React.Component {

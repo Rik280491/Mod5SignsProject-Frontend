@@ -7,7 +7,7 @@ const createUserURL = `${baseURL}/users`;
 const videosURL = `${baseURL}/videos`;
 
 const post = (url, data, token) => {
-	const configObject = {       
+	const configObject = {
 		method: "POST",
 		headers: {
 			Accept: "application/json",
@@ -48,22 +48,18 @@ const getVideos = () => {
 };
 
 const deleteVideo = (id) => {
-	return fetch(`${videosURL}/${id}`, { method: "DELETE"})
-}
-
-
+	return fetch(`${videosURL}/${id}`, { method: "DELETE" });
+};
 
 const checkWord = (value) => {
 	return fetch(`https://wordsapiv1.p.rapidapi.com/words/${value}/definitions`, {
-		"method": "GET",
-		"headers": {
+		method: "GET",
+		headers: {
 			"x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
-			"x-rapidapi-key": "b6ab925e73mshc85e09479bf16dbp1dcd6ajsn56ffd8f4fbe0"
-		}
-	})
-	
-	
-}
+			"x-rapidapi-key": "b6ab925e73mshc85e09479bf16dbp1dcd6ajsn56ffd8f4fbe0",
+		},
+	});
+};
 export default {
 	get,
 	getUser,
@@ -73,5 +69,5 @@ export default {
 	createSignWithVideo,
 	getVideos,
 	deleteVideo,
-	checkWord
+	checkWord,
 };

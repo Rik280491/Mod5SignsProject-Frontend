@@ -14,7 +14,7 @@ function DeleteDialog(props) {
   
   useEffect(() => {
     !deleteVideo ? handleClickOpen() : handleClose()
-  }, [])
+  })
   
   
   const handleClickOpen = () => {
@@ -35,9 +35,6 @@ function DeleteDialog(props) {
 
   return (
     <div>
-      {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open alert dialog
-      </Button> */}
       <Dialog
         open={open}
         onClose={handleClose}

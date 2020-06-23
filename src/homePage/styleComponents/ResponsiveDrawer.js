@@ -3,7 +3,6 @@ import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
-import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -13,7 +12,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import SearchSigns from "../../search/SearchSigns";
 import HearingIcon from "@material-ui/icons/Hearing";
@@ -42,14 +41,7 @@ function ResponsiveDrawer(props) {
 	const classes = useStyles();
 	const theme = useTheme();
 	const [mobileOpen, setMobileOpen] = React.useState(false);
-	const {
-		toggleUpload,
-		toggleMS,
-		toggleContact,
-		logOut,
-		username,
-		logIn,
-	} = props;
+	const { logOut, username } = props;
 	const loginLink = (props) => <Link to="/login" {...props} />;
 
 	const handleDrawerToggle = () => {
@@ -108,7 +100,6 @@ function ResponsiveDrawer(props) {
 				<ListItem
 					button
 					onClick={handleDrawerToggle}
-					button
 					component={(props) => <Link to="/contact-us" {...props} />}
 				>
 					<ListItemIcon>

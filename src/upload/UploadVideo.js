@@ -12,7 +12,6 @@ import Input from "@material-ui/core/Input";
 import { Player, ControlBar, VolumeMenuButton } from "video-react";
 import "../../node_modules/video-react/dist/video-react.css";
 
-
 const toxicity = require("@tensorflow-models/toxicity");
 
 // import { regCapConverter } from "../search/SearchSigns"
@@ -36,7 +35,6 @@ function UploadVideo(props) {
 
 	const classes = useStyles();
 
-
 	const handleChange = async (e) => {
 		const files = e.target.files;
 		const data = new FormData();
@@ -58,7 +56,7 @@ function UploadVideo(props) {
 	};
 
 	const handleNameChange = (e) => {
-		setValid(false)
+		setValid(false);
 		setIsWord(false);
 		setWarningMessage("");
 		console.log(e.target.value);
@@ -82,7 +80,6 @@ function UploadVideo(props) {
 	};
 
 	const checkToxicity = (signName) => {
-
 		if (signName.length <= 1) {
 			alert("Word must be more than one character long!");
 			return;
@@ -97,7 +94,6 @@ function UploadVideo(props) {
 			const labelsToInclude = ["toxicity"];
 
 			toxicity.load(threshold, labelsToInclude).then((model) => {
-				
 				model.classify([signName]).then((predictions) => {
 					if (predictions[0].results[0].match === true) {
 						setWarningMessage("This is a family friendly app");
@@ -137,55 +133,48 @@ function UploadVideo(props) {
 				},
 				localStorage.token
 			).then((response) => {
-				setUploadResponse(response.message)
-				updateSignsIndex(response.sign)
-				console.log(response.sign)
+				setUploadResponse(response.message);
+				updateSignsIndex(response.sign);
+				console.log(response.sign);
 				setValid(false);
-
 			});
-				
-
 		} else if (selectedSign) {
-				API.createSignWithVideo(
-					{
-						video_url: video,
-						sign_name: selectedSign.name,
-					},
-					localStorage.token
-				).then((response) => {
-					setUploadResponse(response.message)
-					updateSignsIndex(response.sign)				
-					setValid(false);
-					deselectSign();
-				
-				});
-			
-				
-			
+			API.createSignWithVideo(
+				{
+					video_url: video,
+					sign_name: selectedSign.name,
+				},
+				localStorage.token
+			).then((response) => {
+				setUploadResponse(response.message);
+				updateSignsIndex(response.sign);
+				setValid(false);
+				deselectSign();
+			});
 		} else {
 			alert("A VIDEO FILE MUST BE ATTACHED");
-		
 		}
 	};
 
 	return (
 		<div>
-
 			{/* COMMENT WHAT EACH THING IS DOING! */}
 			{!username ? (
 				<h1 className="title">
 					To upload a video please
-					
-					<Button variant="outlined" component={(props) => <Link to="/login" {...props} />} >
-						Log in  
+					<Button
+						variant="outlined"
+						component={(props) => <Link to="/login" {...props} />}
+					>
+						Log in
 					</Button>
-					
 					<br></br>
-					<Button variant="outlined"  component={(props) => <Link to="/signup" {...props} />} >
-						Sign up 
+					<Button
+						variant="outlined"
+						component={(props) => <Link to="/signup" {...props} />}
+					>
+						Sign up
 					</Button>
-					
-					
 				</h1>
 			) : (
 				<>
@@ -209,7 +198,9 @@ function UploadVideo(props) {
 							{loadingValid ? (
 								<LinearProgress color={"secondary"} />
 							) : (
-								<h2 className="title" style={{ color: "red" }}>{warningMessage}</h2>
+								<h2 className="title" style={{ color: "red" }}>
+									{warningMessage}
+								</h2>
 							)}
 						</>
 					) : null}
@@ -227,17 +218,16 @@ function UploadVideo(props) {
 					{loading ? (
 						<CircularProgress />
 					) : (
-
 						<>
 							{/* view video youve just uploaded */}
 
-							<Player fluid={false} width={350} height={200} >
+							<Player fluid={false} width={350} height={200}>
 								<source src={video} />
 								<ControlBar>
 									<VolumeMenuButton disabled />
 								</ControlBar>
 							</Player>
-						
+
 							{valid || selectedSign ? (
 								<>
 									<Button
@@ -275,7 +265,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		deselectSign: () => dispatch({ type: "DESELECT_SIGN" }),
-		updateSignsIndex: (sign) => dispatch({ type: "UPDATE_SIGNS_INDEX", payload: {sign}})
+		updateSignsIndex: (sign) =>
+			dispatch({ type: "UPDATE_SIGNS_INDEX", payload: { sign } }),
 	};
 };
 
