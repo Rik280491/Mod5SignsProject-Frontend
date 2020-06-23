@@ -1,68 +1,59 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Hear Together
 
-In the project directory, you can run:
+**A Speech To British Sign Language (BSL) Translator & User Generated BSL Dictionary**
 
-### `yarn start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**Motivation**
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+This is my first solo project and my final project at Flatiron School London. The inspiration for this app was growing up with a deaf sister and watching her struggles to communicate with the hearing world. This is my attempt to bridge that gap, and why I chose the name Hear Together. It is a play on the words here together. 
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Features**
 
-### `yarn build`
+* A Voice Search
+* Redux state management
+* React Hooks
+* Due to the lack of a suitable API, I created my own data. 
+* Authentication using BCrypt and JSON Web Tokens (JWT) 
+* TensorFlow toxicity library used to prevent users uploading rude words.
+* Checks against a dictionary API to ensure word being uploaded exists. 
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+**Built with**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`React 16.13.1`
+`Rails 6.0.3 (backend)` 
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Screenshots**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+`Home Page`
+<img width="970" alt="Screenshot 2020-06-23 at 18 33 50" src="https://user-images.githubusercontent.com/57149887/85435952-26d29e00-b580-11ea-8f8a-3b3f650c22ca.png">
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+`Searched Sign`
+<img width="967" alt="Screenshot 2020-06-23 at 18 33 28" src="https://user-images.githubusercontent.com/57149887/85436021-4669c680-b580-11ea-9a1a-96824cb8c5d4.png">
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`Upload Video Validation` 
+<img width="1197" alt="Screenshot 2020-06-16 at 22 10 21" src="https://user-images.githubusercontent.com/57149887/85435625-a7dd6580-b57f-11ea-9a57-39b0a4d049cd.png">
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+**API Reference**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+* WORDS dictionary API - https://www.wordsapi.com/ 
+* Speech Recognition - Web Speech API - https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API 
 
-### Analyzing the Bundle Size
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+**Demo**
 
-### Making a Progressive Web App
+Please visit https://youtu.be/X9MAZSlLMWw for a demonstration of the app. 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+## Deployment 
 
-### Advanced Configuration
+Please visit our app at: https://heartogether.netlify.app/ 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+Note: Unfortunately, the app does not currently work on iOS. 
 
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
