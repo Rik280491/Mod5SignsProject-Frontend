@@ -69,7 +69,7 @@ Please visit https://youtu.be/X9MAZSlLMWw for a demonstration of the app.
 
 ## Deployment 
 
-Please visit our app at: https://heartogether.netlify.app/ 
+Please visit the app at: https://heartogether.netlify.app/ 
 
 Note: Unfortunately, the app does not currently work on iOS. 
 
