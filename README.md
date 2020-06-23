@@ -71,5 +71,7 @@ Please visit https://youtu.be/X9MAZSlLMWw for a demonstration of the app.
 
 Please visit the app at: https://heartogether.netlify.app/ 
 
-Note: Unfortunately, the app does not currently work on iOS. 
+The app was designed for mobile screens, but does still function on larger screens. 
+
+Note: Unfortunately, the app does not currently work on iOS mobile browsers. 
 
