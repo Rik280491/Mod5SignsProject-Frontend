@@ -19,7 +19,8 @@ This is my first solo project and my final project at Flatiron School London. Th
 * Authentication using BCrypt and JSON Web Tokens (JWT) 
 * TensorFlow toxicity library used to prevent users uploading rude words.
 * Checks against a dictionary API to ensure word being uploaded exists. 
-* Users can upload videos for a new or existing sign. Users can delete their own uploads. 
+* Users can upload videos for a new or existing sign. Users can delete their own uploads.
+* Could be utilised as an educational tool for hearing users.  
 
 
 **Built with**
