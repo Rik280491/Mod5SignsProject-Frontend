@@ -11,7 +11,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 function DropdownSearch(props) {
-	const { signs, onChange, speechPlaceholder } = props;
+	const { signs, onChange} = props;
 	const classes = useStyles();
 
 	return (

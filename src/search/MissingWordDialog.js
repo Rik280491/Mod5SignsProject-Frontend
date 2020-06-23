@@ -14,7 +14,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function MissingWordDialog(props) {
-    const { suggestedWord, definition, setDefinition, setSuggestedWord } = props
+    const { suggestedWord, definition, setSuggestedWord } = props
     const [open, setOpen] = React.useState(false);
     console.log(definition)
     

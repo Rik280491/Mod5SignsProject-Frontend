@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete, {
 	createFilterOptions,
@@ -8,7 +8,6 @@ import { connect } from "react-redux";
 const filter = createFilterOptions();
 
 function InputAutocomplete(props) {
-	//   const [value, setValue] = useState(null);
 	const { onChange, signs } = props;
 
 	return (

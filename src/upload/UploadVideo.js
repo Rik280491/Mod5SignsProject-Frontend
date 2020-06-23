@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import API from "../API/API";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -170,6 +170,8 @@ function UploadVideo(props) {
 
 	return (
 		<div>
+
+			{/* COMMENT WHAT EACH THING IS DOING! */}
 			{!username ? (
 				<h1 className="title">
 					To upload a video please
@@ -212,7 +214,6 @@ function UploadVideo(props) {
 						</>
 					) : null}
 
-					{/* when i move this down to line 229 the input stops functioning correctly */}
 					{valid || selectedSign ? (
 						<Input
 							inputProps={{ accept: "video/*" }}
