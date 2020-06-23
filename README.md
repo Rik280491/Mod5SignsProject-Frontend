@@ -38,7 +38,7 @@ This is my first solo project and my final project at Flatiron School London. Th
 
 
 `Upload Video Validation` 
-<img width="1197" alt="Screenshot 2020-06-16 at 22 10 21" src="https://user-images.githubusercontent.com/57149887/85435625-a7dd6580-b57f-11ea-9a57-39b0a4d049cd.png">
+<img width="1197" alt="Screenshot 2020-06-16 at 22 10 21" src="https://user-images.githubusercontent.com/57149887/85437064-eaa03d00-b581-11ea-903d-53baa102441d.png">
 
 
 **API Reference**
