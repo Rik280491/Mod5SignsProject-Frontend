@@ -31,7 +31,6 @@ function UploadVideo(props) {
 	const [valid, setValid] = useState(false);
 	const [warningMessage, setWarningMessage] = useState("");
 	const [loadingValid, setLoadingValid] = useState(false);
-	const [isWord, setIsWord] = useState(false);
 
 	const classes = useStyles();
 
@@ -57,7 +56,6 @@ function UploadVideo(props) {
 
 	const handleNameChange = (e) => {
 		setValid(false);
-		setIsWord(false);
 		setWarningMessage("");
 		console.log(e.target.value);
 		Number.isInteger(e.target.value)
@@ -67,46 +65,40 @@ function UploadVideo(props) {
 
 	const checkWord = (signName) => {
 		const regWord = regCapConverter(signName);
-		console.log(regWord);
-		API.checkWord(regWord).then((response) => {
-			if (!response.ok) {
-				alert("This Word is not in the English Dictionary!");
-				setIsWord(false);
-				// future. consider a phrases api so phrases func can be added to app
-			} else {
-				setIsWord(true);
-			}
-		});
+		if (regWord.length <= 1) {
+			alert("Word must be more than one character long!");
+			return;
+		} else {
+			API.checkWord(regWord).then((response) => {
+				if (!response.ok) {
+					alert("This Word is not in the English Dictionary!");
+					// future. consider a phrases api so phrases func can be added to app
+				} else {
+					checkToxicity(signName);
+				}
+			});
+		}
 	};
 
 	const checkToxicity = (signName) => {
-		if (signName.length <= 1) {
-			alert("Word must be more than one character long!");
-			return;
-		}
+		setLoadingValid(true);
 
-		checkWord(signName);
+		const threshold = 0.8;
+		const labelsToInclude = ["toxicity"];
 
-		if (isWord) {
-			setLoadingValid(true);
-
-			const threshold = 0.8;
-			const labelsToInclude = ["toxicity"];
-
-			toxicity.load(threshold, labelsToInclude).then((model) => {
-				model.classify([signName]).then((predictions) => {
-					if (predictions[0].results[0].match === true) {
-						setWarningMessage("This is a family friendly app");
-						setValid(false);
-					} else {
-						setValid(true);
-						setWarningMessage("");
-					}
-					setLoadingValid(false);
-				});
-				// error handling
+		toxicity.load(threshold, labelsToInclude).then((model) => {
+			model.classify([signName]).then((predictions) => {
+				if (predictions[0].results[0].match === true) {
+					setWarningMessage("This is a family friendly app");
+					setValid(false);
+				} else {
+					setValid(true);
+					setWarningMessage("");
+				}
+				setLoadingValid(false);
 			});
-		}
+			// error handling
+		});
 	};
 
 	// already defined. import from search signs
@@ -188,7 +180,7 @@ function UploadVideo(props) {
 							<InputAutocomplete onChange={handleNameChange} />
 
 							<Button
-								onClick={() => checkToxicity(signName)}
+								onClick={() => checkWord(signName)}
 								variant="contained"
 								color="secondary"
 								size="small"
