@@ -4,21 +4,20 @@ import emailjs from "emailjs-com";
 
 function ContactForm(props) {
 	const [formValues, setFormValues] = useState({
-		firstName: '',
-		lastName: '',
-		message: ''
-	})
-    const [contactStatus, setContactStatus] = useState("")
-    const [loading, setLoading] = useState(false)
+		firstName: "",
+		lastName: "",
+		message: "",
+	});
+	const [contactStatus, setContactStatus] = useState("");
+	const [loading, setLoading] = useState(false);
 
-	
 	const handleChange = (e) => {
-		setFormValues({...formValues, [e.target.name]: e.target.value })
-	}
-	
+		setFormValues({ ...formValues, [e.target.name]: e.target.value });
+	};
+
 	const handleSubmit = (e) => {
-        e.preventDefault();
-        setLoading(true)
+		e.preventDefault();
+		setLoading(true);
 
 		emailjs
 			.send(
@@ -29,94 +28,87 @@ function ContactForm(props) {
 			)
 			.then(
 				(result) => {
-                    console.log(result.text);
-                    setContactStatus("success")
-                    setLoading(false)
+					console.log(result.text);
+					setContactStatus("success");
+					setLoading(false);
 				},
 				(error) => {
-                    console.log(error.text)
-                    setContactStatus("error")
-                    setLoading(false)
-                }
-                
+					console.log(error.text);
+					setContactStatus("error");
+					setLoading(false);
+				}
 			);
-    };
-    
-    const loadingProps = {
-        className: loading ? "ui loading form" : null 
-    }
-    
-    let formProps = {}
-    
-    if (contactStatus === "success") {
-        formProps = {
-            className: "ui success message"} 
-    }
-    if (contactStatus === "error") {
-        formProps = {
-            className: "ui error message"}
-    }
-    
-        
-       
-    
+	};
+
+	const loadingProps = {
+		className: loading ? "ui loading form" : null,
+	};
+
+	let formProps = {};
+
+	if (contactStatus === "success") {
+		formProps = {
+			className: "ui success message",
+		};
+	}
+	if (contactStatus === "error") {
+		formProps = {
+			className: "ui error message",
+		};
+	}
 
 	return (
-     <div {...loadingProps}>
-        <h1 className="title">GET IN TOUCH</h1>
-        <Form {...formProps}  onSubmit={handleSubmit}  >
-        
-			<Form.Group unstackable  widths={2}>
+		<div {...loadingProps}>
+			<h1 className="title">GET IN TOUCH</h1>
+			<Form {...formProps} onSubmit={handleSubmit}>
+				<Form.Group unstackable widths={2}>
+					<Form.Field
+						required
+						id="form-input-control-first-name"
+						control={Input}
+						aria-label="First name"
+						placeholder="First name"
+						onChange={handleChange}
+						name="firstName"
+					/>
+					<Form.Field
+						required
+						id="form-input-control-last-name"
+						control={Input}
+						aria-label="Last name"
+						placeholder="Last name"
+						onChange={handleChange}
+						name="lastName"
+					/>
+				</Form.Group>
+				<br></br>
 				<Form.Field
 					required
-					id="form-input-control-first-name"
-					control={Input}
-					aria-label="First name"
-					placeholder="First name"
+					id="form-textarea-control-opinion"
+					control={TextArea}
+					aria-label="Message"
+					placeholder="Message"
 					onChange={handleChange}
-					name="firstName"
-					
+					name="message"
 				/>
 				<Form.Field
-					required
-					id="form-input-control-last-name"
-					control={Input}
-					aria-label="Last name"
-					placeholder="Last name"
-					onChange={handleChange}
-					name="lastName"
+					id="form-button-control-public"
+					control={Button}
+					content="Send"
 				/>
-			</Form.Group>
-			<br></br>
-			<Form.Field
-				required
-				id="form-textarea-control-opinion"
-				control={TextArea}
-				aria-label="Message"
-				placeholder="Message"
-				onChange={handleChange}
-				name="message"
-				
-			/>
-			<Form.Field
-				id="form-button-control-public"
-				control={Button}
-				content="Send"
-			/>
-			<Message
-				success
-				header="Success"
-				content="Message has been sent. Thanks!"
-			/>
-			<Message
-				error
-				header="Error"
-				content="It's not you, it's me. Please try again"
-			/>
-		</Form>
-    </div>
+				<Message
+					success
+					header="Success"
+					content="Message has been sent. Thanks!"
+				/>
+				<Message
+					error
+					header="Error"
+					content="It's not you, it's me. Please try again"
+				/>
+			</Form>
+		</div>
 	);
 }
 
 export default ContactForm;
-
