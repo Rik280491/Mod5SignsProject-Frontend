@@ -20,15 +20,18 @@ class Login extends React.Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 
-		API.logIn(this.state).then((json) =>
-			this.props.logIn(json.username, json.token)
-		);
+		API.logIn(this.state).then((json) => {
+			if (json.error) {
+				alert("The username and/or password is incorrect");
+			} else {
+				this.props.logIn(json.username, json.token);
+			}
+		});
 	};
 
 	render() {
-		console.log(this.props)
+		console.log(this.props);
 		return (
-			
 			<div>
 				<LoginForm
 					handleChange={this.handleChange}
