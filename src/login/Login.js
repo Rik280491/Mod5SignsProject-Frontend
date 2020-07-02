@@ -22,7 +22,7 @@ class Login extends React.Component {
 
 		API.logIn(this.state).then((json) => {
 			if (json.error) {
-				alert("The username and/or password is incorrect");
+				alert("Incorrect username or password");
 			} else {
 				this.props.logIn(json.username, json.token);
 			}

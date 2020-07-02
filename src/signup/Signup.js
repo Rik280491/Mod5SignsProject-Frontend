@@ -17,11 +17,19 @@ class Signup extends React.Component {
 			[e.target.name]: e.target.value,
 		});
 	};
+	
 	handleSubmit = (e) => {
 		e.preventDefault();
 		
 		API.signUp(this.state)
-        .then((json) => this.props.logIn(json.username, json.token));
+		.then((json) => {
+			if (json.error) {
+				alert("Username already exists")
+			} else {
+				this.props.logIn(json.username, json.token);
+			}
+		})
+		 
 	};
 
 	render() {

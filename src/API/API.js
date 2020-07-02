@@ -1,5 +1,5 @@
 // change this to heroku url, and change cors to accept only url
-const baseURL = "https://serene-harbor-87663.herokuapp.com/";
+const baseURL = "https://serene-harbor-87663.herokuapp.com";
 const signsURL = `${baseURL}/signs`;
 const validateURL = `${baseURL}/validate`;
 const logInURL = `${baseURL}/log-in`;
