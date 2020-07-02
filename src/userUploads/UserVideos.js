@@ -10,7 +10,6 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { Player, ControlBar, VolumeMenuButton } from "video-react";
 
-
 const useStyles = makeStyles((theme) => ({
 	button: {
 		margin: theme.spacing(1),
@@ -92,7 +91,11 @@ function UserVideos(props) {
 
 	return (
 		<div>
-			<h1 className="title">{username}'s uploaded Videos</h1>
+			{username ? (
+				<h1 className="title">{username}'s uploaded Videos</h1>
+			) : (
+				<h1 className="title">You must be logged in to view this page</h1>
+			)}
 
 			{findUserVideos()}
 			{loadDialog ? (
